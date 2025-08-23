@@ -1,5 +1,7 @@
 function Footer() {
   try {
+    const currentYear = new Date().getFullYear();
+
     return (
       <footer className="bg-[var(--text-primary)] text-white" data-name="footer" data-file="components/Footer.js">
         <div className="container-max section-padding">
@@ -8,25 +10,61 @@ function Footer() {
             <div className="md:col-span-2">
               <div className="flex items-center space-x-3 mb-4">
                 <img 
-                  src="https://app.trickle.so/storage/public/images/usr_141f626bb8000001/f395f7e2-ed71-4fe7-a417-6eb94e93d7b6.png" 
-                  alt="Varman Construction Logo"
+                  src="assets/logo.png" 
+                  alt="VARMAN CONSTRUCTIONS Logo"
                   className="w-10 h-10 object-contain"
                 />
-                <span className="text-xl font-bold">Varman Construction</span>
+                <div>
+                  <span className="text-xl font-bold">VARMAN CONSTRUCTIONS</span>
+                  <div className="text-sm text-gray-300">Building Materials Supplier</div>
+                </div>
               </div>
               <p className="text-gray-300 mb-4 leading-relaxed">
-                Your trusted partner for premium construction materials and nationwide export services. Building India's future with quality and reliability.
+                Your trusted partner for premium building materials since 2020. We supply high-quality M-Sand, Blue Metal, Cement, Bricks, and construction materials across India with guaranteed quality and timely delivery.
               </p>
-              <div className="flex space-x-4">
-                <div className="w-8 h-8 bg-gray-700 rounded-full flex items-center justify-center hover:bg-[var(--primary-color)] transition-colors cursor-pointer">
+              
+              {/* Contact Info */}
+              <div className="space-y-2 mb-4">
+                <div className="flex items-center space-x-2">
+                  <div className="icon-phone text-[var(--primary-color)]"></div>
+                  <span className="text-sm">+91 77084 84811, +91 99652 37777</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <div className="icon-mail text-[var(--primary-color)]"></div>
+                  <span className="text-sm">info@varmanconstructions.in</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <div className="icon-calendar text-[var(--primary-color)]"></div>
+                  <span className="text-sm">Established 2020</span>
+                </div>
+              </div>
+
+              {/* Social Links */}
+              <div className="flex space-x-3">
+                <button 
+                  onClick={() => window.open('tel:+917708484811', '_self')}
+                  className="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-[var(--primary-color)] transition-colors cursor-pointer"
+                  title="Call Us"
+                >
                   <div className="icon-phone text-sm text-white"></div>
-                </div>
-                <div className="w-8 h-8 bg-gray-700 rounded-full flex items-center justify-center hover:bg-[var(--primary-color)] transition-colors cursor-pointer">
+                </button>
+                <button 
+                  onClick={() => {
+                    const message = "Hi VARMAN CONSTRUCTIONS! I'm interested in your building materials.";
+                    window.open(`https://wa.me/917708484811?text=${encodeURIComponent(message)}`, '_blank');
+                  }}
+                  className="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-green-600 transition-colors cursor-pointer"
+                  title="WhatsApp"
+                >
+                  <div className="icon-message-circle text-sm text-white"></div>
+                </button>
+                <button 
+                  onClick={() => window.open('mailto:info@varmanconstructions.in', '_self')}
+                  className="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-[var(--primary-color)] transition-colors cursor-pointer"
+                  title="Email Us"
+                >
                   <div className="icon-mail text-sm text-white"></div>
-                </div>
-                <div className="w-8 h-8 bg-gray-700 rounded-full flex items-center justify-center hover:bg-[var(--primary-color)] transition-colors cursor-pointer">
-                  <div className="icon-map-pin text-sm text-white"></div>
-                </div>
+                </button>
               </div>
             </div>
 
@@ -34,30 +72,63 @@ function Footer() {
             <div>
               <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
               <ul className="space-y-2 text-gray-300">
-                <li><a href="#home" className="hover:text-white transition-colors">Home</a></li>
-                <li><a href="#services" className="hover:text-white transition-colors">Services</a></li>
-                <li><a href="#about" className="hover:text-white transition-colors">About Us</a></li>
-                <li><a href="#contact" className="hover:text-white transition-colors">Contact</a></li>
+                <li><a href="#home" className="hover:text-white transition-colors text-sm">Home</a></li>
+                <li><a href="#services" className="hover:text-white transition-colors text-sm">Products</a></li>
+                <li><a href="#about" className="hover:text-white transition-colors text-sm">About Us</a></li>
+                <li><a href="#faq" className="hover:text-white transition-colors text-sm">FAQ</a></li>
+                <li><a href="#contact" className="hover:text-white transition-colors text-sm">Contact</a></li>
               </ul>
             </div>
 
-            {/* Materials */}
+            {/* Our Products */}
             <div>
-              <h4 className="text-lg font-semibold mb-4">Materials</h4>
+              <h4 className="text-lg font-semibold mb-4">Our Materials</h4>
               <ul className="space-y-2 text-gray-300">
-                <li><span className="hover:text-white transition-colors cursor-pointer">Cement & Concrete</span></li>
-                <li><span className="hover:text-white transition-colors cursor-pointer">Steel & Reinforcement</span></li>
-                <li><span className="hover:text-white transition-colors cursor-pointer">Aggregates & Sand</span></li>
-                <li><span className="hover:text-white transition-colors cursor-pointer">Bricks & Blocks</span></li>
+                <li><span className="hover:text-white transition-colors cursor-pointer text-sm">M-Sand & P-Sand</span></li>
+                <li><span className="hover:text-white transition-colors cursor-pointer text-sm">Blue Metal / Jalli</span></li>
+                <li><span className="hover:text-white transition-colors cursor-pointer text-sm">Red Bricks & Fly Ash Bricks</span></li>
+                <li><span className="hover:text-white transition-colors cursor-pointer text-sm">AAC Blocks & Cement</span></li>
+                <li><span className="hover:text-white transition-colors cursor-pointer text-sm">Concrete Blocks</span></li>
+                <li><span className="hover:text-white transition-colors cursor-pointer text-sm">Size Stone & Natural Stone</span></li>
               </ul>
             </div>
           </div>
 
+          {/* Service Areas */}
+          <div className="mt-8 pt-8 border-t border-gray-700">
+            <h4 className="text-lg font-semibold mb-4">Service Areas</h4>
+            <p className="text-gray-300 text-sm mb-3">We deliver building materials across India with primary focus on:</p>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 text-sm text-gray-300">
+              <div>Tamil Nadu</div>
+              <div>Karnataka</div>
+              <div>Kerala</div>
+              <div>Andhra Pradesh</div>
+              <div>Telangana</div>
+              <div>Maharashtra</div>
+              <div>Gujarat</div>
+              <div>Rajasthan</div>
+              <div>Madhya Pradesh</div>
+              <div>Odisha</div>
+              <div>West Bengal</div>
+              <div>Other States*</div>
+            </div>
+            <p className="text-xs text-gray-400 mt-2">*Delivery to other states available on request with advance notice</p>
+          </div>
+
           {/* Bottom Section */}
-          <div className="border-t border-gray-700 mt-12 pt-8 text-center">
-            <p className="text-gray-300">
-              © 2024 Varman Construction. All rights reserved. Building India with quality materials.
-            </p>
+          <div className="border-t border-gray-700 mt-8 pt-8">
+            <div className="grid md:grid-cols-2 gap-4 items-center">
+              <div>
+                <p className="text-gray-300 text-sm">
+                  © {currentYear} VARMAN CONSTRUCTIONS. All rights reserved. Building India with quality materials.
+                </p>
+              </div>
+              <div className="md:text-right">
+                <p className="text-gray-400 text-xs">
+                  Website: varmanconstructions.in | Quality Materials • Timely Delivery • Competitive Pricing
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </footer>
