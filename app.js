@@ -21,7 +21,7 @@ class ErrorBoundary extends React.Component {
             <p className="text-gray-600 mb-4">We're sorry, but something unexpected happened.</p>
             <button
               onClick={() => window.location.reload()}
-              className="btn btn-black"
+              className="btn-primary"
             >
               Reload Page
             </button>
@@ -42,6 +42,7 @@ function App() {
         <Hero />
         <Services />
         <About />
+        <FAQ />
         <Contact />
         <Footer />
       </div>
