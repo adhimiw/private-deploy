@@ -3,39 +3,41 @@ function Footer() {
     const currentYear = new Date().getFullYear();
 
     return (
-      <footer className="bg-[var(--text-primary)] text-white" data-name="footer" data-file="components/Footer.js">
-        <div className="container-max section-padding">
+      <footer className="bg-dark-secondary text-white border-t border-[var(--border-color)]" data-name="footer" data-file="components/Footer.js">
+        <div className="container-max section-padding relative z-10">
           <div className="grid md:grid-cols-4 gap-8">
-            {/* Company Info */}
+            {/* Company Info with Gypsy-Style Animation */}
             <div className="md:col-span-2">
-              <div className="flex items-center space-x-3 mb-4">
-                <img 
-                  src="assets/logo.png" 
+              <div className="flex items-center space-x-3 mb-6 group">
+                <img
+                  src="assets/logo.png"
                   alt="VARMAN CONSTRUCTIONS Logo"
-                  className="w-10 h-10 object-contain"
+                  className="h-12 w-auto object-contain transition-all duration-500 group-hover:scale-105"
                 />
                 <div>
-                  <span className="text-xl font-bold">VARMAN CONSTRUCTIONS</span>
-                  <div className="text-sm text-gray-300">Building Materials Supplier</div>
+                  <span className="text-xl font-bold text-[var(--text-primary)] group-hover:text-[var(--primary-color)] transition-colors duration-300">
+                    <span style={{color: 'var(--primary-color)'}}>VARMAN</span> CONSTRUCTIONS
+                  </span>
+                  <div className="text-sm text-[var(--text-secondary)]">Building Materials Supplier</div>
                 </div>
               </div>
-              <p className="text-gray-300 mb-4 leading-relaxed">
-                Your trusted partner for premium building materials since 2020. We supply high-quality M-Sand, Blue Metal, Cement, Bricks, and construction materials across India with guaranteed quality and timely delivery.
+              <p className="text-[var(--text-secondary)] mb-6 leading-relaxed">
+                Your trusted partner for premium building materials since <span style={{color: 'var(--primary-color)', fontWeight: 'bold'}}>2020</span>. We supply high-quality <span style={{color: 'var(--secondary-color)'}}>M-Sand, Blue Metal, Cement, Bricks</span>, and construction materials across India with guaranteed quality and timely delivery.
               </p>
-              
+
               {/* Contact Info */}
-              <div className="space-y-2 mb-4">
-                <div className="flex items-center space-x-2">
+              <div className="space-y-3 mb-6">
+                <div className="flex items-center space-x-3">
                   <div className="icon-phone text-[var(--primary-color)]"></div>
-                  <span className="text-sm">+91 77084 84811, +91 99652 37777</span>
+                  <span className="text-sm text-[var(--text-secondary)]">+91 77084 84811, +91 99652 37777</span>
                 </div>
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center space-x-3">
                   <div className="icon-mail text-[var(--primary-color)]"></div>
-                  <span className="text-sm">info@varmanconstructions.in</span>
+                  <span className="text-sm text-[var(--text-secondary)]">info@varmanconstructions.in</span>
                 </div>
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center space-x-3">
                   <div className="icon-calendar text-[var(--primary-color)]"></div>
-                  <span className="text-sm">Established 2020</span>
+                  <span className="text-sm text-[var(--text-secondary)]">Established 2020</span>
                 </div>
               </div>
 

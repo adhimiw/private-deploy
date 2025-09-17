@@ -68,56 +68,56 @@ function Contact() {
     };
 
     return (
-      <section id="contact" className="section-padding bg-gray-50" data-name="contact" data-file="components/Contact.js">
-        <div className="container-max">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)] mb-4">
-              Get in Touch with VARMAN CONSTRUCTIONS
+      <section id="contact" className="section-padding bg-dark" data-name="contact" data-file="components/Contact.js">
+        <div className="container-max relative z-10">
+          <div className="text-center mb-16 animate-fade-in">
+            <h2 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)] mb-6">
+              Get in Touch with <span style={{color: 'var(--primary-color)'}}>VARMAN CONSTRUCTIONS</span>
             </h2>
-            <p className="text-lg text-[var(--text-secondary)]">
+            <p className="text-xl text-[var(--text-secondary)] max-w-3xl mx-auto">
               Ready to start your construction project? Contact us for quotes, material information, and expert guidance.
             </p>
           </div>
 
           <div className="grid lg:grid-cols-3 gap-12">
             {/* Contact Information */}
-            <div className="lg:col-span-1 space-y-8">
+            <div className="lg:col-span-1 space-y-8 animate-slide-up">
               <div>
-                <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-6">Contact Information</h3>
-                <div className="space-y-4">
-                  <div className="flex items-center space-x-3 p-4 bg-white rounded-lg border border-[var(--border-color)]">
-                    <div className="w-10 h-10 bg-[var(--background-light)] rounded-lg flex items-center justify-center">
-                      <div className="icon-phone text-lg text-[var(--primary-color)]"></div>
+                <h3 className="text-2xl font-semibold text-[var(--text-primary)] mb-8">Contact Information</h3>
+                <div className="space-y-6">
+                  <div className="flex items-center space-x-4 p-6 bg-card rounded-xl border-subtle card-shadow group cursor-pointer">
+                    <div className="w-12 h-12 bg-[var(--primary-color)] rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+                      <div className="icon-phone text-lg text-[var(--background-primary)]"></div>
                     </div>
                     <div>
-                      <div className="font-medium text-[var(--text-primary)]">Primary Contact</div>
+                      <div className="font-semibold text-[var(--text-primary)] group-hover:text-[var(--primary-color)] transition-colors duration-300">Primary Contact</div>
                       <div className="text-[var(--text-secondary)]">+91 77084 84811</div>
                     </div>
                   </div>
 
-                  <div className="flex items-center space-x-3 p-4 bg-white rounded-lg border border-[var(--border-color)]">
-                    <div className="w-10 h-10 bg-[var(--background-light)] rounded-lg flex items-center justify-center">
-                      <div className="icon-phone text-lg text-[var(--primary-color)]"></div>
+                  <div className="flex items-center space-x-4 p-6 bg-card rounded-xl border-subtle card-shadow group cursor-pointer">
+                    <div className="w-12 h-12 bg-[var(--primary-color)] rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+                      <div className="icon-phone text-lg text-[var(--background-primary)]"></div>
                     </div>
                     <div>
-                      <div className="font-medium text-[var(--text-primary)]">Secondary Contact</div>
+                      <div className="font-semibold text-[var(--text-primary)] group-hover:text-[var(--primary-color)] transition-colors duration-300">Secondary Contact</div>
                       <div className="text-[var(--text-secondary)]">+91 99652 37777</div>
                     </div>
                   </div>
 
-                  <div className="flex items-center space-x-3 p-4 bg-white rounded-lg border border-[var(--border-color)]">
-                    <div className="w-10 h-10 bg-[var(--background-light)] rounded-lg flex items-center justify-center">
-                      <div className="icon-mail text-lg text-[var(--primary-color)]"></div>
+                  <div className="flex items-center space-x-4 p-6 bg-card rounded-xl border-subtle card-shadow group cursor-pointer">
+                    <div className="w-12 h-12 bg-[var(--primary-color)] rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+                      <div className="icon-mail text-lg text-[var(--background-primary)]"></div>
                     </div>
                     <div>
-                      <div className="font-medium text-[var(--text-primary)]">Email</div>
+                      <div className="font-semibold text-[var(--text-primary)] group-hover:text-[var(--primary-color)] transition-colors duration-300">Email</div>
                       <div className="text-[var(--text-secondary)]">info@varmanconstructions.in</div>
                     </div>
                   </div>
 
-                  <div className="flex items-center space-x-3 p-4 bg-white rounded-lg border border-[var(--border-color)]">
-                    <div className="w-10 h-10 bg-[var(--background-light)] rounded-lg flex items-center justify-center">
-                      <div className="icon-calendar text-lg text-[var(--primary-color)]"></div>
+                  <div className="flex items-center space-x-3 p-4 bg-card rounded-lg border border-[var(--border-color)]">
+                    <div className="w-10 h-10 bg-[var(--primary-color)] rounded-lg flex items-center justify-center">
+                      <div className="icon-calendar text-lg text-[var(--background-primary)]"></div>
                     </div>
                     <div>
                       <div className="font-medium text-[var(--text-primary)]">Established</div>
@@ -133,7 +133,7 @@ function Contact() {
                 <div className="space-y-3">
                   <button 
                     onClick={() => window.open('tel:+917708484811', '_self')}
-                    className="w-full flex items-center justify-center space-x-2 bg-[var(--primary-color)] text-white py-3 px-4 rounded-lg hover:bg-[var(--accent-color)] transition-colors"
+                    className="w-full flex items-center justify-center space-x-2 bg-[var(--primary-color)] text-[var(--background-primary)] py-3 px-4 rounded-lg hover:bg-[var(--accent-color)] transition-colors"
                   >
                     <div className="icon-phone"></div>
                     <span>Call Now</span>
@@ -141,7 +141,7 @@ function Contact() {
                   
                   <button 
                     onClick={handleWhatsAppContact}
-                    className="w-full flex items-center justify-center space-x-2 bg-green-600 text-white py-3 px-4 rounded-lg hover:bg-green-700 transition-colors"
+                    className="w-full flex items-center justify-center space-x-2 bg-green-600 text-[var(--text-primary)] py-3 px-4 rounded-lg hover:bg-green-700 transition-colors"
                   >
                     <div className="icon-message-circle"></div>
                     <span>WhatsApp</span>
@@ -164,7 +164,7 @@ function Contact() {
 
             {/* Contact Form */}
             <div className="lg:col-span-2">
-              <div className="bg-white p-8 rounded-lg border border-[var(--border-color)] shadow-lg">
+              <div className="bg-card p-8 rounded-lg border border-[var(--border-color)] shadow-lg">
                 <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-6">Request a Quote / Send Inquiry</h3>
                 
                 {submitMessage && (
@@ -271,7 +271,7 @@ function Contact() {
                   <button 
                     type="submit" 
                     disabled={isSubmitting}
-                    className="w-full bg-[var(--primary-color)] text-white py-3 px-6 rounded-lg font-semibold hover:bg-[var(--accent-color)] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full bg-[var(--primary-color)] text-[var(--background-primary)] py-3 px-6 rounded-lg font-semibold hover:bg-[var(--accent-color)] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {isSubmitting ? 'Submitting...' : 'Send Inquiry & Continue on WhatsApp'}
                   </button>
@@ -285,25 +285,25 @@ function Contact() {
           </div>
 
           {/* Additional Info */}
-          <div className="mt-12 bg-white p-8 rounded-lg border border-[var(--border-color)]">
+          <div className="mt-12 bg-card p-8 rounded-lg border border-[var(--border-color)]">
             <div className="grid md:grid-cols-3 gap-8 text-center">
               <div>
-                <div className="w-16 h-16 bg-[var(--background-light)] rounded-full flex items-center justify-center mx-auto mb-4">
-                  <div className="icon-clock text-2xl text-[var(--primary-color)]"></div>
+                <div className="w-16 h-16 bg-[var(--primary-color)] rounded-full flex items-center justify-center mx-auto mb-4">
+                  <div className="icon-clock text-2xl text-[var(--background-primary)]"></div>
                 </div>
                 <h4 className="font-semibold text-[var(--text-primary)] mb-2">Quick Response</h4>
                 <p className="text-sm text-[var(--text-secondary)]">We respond to all inquiries within 2 hours during business hours</p>
               </div>
               <div>
-                <div className="w-16 h-16 bg-[var(--background-light)] rounded-full flex items-center justify-center mx-auto mb-4">
-                  <div className="icon-truck text-2xl text-[var(--primary-color)]"></div>
+                <div className="w-16 h-16 bg-[var(--primary-color)] rounded-full flex items-center justify-center mx-auto mb-4">
+                  <div className="icon-truck text-2xl text-[var(--background-primary)]"></div>
                 </div>
                 <h4 className="font-semibold text-[var(--text-primary)] mb-2">Fast Delivery</h4>
                 <p className="text-sm text-[var(--text-secondary)]">24-48 hours delivery for most materials within our service areas</p>
               </div>
               <div>
-                <div className="w-16 h-16 bg-[var(--background-light)] rounded-full flex items-center justify-center mx-auto mb-4">
-                  <div className="icon-shield-check text-2xl text-[var(--primary-color)]"></div>
+                <div className="w-16 h-16 bg-[var(--primary-color)] rounded-full flex items-center justify-center mx-auto mb-4">
+                  <div className="icon-shield-check text-2xl text-[var(--background-primary)]"></div>
                 </div>
                 <h4 className="font-semibold text-[var(--text-primary)] mb-2">Quality Assured</h4>
                 <p className="text-sm text-[var(--text-secondary)]">All materials meet IS standards with quality certificates provided</p>

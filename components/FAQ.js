@@ -131,7 +131,7 @@ function FAQ() {
     };
 
     return (
-      <section id="faq" className="section-padding bg-white" data-name="faq" data-file="components/FAQ.js">
+      <section id="faq" className="section-padding bg-dark" data-name="faq" data-file="components/FAQ.js">
         <div className="container-max">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)] mb-4">
@@ -151,8 +151,8 @@ function FAQ() {
                   onClick={() => toggleCategory(category.id)}
                   className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-medium transition-colors ${
                     expandedCategory === category.id
-                      ? 'bg-[var(--primary-color)] text-white'
-                      : 'bg-gray-100 text-[var(--text-secondary)] hover:bg-gray-200'
+                      ? 'bg-[var(--primary-color)] text-[var(--background-primary)]'
+                      : 'bg-card text-[var(--text-secondary)] hover:bg-[var(--background-secondary)]'
                   }`}
                 >
                   <div className={`icon-${category.icon} text-sm`}></div>
@@ -167,20 +167,20 @@ function FAQ() {
                 key={category.id}
                 className={`${expandedCategory === category.id ? 'block' : 'hidden'}`}
               >
-                <div className="bg-gray-50 rounded-lg p-6">
+                <div className="bg-card rounded-lg p-6">
                   <div className="flex items-center mb-6">
                     <div className="w-10 h-10 bg-[var(--primary-color)] rounded-lg flex items-center justify-center mr-3">
-                      <div className={`icon-${category.icon} text-lg text-white`}></div>
+                      <div className={`icon-${category.icon} text-lg text-[var(--background-primary)]`}></div>
                     </div>
                     <h3 className="text-xl font-semibold text-[var(--text-primary)]">{category.title}</h3>
                   </div>
 
                   <div className="space-y-4">
                     {category.questions.map((faq, index) => (
-                      <div key={index} className="bg-white rounded-lg border border-[var(--border-color)]">
+                      <div key={index} className="bg-[var(--background-secondary)] rounded-lg border border-[var(--border-color)]">
                         <button
                           onClick={() => toggleQuestion(`${category.id}-${index}`)}
-                          className="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors"
+                          className="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-[var(--background-card)] transition-colors"
                         >
                           <span className="font-medium text-[var(--text-primary)] pr-4">{faq.question}</span>
                           <div className={`icon-chevron-down text-[var(--primary-color)] transform transition-transform ${
@@ -203,7 +203,7 @@ function FAQ() {
           </div>
 
           {/* Still have questions section */}
-          <div className="mt-12 text-center bg-gradient-to-r from-[var(--background-light)] to-white p-8 rounded-lg border border-[var(--border-color)]">
+          <div className="mt-12 text-center bg-card p-8 rounded-lg border border-[var(--border-color)]">
             <h3 className="text-2xl font-bold text-[var(--text-primary)] mb-4">Still Have Questions?</h3>
             <p className="text-[var(--text-secondary)] mb-6 max-w-2xl mx-auto">
               Our team is here to help! Contact us for personalized assistance with your building material requirements.

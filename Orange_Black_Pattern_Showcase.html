@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orange & Black Design Pattern Showcase</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #000;
+            color: #fff;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 40px 0;
+            background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            color: #FF6B35;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            color: #ccc;
+        }
+
+        .pattern-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .pattern-card {
+            background: #1a1a1a;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .pattern-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.2);
+        }
+
+        .pattern-preview {
+            height: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pattern-info {
+            padding: 20px;
+        }
+
+        .pattern-info h3 {
+            color: #FF6B35;
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+        }
+
+        .pattern-info p {
+            color: #ccc;
+            margin-bottom: 15px;
+        }
+
+        .pattern-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag {
+            background: #FF6B35;
+            color: #000;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        /* Geometric Patterns */
+        .hexagon-pattern {
+            background: #000;
+            background-image: 
+                radial-gradient(circle at 25% 25%, #FF6B35 2px, transparent 2px),
+                radial-gradient(circle at 75% 75%, #FF6B35 2px, transparent 2px);
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
+        }
+
+        .stripe-pattern {
+            background: repeating-linear-gradient(
+                45deg,
+                #000 0px,
+                #000 15px,
+                #FF6B35 15px,
+                #FF6B35 18px
+            );
+        }
+
+        .grid-pattern {
+            background: #000;
+            background-image: 
+                linear-gradient(#FF6B35 1px, transparent 1px),
+                linear-gradient(90deg, #FF6B35 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        /* Abstract Patterns */
+        .marble-pattern {
+            background: radial-gradient(ellipse at top, #FF6B35, #000),
+                        radial-gradient(ellipse at bottom, #000, #FF6B35);
+            background-blend-mode: multiply;
+            filter: blur(1px);
+        }
+
+        .fluid-pattern {
+            background: linear-gradient(45deg, #000 25%, #FF6B35 25%, #FF6B35 50%, #000 50%, #000 75%, #FF6B35 75%);
+            background-size: 60px 60px;
+            animation: flow 10s linear infinite;
+        }
+
+        @keyframes flow {
+            0% { background-position: 0 0; }
+            100% { background-position: 60px 60px; }
+        }
+
+        .organic-pattern {
+            background: #000;
+            background-image: radial-gradient(circle at 20% 80%, #FF6B35 20%, transparent 20%),
+                            radial-gradient(circle at 80% 20%, #FF6B35 20%, transparent 20%),
+                            radial-gradient(circle at 40% 40%, #FF6B35 20%, transparent 20%);
+            background-size: 80px 80px;
+        }
+
+        /* Natural Patterns */
+        .volcanic-pattern {
+            background: #000;
+            background-image: 
+                radial-gradient(circle at 30% 20%, #FF6B35 3px, transparent 3px),
+                radial-gradient(circle at 70% 60%, #FF8C42 2px, transparent 2px),
+                radial-gradient(circle at 20% 80%, #FF6B35 4px, transparent 4px);
+            background-size: 50px 50px, 30px 30px, 70px 70px;
+        }
+
+        .patina-pattern {
+            background: linear-gradient(135deg, #000 0%, #FF6B35 25%, #000 50%, #FF8C42 75%, #000 100%);
+            background-size: 100px 100px;
+            filter: contrast(1.2) brightness(0.8);
+        }
+
+        .weave-pattern {
+            background: 
+                linear-gradient(90deg, #FF6B35 2px, transparent 2px),
+                linear-gradient(#000 2px, transparent 2px);
+            background-size: 20px 20px;
+        }
+
+        /* Mandala Patterns */
+        .mandala-pattern {
+            background: #000;
+            background-image: 
+                radial-gradient(circle at center, #FF6B35 2px, transparent 2px),
+                radial-gradient(circle at center, transparent 20px, #FF6B35 21px, #FF6B35 22px, transparent 23px),
+                radial-gradient(circle at center, transparent 40px, #FF6B35 41px, #FF6B35 42px, transparent 43px);
+            background-size: 100px 100px;
+        }
+
+        .flower-pattern {
+            background: #000;
+            background-image: 
+                radial-gradient(circle at 50% 50%, #FF6B35 10px, transparent 10px),
+                radial-gradient(circle at 25% 25%, #FF8C42 5px, transparent 5px),
+                radial-gradient(circle at 75% 75%, #FF8C42 5px, transparent 5px);
+            background-size: 60px 60px;
+        }
+
+        .sunburst-pattern {
+            background: radial-gradient(circle at center, #FF6B35 0%, #FF8C42 30%, #000 70%);
+            background-size: 150px 150px;
+        }
+
+        .section-title {
+            color: #FF6B35;
+            font-size: 2rem;
+            margin: 40px 0 20px 0;
+            text-align: center;
+            border-bottom: 2px solid #FF6B35;
+            padding-bottom: 10px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px 0;
+            background: #1a1a1a;
+            margin-top: 40px;
+            border-radius: 15px;
+        }
+
+        .footer h3 {
+            color: #FF6B35;
+            margin-bottom: 10px;
+        }
+
+        .footer p {
+            color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Orange & Black Design Patterns</h1>
+        <p>Professional Pattern Collection for Modern Branding</p>
+    </div>
+
+    <div class="container">
+        <h2 class="section-title">Geometric Patterns</h2>
+        <div class="pattern-grid">
+            <div class="pattern-card">
+                <div class="pattern-preview hexagon-pattern"></div>
+                <div class="pattern-info">
+                    <h3>Hexagonal Grid</h3>
+                    <p>Modern geometric pattern perfect for tech and innovation brands. Creates structured yet dynamic visual appeal.</p>
+                    <div class="pattern-tags">
+                        <span class="tag">Tech</span>
+                        <span class="tag">Modern</span>
+                        <span class="tag">Scalable</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pattern-card">
+                <div class="pattern-preview stripe-pattern"></div>
+                <div class="pattern-info">
+                    <h3>Dynamic Stripes</h3>
+                    <p>Classic diagonal stripes with contemporary twist. Ideal for sports, fashion, and energetic brands.</p>
+                    <div class="pattern-tags">
+                        <span class="tag">Sports</span>
+                        <span class="tag">Fashion</span>
+                        <span class="tag">Energy</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pattern-card">
+                <div class="pattern-preview grid-pattern"></div>
+                <div class="pattern-info">
+                    <h3>Modular Grid</h3>
+                    <p>Clean grid system for digital applications. Perfect for websites, apps, and presentation templates.</p>
+                    <div class="pattern-tags">
+                        <span class="tag">Digital</span>
+                        <span class="tag">Clean</span>
+                        <span class="tag">Versatile</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">Abstract Fluid Patterns</h2>
+        <div class="pattern-grid">
+            <div class="pattern-card">
+                <div class="pattern-preview marble-pattern"></div>
+                <div class="pattern-info">
+                    <h3>Marble Flow</h3>
+                    <p>Organic marble texture for luxury and premium applications. Creates sophisticated, high-end appeal.</p>
+                    <div class="pattern-tags">
+                        <span class="tag">Luxury</span>
+                        <span class="tag">Premium</span>
+                        <span class="tag">Organic</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pattern-card">
+                <div class="pattern-preview fluid-pattern"></div>
+                <div class="pattern-info">
+                    <h3>Liquid Gradient</h3>
+                    <p>Animated fluid pattern with smooth transitions. Perfect for digital backgrounds and modern interfaces.</p>
+                    <div class="pattern-tags">
+                        <span class="tag">Animated</span>
+                        <span class="tag">Digital</span>
+                        <span class="tag">Modern</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pattern-card">
+                <div class="pattern-preview organic-pattern"></div>
+                <div class="pattern-info">
+                    <h3>Organic Curves</h3>
+                    <p>Natural flowing patterns inspired by organic forms. Ideal for wellness and lifestyle brands.</p>
+                    <div class="pattern-tags">
+                        <span class="tag">Wellness</span>
+                        <span class="tag">Natural</span>
+                        <span class="tag">Flowing</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">Natural Textured Patterns</h2>
+        <div class="pattern-grid">
+            <div class="pattern-card">
+                <div class="pattern-preview volcanic-pattern"></div>
+                <div class="pattern-info">
+                    <h3>Volcanic Rock</h3>
+                    <p>Textured pattern mimicking natural volcanic rock. Perfect for industrial and earth-conscious brands.</p>
+                    <div class="pattern-tags">
+                        <span class="tag">Industrial</span>
+                        <span class="tag">Natural</span>
+                        <span class="tag">Textured</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pattern-card">
+                <div class="pattern-preview patina-pattern"></div>
+                <div class="pattern-info">
+                    <h3>Burnt Patina</h3>
+                    <p>Weathered metal appearance with industrial charm. Great for urban and contemporary applications.</p>
+                    <div class="pattern-tags">
+                        <span class="tag">Urban</span>
+                        <span class="tag">Industrial</span>
+                        <span class="tag">Vintage</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pattern-card">
+                <div class="pattern-preview weave-pattern"></div>
+                <div class="pattern-info">
+                    <h3>Fiber Weave</h3>
+                    <p>Textile-inspired pattern for sustainable and eco-friendly brand positioning.</p>
+                    <div class="pattern-tags">
+                        <span class="tag">Eco</span>
+                        <span class="tag">Textile</span>
+                        <span class="tag">Sustainable</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">Mandala & Sacred Geometry</h2>
+        <div class="pattern-grid">
+            <div class="pattern-card">
+                <div class="pattern-preview mandala-pattern"></div>
+                <div class="pattern-info">
+                    <h3>Modern Mandala</h3>
+                    <p>Contemporary interpretation of traditional mandala. Perfect for wellness and spiritual brands.</p>
+                    <div class="pattern-tags">
+                        <span class="tag">Spiritual</span>
+                        <span class="tag">Wellness</span>
+                        <span class="tag">Balanced</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pattern-card">
+                <div class="pattern-preview flower-pattern"></div>
+                <div class="pattern-info">
+                    <h3>Flower of Life</h3>
+                    <p>Sacred geometry pattern with universal appeal. Ideal for holistic and mindfulness applications.</p>
+                    <div class="pattern-tags">
+                        <span class="tag">Sacred</span>
+                        <span class="tag">Universal</span>
+                        <span class="tag">Mindful</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pattern-card">
+                <div class="pattern-preview sunburst-pattern"></div>
+                <div class="pattern-info">
+                    <h3>Geometric Sunburst</h3>
+                    <p>Radial energy pattern conveying dynamism and growth. Perfect for motivational and energy brands.</p>
+                    <div class="pattern-tags">
+                        <span class="tag">Energy</span>
+                        <span class="tag">Growth</span>
+                        <span class="tag">Dynamic</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <h3>Professional Design Pattern Collection</h3>
+        <p>Research-driven patterns for modern branding and digital applications</p>
+    </div>
+</body>
+</html>

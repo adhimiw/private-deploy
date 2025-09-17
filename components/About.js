@@ -41,13 +41,13 @@ function About() {
     ];
 
     return (
-      <section id="about" className="section-padding bg-gray-50" data-name="about" data-file="components/About.js">
+      <section id="about" className="section-padding bg-dark" data-name="about" data-file="components/About.js">
         <div className="container-max">
           {/* Main Content */}
           <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
             {/* Content */}
             <div className="space-y-6">
-              <div className="inline-flex items-center px-4 py-2 bg-white rounded-full shadow-sm border border-[var(--border-color)] mb-4">
+              <div className="inline-flex items-center px-4 py-2 bg-card rounded-full shadow-sm border border-[var(--border-color)] mb-4">
                 <div className="w-2 h-2 bg-[var(--primary-color)] rounded-full mr-2"></div>
                 <span className="text-sm font-medium text-[var(--text-primary)]">About VARMAN CONSTRUCTIONS</span>
               </div>
@@ -64,7 +64,7 @@ function About() {
                 We specialize in supplying high-quality construction materials including M-Sand, Blue Metal (Jalli), various types of bricks, cement, AAC blocks, and natural stones. Our extensive network now covers 3+ states with a primary focus on South Indian markets, ensuring that quality construction materials reach every corner of our service area.
               </p>
 
-              <div className="bg-white p-6 rounded-lg border border-[var(--border-color)] shadow-sm">
+              <div className="bg-card p-6 rounded-lg border border-[var(--border-color)] shadow-sm">
                 <h4 className="font-semibold text-[var(--text-primary)] mb-3">Our Commitment</h4>
                 <p className="text-[var(--text-secondary)] text-sm leading-relaxed">
                   "We believe that every construction project deserves the best materials. Our mission is to provide consistent quality, competitive pricing, and reliable service that helps our customers build with confidence. From small residential projects to large infrastructure developments, we are committed to being your trusted material supplier partner."
@@ -91,16 +91,16 @@ function About() {
                 alt="VARMAN CONSTRUCTIONS - Building materials supplier"
                 className="rounded-lg shadow-xl w-full h-96 object-cover"
               />
-              <div className="absolute top-6 right-6 bg-[var(--primary-color)] text-white p-4 rounded-lg">
+              <div className="absolute top-6 right-6 bg-[var(--primary-color)] text-[var(--background-primary)] p-4 rounded-lg">
                 <div className="text-center">
                   <div className="text-2xl font-bold">2020</div>
                   <div className="text-sm opacity-90">Established</div>
                 </div>
               </div>
-              <div className="absolute bottom-6 left-6 bg-white p-4 rounded-lg shadow-lg">
+              <div className="absolute bottom-6 left-6 bg-card p-4 rounded-lg shadow-lg">
                 <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
-                    <div className="icon-trending-up text-lg text-green-600"></div>
+                  <div className="w-10 h-10 bg-[var(--primary-color)] rounded-full flex items-center justify-center">
+                    <div className="icon-trending-up text-lg text-[var(--background-primary)]"></div>
                   </div>
                   <div>
                     <div className="font-semibold text-[var(--text-primary)]">Growing Fast</div>
@@ -114,9 +114,9 @@ function About() {
           {/* Stats Section */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
             {stats.map((stat, index) => (
-              <div key={index} className="bg-white p-6 rounded-lg border border-[var(--border-color)] text-center card-shadow">
-                <div className="w-12 h-12 bg-[var(--background-light)] rounded-lg flex items-center justify-center mx-auto mb-3">
-                  <div className={`icon-${stat.icon} text-xl text-[var(--primary-color)]`}></div>
+              <div key={index} className="bg-card p-6 rounded-lg border border-[var(--border-color)] text-center card-shadow">
+                <div className="w-12 h-12 bg-[var(--primary-color)] rounded-lg flex items-center justify-center mx-auto mb-3">
+                  <div className={`icon-${stat.icon} text-xl text-[var(--background-primary)]`}></div>
                 </div>
                 <div className="text-2xl font-bold text-[var(--primary-color)] mb-1">{stat.number}</div>
                 <div className="text-sm text-[var(--text-secondary)]">{stat.label}</div>
@@ -137,9 +137,9 @@ function About() {
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {features.map((feature, index) => (
-                <div key={index} className="bg-white p-6 rounded-lg border border-[var(--border-color)] card-shadow">
-                  <div className="w-12 h-12 bg-[var(--background-light)] rounded-lg flex items-center justify-center mb-4">
-                    <div className={`icon-${feature.icon} text-xl text-[var(--primary-color)]`}></div>
+                <div key={index} className="bg-card p-6 rounded-lg border border-[var(--border-color)] card-shadow">
+                  <div className="w-12 h-12 bg-[var(--primary-color)] rounded-lg flex items-center justify-center mb-4">
+                    <div className={`icon-${feature.icon} text-xl text-[var(--background-primary)]`}></div>
                   </div>
                   <h4 className="text-lg font-semibold text-[var(--text-primary)] mb-3">
                     {feature.title}
@@ -154,10 +154,10 @@ function About() {
 
           {/* Our Mission & Vision */}
           <div className="mt-16 grid md:grid-cols-2 gap-8">
-            <div className="bg-gradient-to-br from-[var(--background-light)] to-white p-8 rounded-lg border border-[var(--border-color)]">
+            <div className="bg-card p-8 rounded-lg border border-[var(--border-color)]">
               <div className="flex items-center mb-4">
                 <div className="w-10 h-10 bg-[var(--primary-color)] rounded-lg flex items-center justify-center mr-3">
-                  <div className="icon-target text-lg text-white"></div>
+                  <div className="icon-target text-lg text-[var(--background-primary)]"></div>
                 </div>
                 <h4 className="text-xl font-semibold text-[var(--text-primary)]">Our Mission</h4>
               </div>
@@ -166,10 +166,10 @@ function About() {
               </p>
             </div>
 
-            <div className="bg-gradient-to-br from-white to-[var(--background-light)] p-8 rounded-lg border border-[var(--border-color)]">
+            <div className="bg-card p-8 rounded-lg border border-[var(--border-color)]">
               <div className="flex items-center mb-4">
                 <div className="w-10 h-10 bg-[var(--primary-color)] rounded-lg flex items-center justify-center mr-3">
-                  <div className="icon-eye text-lg text-white"></div>
+                  <div className="icon-eye text-lg text-[var(--background-primary)]"></div>
                 </div>
                 <h4 className="text-xl font-semibold text-[var(--text-primary)]">Our Vision</h4>
               </div>
