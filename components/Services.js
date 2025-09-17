@@ -14,7 +14,7 @@ function Services() {
         uses: ['Concrete mixing', 'Plastering work', 'Block work', 'Foundation construction'],
         advantages: ['Consistent quality', 'No impurities', 'Better workability', 'Environmentally friendly'],
         unit: 'per cubic meter',
-        image: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800&q=80'
+        image: './assets/msand.webp'
       },
       {
         id: 'p_sand',
@@ -26,7 +26,7 @@ function Services() {
         uses: ['Wall plastering', 'Ceiling work', 'Finishing work', 'Tile fixing'],
         advantages: ['Smooth finish', 'Easy workability', 'No cracking', 'Better adhesion'],
         unit: 'per cubic meter',
-        image: 'https://images.unsplash.com/photo-1588880331179-bc9b93a8cb5e?auto=format&fit=crop&w=800&q=80'
+        image: './assets/psand.webp'
       },
       {
         id: 'blue_metal',
@@ -44,7 +44,7 @@ function Services() {
         specifications: ['Crushing Strength: >200 N/mm²', 'Water Absorption: <1%', 'Impact Value: <10%', 'Specific Gravity: 2.6-2.8'],
         uses: ['Concrete construction', 'Road construction', 'Drainage work', 'Industrial flooring'],
         unit: 'per cubic meter',
-        image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?auto=format&fit=crop&w=800&q=80'
+        image: './assets/blue metals.webp'
       },
       {
         id: 'red_bricks',
@@ -59,7 +59,7 @@ function Services() {
         specifications: ['Size: 230x110x75mm', 'Compressive Strength: 3.5-7 N/mm²', 'Water Absorption: 15-20%', 'Size Tolerance: ±3mm'],
         uses: ['Load bearing walls', 'Non-load bearing walls', 'Partition walls', 'General construction'],
         unit: 'per 1000 nos',
-        image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=80'
+        image: './assets/red brick.webp'
       },
       {
         id: 'fly_ash_bricks',
@@ -71,7 +71,7 @@ function Services() {
         uses: ['Load bearing walls', 'High-rise construction', 'Earthquake resistant construction', 'Thermal insulation'],
         advantages: ['Higher strength', 'Lower weight', 'Better thermal insulation', 'Eco-friendly'],
         unit: 'per 1000 nos',
-        image: 'https://images.unsplash.com/photo-1578643463396-0997cb5328c1?auto=format&fit=crop&w=800&q=80'
+        image: './assets/brick.webp'
       },
       {
         id: 'concrete_blocks',
@@ -83,7 +83,7 @@ function Services() {
         uses: ['Partition walls', 'Compound walls', 'Non-load bearing walls', 'Quick construction'],
         advantages: ['Fast construction', 'Good insulation', 'Uniform size', 'Cost effective'],
         unit: 'per nos',
-        image: 'https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?auto=format&fit=crop&w=800&q=80'
+        image: './assets/concretate.webp'
       },
       {
         id: 'cement',
@@ -100,7 +100,7 @@ function Services() {
         specifications: ['Packaging: 50 kg bags', 'Strength: 43-53 N/mm² at 28 days', 'Setting Time: As per IS standards'],
         uses: ['Structural concrete', 'Plastering', 'Foundation work', 'General construction'],
         unit: 'per bag (50kg)',
-        image: 'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=800&q=80'
+        image: './assets/cement.webp'
       },
       {
         id: 'aac_blocks',
@@ -112,7 +112,7 @@ function Services() {
         uses: ['Load bearing walls', 'Partition walls', 'Thermal insulation', 'Sound insulation'],
         advantages: ['Lightweight', 'Excellent insulation', 'Fire resistant', 'Earthquake resistant'],
         unit: 'per cubic meter',
-        image: 'https://images.unsplash.com/photo-1572981779307-38b8cabb2407?auto=format&fit=crop&w=800&q=80'
+        image: './assets/acc.webp'
       },
       {
         id: 'size_stone',
@@ -127,7 +127,7 @@ function Services() {
         specifications: ['Compressive Strength: >100 N/mm²', 'Water Absorption: <0.5%', 'Custom sizes available'],
         uses: ['Flooring', 'Wall cladding', 'Landscaping', 'Decorative work'],
         unit: 'per sq.m / cubic meter',
-        image: 'https://images.unsplash.com/photo-1568205284717-cfb9fa4554e4?auto=format&fit=crop&w=800&q=80'
+        image: './assets/sizestone.webp'
       }
     ];
 
@@ -151,44 +151,55 @@ function Services() {
 
     return (
       <>
-        <section id="services" className="section-padding bg-white" data-name="services" data-file="components/Services.js">
-          <div className="container-max">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)] mb-4">
-                Our Building Materials Catalog
+        <section id="services" className="section-padding bg-dark" data-name="services" data-file="components/Services.js">
+          <div className="container-max relative z-10">
+            <div className="text-center mb-16 animate-fade-in">
+              <h2 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)] mb-6">
+                Our <span style={{color: 'var(--primary-color)'}}>Building Materials</span> Catalog
               </h2>
-              <p className="text-lg text-[var(--text-secondary)] max-w-2xl mx-auto">
-                Comprehensive range of high-quality building materials with detailed specifications and competitive pricing
+              <p className="text-xl text-[var(--text-secondary)] max-w-3xl mx-auto leading-relaxed">
+                Comprehensive range of <span style={{color: 'var(--secondary-color)', fontWeight: 'bold'}}>high-quality building materials</span> with detailed specifications and competitive pricing
               </p>
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {products.map((product, index) => (
-                <div key={index} className="bg-white border border-[var(--border-color)] rounded-lg overflow-hidden card-shadow hover:shadow-xl transition-all duration-300 cursor-pointer" onClick={() => openProductModal(product)}>
-                  <div className="h-48 overflow-hidden">
-                    <img 
-                      src={product.image} 
+                <div key={index} className="bg-card border-subtle rounded-xl overflow-hidden card-shadow cursor-pointer group animate-scale-in" onClick={() => openProductModal(product)}
+                     style={{
+                       animationDelay: `${index * 0.2}s`,
+                       transition: 'all 0.4s ease'
+                     }}>
+                  <div className="h-48 overflow-hidden relative">
+                    <img
+                      src={product.image}
                       alt={product.title}
-                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      style={{
+                        filter: 'contrast(1.1) brightness(0.9)'
+                      }}
                     />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-var(--glow-orange)/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div className="absolute top-4 right-4 w-8 h-8 bg-[var(--primary-color)] rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
+                      <div className="icon-arrow-right text-sm text-[var(--background-primary)]"></div>
+                    </div>
                   </div>
                   <div className="p-6">
-                    <div className="flex items-center mb-3">
-                      <div className="w-10 h-10 bg-[var(--background-light)] rounded-lg flex items-center justify-center mr-3">
-                        <div className={`icon-${product.icon} text-lg text-[var(--primary-color)]`}></div>
+                    <div className="flex items-center mb-4">
+                      <div className="w-12 h-12 bg-[var(--primary-color)] rounded-lg flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-500">
+                        <div className={`icon-${product.icon} text-lg text-[var(--background-primary)]`}></div>
                       </div>
-                      <h3 className="text-lg font-semibold text-[var(--text-primary)]">
+                      <h3 className="text-xl font-semibold text-[var(--text-primary)] group-hover:text-[var(--primary-color)] transition-colors duration-300">
                         {product.title}
                       </h3>
                     </div>
-                    <p className="text-[var(--text-secondary)] leading-relaxed mb-4">
+                    <p className="text-[var(--text-secondary)] leading-relaxed mb-6">
                       {product.shortDescription}
                     </p>
                     <div className="flex justify-between items-center">
-                      <span className="text-sm text-[var(--primary-color)] font-medium">
+                      <span className="text-sm text-[var(--text-muted)] font-medium bg-[var(--background-secondary)] px-3 py-1 rounded-full border border-[var(--primary-color)]/20">
                         Unit: {product.unit}
                       </span>
-                      <span className="text-sm text-[var(--primary-color)] font-medium hover:underline">
+                      <span className="text-sm text-[var(--primary-color)] font-semibold hover:underline transition-all duration-300">
                         View Details →
                       </span>
                     </div>
@@ -198,11 +209,11 @@ function Services() {
             </div>
 
             {/* Call to Action */}
-            <div className="text-center mt-12">
-              <div className="bg-gradient-to-r from-[var(--background-light)] to-white p-8 rounded-lg border border-[var(--border-color)]">
-                <h3 className="text-2xl font-bold text-[var(--text-primary)] mb-4">Need Custom Quantities or Specifications?</h3>
-                <p className="text-[var(--text-secondary)] mb-6">Contact us for bulk orders, custom specifications, or detailed quotations for your project.</p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="text-center mt-16 animate-slide-up">
+              <div className="bg-card p-12 rounded-2xl border-subtle shadow-elevated">
+                <h3 className="text-3xl font-bold text-[var(--text-primary)] mb-6">Need Custom Quantities or Specifications?</h3>
+                <p className="text-[var(--text-secondary)] text-lg mb-8 max-w-2xl mx-auto">Contact us for bulk orders, custom specifications, or detailed quotations for your project.</p>
+                <div className="flex flex-col sm:flex-row gap-6 justify-center">
                   <button onClick={() => window.open('tel:+917708484811', '_self')} className="btn-primary">
                     Call Now: +91 77084 84811
                   </button>
@@ -217,42 +228,42 @@ function Services() {
 
         {/* Product Detail Modal */}
         {showProductModal && selectedProduct && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4" onClick={closeProductModal}>
-            <div className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+          <div className="fixed inset-0 bg-black bg-opacity-75 z-50 flex items-center justify-center p-4 animate-fade-in" onClick={closeProductModal}>
+            <div className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl animate-bounce-in border border-gray-200" onClick={(e) => e.stopPropagation()}>
               <div className="p-6">
                 {/* Modal Header */}
                 <div className="flex justify-between items-start mb-6">
                   <div className="flex items-center">
-                    <div className="w-12 h-12 bg-[var(--background-light)] rounded-lg flex items-center justify-center mr-4">
-                      <div className={`icon-${selectedProduct.icon} text-xl text-[var(--primary-color)]`}></div>
+                    <div className="w-12 h-12 bg-[var(--primary-color)] rounded-lg flex items-center justify-center mr-4">
+                      <div className={`icon-${selectedProduct.icon} text-xl text-white`}></div>
                     </div>
                     <div>
-                      <h2 className="text-2xl font-bold text-[var(--text-primary)]">{selectedProduct.title}</h2>
-                      <p className="text-[var(--text-secondary)]">Unit: {selectedProduct.unit}</p>
+                      <h2 className="text-2xl font-bold text-gray-900">{selectedProduct.title}</h2>
+                      <p className="text-gray-600">Unit: {selectedProduct.unit}</p>
                     </div>
                   </div>
-                  <button onClick={closeProductModal} className="text-gray-500 hover:text-gray-700 text-2xl">×</button>
+                  <button onClick={closeProductModal} className="text-gray-500 hover:text-gray-700 text-2xl transition-all duration-300 transform hover:scale-110">×</button>
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-6">
                   {/* Image and Description */}
                   <div>
-                    <img 
-                      src={selectedProduct.image} 
+                    <img
+                      src={selectedProduct.image}
                       alt={selectedProduct.title}
                       className="w-full h-64 object-cover rounded-lg mb-4"
                     />
-                    <p className="text-[var(--text-secondary)] leading-relaxed">{selectedProduct.description}</p>
+                    <p className="text-gray-700 leading-relaxed">{selectedProduct.description}</p>
                   </div>
 
                   {/* Specifications and Details */}
                   <div className="space-y-6">
                     {selectedProduct.specifications && (
                       <div>
-                        <h4 className="font-semibold text-[var(--text-primary)] mb-3">Specifications:</h4>
+                        <h4 className="font-semibold text-gray-900 mb-3">Specifications:</h4>
                         <ul className="space-y-2">
                           {selectedProduct.specifications.map((spec, idx) => (
-                            <li key={idx} className="text-sm text-[var(--text-secondary)] flex items-start">
+                            <li key={idx} className="text-sm text-gray-700 flex items-start">
                               <span className="text-[var(--primary-color)] mr-2">•</span>
                               {spec}
                             </li>
@@ -263,12 +274,12 @@ function Services() {
 
                     {selectedProduct.sizes && (
                       <div>
-                        <h4 className="font-semibold text-[var(--text-primary)] mb-3">Available Sizes:</h4>
+                        <h4 className="font-semibold text-gray-900 mb-3">Available Sizes:</h4>
                         <div className="space-y-2">
                           {Object.entries(selectedProduct.sizes).map(([size, desc]) => (
                             <div key={size} className="text-sm">
                               <span className="font-medium text-[var(--primary-color)]">{size}:</span>
-                              <span className="text-[var(--text-secondary)] ml-2">{desc}</span>
+                              <span className="text-gray-700 ml-2">{desc}</span>
                             </div>
                           ))}
                         </div>
@@ -277,12 +288,12 @@ function Services() {
 
                     {selectedProduct.types && (
                       <div>
-                        <h4 className="font-semibold text-[var(--text-primary)] mb-3">Types Available:</h4>
+                        <h4 className="font-semibold text-gray-900 mb-3">Types Available:</h4>
                         <div className="space-y-2">
                           {Object.entries(selectedProduct.types).map(([type, desc]) => (
                             <div key={type} className="text-sm">
                               <span className="font-medium text-[var(--primary-color)]">{type}:</span>
-                              <span className="text-[var(--text-secondary)] ml-2">{desc}</span>
+                              <span className="text-gray-700 ml-2">{desc}</span>
                             </div>
                           ))}
                         </div>
@@ -291,12 +302,12 @@ function Services() {
 
                     {selectedProduct.grades && (
                       <div>
-                        <h4 className="font-semibold text-[var(--text-primary)] mb-3">Grades Available:</h4>
+                        <h4 className="font-semibold text-gray-900 mb-3">Grades Available:</h4>
                         <div className="space-y-2">
                           {Object.entries(selectedProduct.grades).map(([grade, desc]) => (
                             <div key={grade} className="text-sm">
                               <span className="font-medium text-[var(--primary-color)]">{grade}:</span>
-                              <span className="text-[var(--text-secondary)] ml-2">{desc}</span>
+                              <span className="text-gray-700 ml-2">{desc}</span>
                             </div>
                           ))}
                         </div>
@@ -305,10 +316,10 @@ function Services() {
 
                     {selectedProduct.brands && (
                       <div>
-                        <h4 className="font-semibold text-[var(--text-primary)] mb-3">Available Brands:</h4>
+                        <h4 className="font-semibold text-gray-900 mb-3">Available Brands:</h4>
                         <div className="flex flex-wrap gap-2">
                           {selectedProduct.brands.map((brand, idx) => (
-                            <span key={idx} className="px-3 py-1 bg-[var(--background-light)] text-[var(--primary-color)] rounded-full text-sm">
+                            <span key={idx} className="px-3 py-1 bg-gray-100 text-[var(--primary-color)] rounded-full text-sm">
                               {brand}
                             </span>
                           ))}
@@ -318,10 +329,10 @@ function Services() {
 
                     {selectedProduct.uses && (
                       <div>
-                        <h4 className="font-semibold text-[var(--text-primary)] mb-3">Common Uses:</h4>
+                        <h4 className="font-semibold text-gray-900 mb-3">Common Uses:</h4>
                         <div className="flex flex-wrap gap-2">
                           {selectedProduct.uses.map((use, idx) => (
-                            <span key={idx} className="px-3 py-1 bg-gray-100 text-[var(--text-secondary)] rounded-full text-sm">
+                            <span key={idx} className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">
                               {use}
                             </span>
                           ))}
@@ -331,10 +342,10 @@ function Services() {
 
                     {selectedProduct.advantages && (
                       <div>
-                        <h4 className="font-semibold text-[var(--text-primary)] mb-3">Key Advantages:</h4>
+                        <h4 className="font-semibold text-gray-900 mb-3">Key Advantages:</h4>
                         <ul className="space-y-1">
                           {selectedProduct.advantages.map((advantage, idx) => (
-                            <li key={idx} className="text-sm text-[var(--text-secondary)] flex items-center">
+                            <li key={idx} className="text-sm text-gray-700 flex items-center">
                               <div className="icon-check text-green-500 mr-2"></div>
                               {advantage}
                             </li>
@@ -346,7 +357,7 @@ function Services() {
                 </div>
 
                 {/* Modal Footer */}
-                <div className="flex flex-col sm:flex-row gap-4 mt-8 pt-6 border-t border-[var(--border-color)]">
+                <div className="flex flex-col sm:flex-row gap-4 mt-8 pt-6 border-t border-gray-200">
                   <button onClick={() => window.open('tel:+917708484811', '_self')} className="btn-primary">
                     Call for Pricing: +91 77084 84811
                   </button>
