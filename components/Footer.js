@@ -72,41 +72,28 @@ function Footer() {
 
             {/* Quick Links */}
             <div>
-              <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
+              <h4 className="text-lg font-semibold text-black mb-4">Quick Links</h4>
               <ul className="space-y-2 text-gray-300">
-                <li><a href="#home" className="hover:text-white transition-colors text-sm">Home</a></li>
-                <li><a href="#services" className="hover:text-white transition-colors text-sm">Products</a></li>
-                <li><a href="#about" className="hover:text-white transition-colors text-sm">About Us</a></li>
-                <li><a href="#faq" className="hover:text-white transition-colors text-sm">FAQ</a></li>
-                <li><a href="#contact" className="hover:text-white transition-colors text-sm">Contact</a></li>
+                <li><a href="#home" className="hover:text-white transition-colors text-sm text-black">Home</a></li>
+                <li><a href="#services" className="hover:text-white transition-colors text-sm text-black">Products</a></li>
+                <li><a href="#about" className="hover:text-white transition-colors text-sm text-black">About Us</a></li>
+                <li><a href="#faq" className="hover:text-white transition-colors text-sm text-black">FAQ</a></li>
+                <li><a href="#contact" className="hover:text-white transition-colors text-sm text-black">Contact</a></li>
               </ul>
             </div>
 
             {/* Our Products */}
             <div>
-              <h4 className="text-lg font-semibold mb-4">Our Materials</h4>
+              <h4 className="text-lg font-semibold text-black mb-4">Our Materials</h4>
               <ul className="space-y-2 text-gray-300">
-                <li><span className="hover:text-white transition-colors cursor-pointer text-sm">M-Sand & P-Sand</span></li>
-                <li><span className="hover:text-white transition-colors cursor-pointer text-sm">Blue Metal / Jalli</span></li>
-                <li><span className="hover:text-white transition-colors cursor-pointer text-sm">Red Bricks & Fly Ash Bricks</span></li>
-                <li><span className="hover:text-white transition-colors cursor-pointer text-sm">AAC Blocks & Cement</span></li>
-                <li><span className="hover:text-white transition-colors cursor-pointer text-sm">Concrete Blocks</span></li>
-                <li><span className="hover:text-white transition-colors cursor-pointer text-sm">Size Stone & Natural Stone</span></li>
+                <li><span className="hover:text-white transition-colors cursor-pointer text-sm text-black">M-Sand & P-Sand</span></li>
+                <li><span className="hover:text-white transition-colors cursor-pointer text-sm text-black">Blue Metal / Jalli</span></li>
+                <li><span className="hover:text-white transition-colors cursor-pointer text-sm text-black">Red Bricks & Fly Ash Bricks</span></li>
+                <li><span className="hover:text-white transition-colors cursor-pointer text-sm text-black">AAC Blocks & Cement</span></li>
+                <li><span className="hover:text-white transition-colors cursor-pointer text-sm text-black">Concrete Blocks</span></li>
+                <li><span className="hover:text-white transition-colors cursor-pointer text-sm text-black">Size Stone & Natural Stone</span></li>
               </ul>
             </div>
-          </div>
-
-          {/* Service Areas */}
-          <div className="mt-8 pt-8 border-t border-gray-700">
-            <h4 className="text-lg font-semibold mb-4">Service Areas</h4>
-            <p className="text-gray-300 text-sm mb-3">We deliver building materials across India with primary focus on:</p>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 text-sm text-gray-300">
-              <div>Tamil Nadu</div>
-              <div>Karnataka</div>
-              <div>Kerala</div>
-              <div>Other States*</div>
-            </div>
-            <p className="text-xs text-gray-400 mt-2">*Delivery to other states available on request with advance notice</p>
           </div>
 
           {/* Bottom Section */}
@@ -119,7 +106,7 @@ function Footer() {
               </div>
               <div className="md:text-right">
                 <p className="text-gray-400 text-xs">
-                  Website: varmanconstructions.in | Quality Materials • Timely Delivery • Competitive Pricing
+                  GSTIN: 33BTGPM9877H1Z3
                 </p>
               </div>
             </div>

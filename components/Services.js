@@ -229,20 +229,20 @@ function Services() {
         {/* Product Detail Modal */}
         {showProductModal && selectedProduct && (
           <div className="fixed inset-0 bg-black bg-opacity-75 z-50 flex items-center justify-center p-4 animate-fade-in" onClick={closeProductModal}>
-            <div className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl animate-bounce-in border border-gray-200" onClick={(e) => e.stopPropagation()}>
+            <div className="bg-[var(--background-card)] rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl animate-bounce-in border border-[var(--border-color)]" onClick={(e) => e.stopPropagation()}>
               <div className="p-6">
                 {/* Modal Header */}
                 <div className="flex justify-between items-start mb-6">
                   <div className="flex items-center">
                     <div className="w-12 h-12 bg-[var(--primary-color)] rounded-lg flex items-center justify-center mr-4">
-                      <div className={`icon-${selectedProduct.icon} text-xl text-white`}></div>
+                      <div className={`icon-${selectedProduct.icon} text-xl text-[var(--background-primary)]`}></div>
                     </div>
                     <div>
-                      <h2 className="text-2xl font-bold text-gray-900">{selectedProduct.title}</h2>
-                      <p className="text-gray-600">Unit: {selectedProduct.unit}</p>
+                      <h2 className="text-2xl font-bold text-[var(--text-primary)]">{selectedProduct.title}</h2>
+                      <p className="text-[var(--text-secondary)]">Unit: {selectedProduct.unit}</p>
                     </div>
                   </div>
-                  <button onClick={closeProductModal} className="text-gray-500 hover:text-gray-700 text-2xl transition-all duration-300 transform hover:scale-110">×</button>
+                  <button onClick={closeProductModal} className="text-[var(--text-secondary)] hover:text-[var(--primary-color)] text-2xl transition-all duration-300 transform hover:scale-110">×</button>
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-6">
@@ -253,17 +253,17 @@ function Services() {
                       alt={selectedProduct.title}
                       className="w-full h-64 object-cover rounded-lg mb-4"
                     />
-                    <p className="text-gray-700 leading-relaxed">{selectedProduct.description}</p>
+                    <p className="text-[var(--text-secondary)] leading-relaxed">{selectedProduct.description}</p>
                   </div>
 
                   {/* Specifications and Details */}
                   <div className="space-y-6">
                     {selectedProduct.specifications && (
                       <div>
-                        <h4 className="font-semibold text-gray-900 mb-3">Specifications:</h4>
+                        <h4 className="font-semibold text-[var(--text-primary)] mb-3">Specifications:</h4>
                         <ul className="space-y-2">
                           {selectedProduct.specifications.map((spec, idx) => (
-                            <li key={idx} className="text-sm text-gray-700 flex items-start">
+                            <li key={idx} className="text-sm text-[var(--text-secondary)] flex items-start">
                               <span className="text-[var(--primary-color)] mr-2">•</span>
                               {spec}
                             </li>
@@ -274,12 +274,12 @@ function Services() {
 
                     {selectedProduct.sizes && (
                       <div>
-                        <h4 className="font-semibold text-gray-900 mb-3">Available Sizes:</h4>
+                        <h4 className="font-semibold text-[var(--text-primary)] mb-3">Available Sizes:</h4>
                         <div className="space-y-2">
                           {Object.entries(selectedProduct.sizes).map(([size, desc]) => (
                             <div key={size} className="text-sm">
                               <span className="font-medium text-[var(--primary-color)]">{size}:</span>
-                              <span className="text-gray-700 ml-2">{desc}</span>
+                              <span className="text-[var(--text-secondary)] ml-2">{desc}</span>
                             </div>
                           ))}
                         </div>
@@ -288,12 +288,12 @@ function Services() {
 
                     {selectedProduct.types && (
                       <div>
-                        <h4 className="font-semibold text-gray-900 mb-3">Types Available:</h4>
+                        <h4 className="font-semibold text-[var(--text-primary)] mb-3">Types Available:</h4>
                         <div className="space-y-2">
                           {Object.entries(selectedProduct.types).map(([type, desc]) => (
                             <div key={type} className="text-sm">
                               <span className="font-medium text-[var(--primary-color)]">{type}:</span>
-                              <span className="text-gray-700 ml-2">{desc}</span>
+                              <span className="text-[var(--text-secondary)] ml-2">{desc}</span>
                             </div>
                           ))}
                         </div>
@@ -302,12 +302,12 @@ function Services() {
 
                     {selectedProduct.grades && (
                       <div>
-                        <h4 className="font-semibold text-gray-900 mb-3">Grades Available:</h4>
+                        <h4 className="font-semibold text-[var(--text-primary)] mb-3">Grades Available:</h4>
                         <div className="space-y-2">
                           {Object.entries(selectedProduct.grades).map(([grade, desc]) => (
                             <div key={grade} className="text-sm">
                               <span className="font-medium text-[var(--primary-color)]">{grade}:</span>
-                              <span className="text-gray-700 ml-2">{desc}</span>
+                              <span className="text-[var(--text-secondary)] ml-2">{desc}</span>
                             </div>
                           ))}
                         </div>
@@ -316,10 +316,10 @@ function Services() {
 
                     {selectedProduct.brands && (
                       <div>
-                        <h4 className="font-semibold text-gray-900 mb-3">Available Brands:</h4>
+                        <h4 className="font-semibold text-[var(--text-primary)] mb-3">Available Brands:</h4>
                         <div className="flex flex-wrap gap-2">
                           {selectedProduct.brands.map((brand, idx) => (
-                            <span key={idx} className="px-3 py-1 bg-gray-100 text-[var(--primary-color)] rounded-full text-sm">
+                            <span key={idx} className="px-3 py-1 bg-[var(--background-secondary)] text-[var(--primary-color)] rounded-full text-sm border border-[var(--primary-color)]/20">
                               {brand}
                             </span>
                           ))}
@@ -329,10 +329,10 @@ function Services() {
 
                     {selectedProduct.uses && (
                       <div>
-                        <h4 className="font-semibold text-gray-900 mb-3">Common Uses:</h4>
+                        <h4 className="font-semibold text-[var(--text-primary)] mb-3">Common Uses:</h4>
                         <div className="flex flex-wrap gap-2">
                           {selectedProduct.uses.map((use, idx) => (
-                            <span key={idx} className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">
+                            <span key={idx} className="px-3 py-1 bg-[var(--background-secondary)] text-[var(--text-secondary)] rounded-full text-sm border border-[var(--border-color)]">
                               {use}
                             </span>
                           ))}
@@ -342,11 +342,11 @@ function Services() {
 
                     {selectedProduct.advantages && (
                       <div>
-                        <h4 className="font-semibold text-gray-900 mb-3">Key Advantages:</h4>
+                        <h4 className="font-semibold text-[var(--text-primary)] mb-3">Key Advantages:</h4>
                         <ul className="space-y-1">
                           {selectedProduct.advantages.map((advantage, idx) => (
-                            <li key={idx} className="text-sm text-gray-700 flex items-center">
-                              <div className="icon-check text-green-500 mr-2"></div>
+                            <li key={idx} className="text-sm text-[var(--text-secondary)] flex items-center">
+                              <div className="icon-check text-[var(--primary-color)] mr-2"></div>
                               {advantage}
                             </li>
                           ))}

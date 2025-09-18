@@ -138,30 +138,37 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://resource.trickle.so/vendor_lib/unpkg/lucide-static@0.516.0/font/lucide.css" rel="stylesheet">
 
-    <!-- Enhanced Tailwind CSS with VARMAN CONSTRUCTIONS branding - Orange & Black Gypsy Theme -->
+    <!-- Enhanced Tailwind CSS with VARMAN CONSTRUCTIONS branding - White & Orange Theme -->
     <style type="text/tailwindcss">
     @layer theme {
         :root {
-            /* Orange & Black Gypsy Theme - VARMAN CONSTRUCTIONS */
-            --primary-color: #FF6B35;
+            /* White & Orange Theme - VARMAN CONSTRUCTIONS - Enhanced Contrast */
+            --primary-color: #E55A2B;        /* Darker orange for better contrast */
             --secondary-color: #FF8C42;
-            --accent-color: #FFA500;
-            --dark-primary: #000000;
-            --dark-secondary: #1A1A1A;
-            --text-primary: #FFFFFF;
-            --text-secondary: #E5E5E5;
-            --text-light: #FFFFFF;
-            --text-muted: #CCCCCC;
-            --background-primary: #000000;
-            --background-secondary: #1A1A1A;
-            --background-card: #0F0F0F;
-            --border-color: #333333;
-            --border-light: #555555;
-            --shadow-color: rgba(255, 107, 53, 0.2);
-            --glow-orange: rgba(255, 107, 53, 0.6);
+            --accent-color: #FF7A00;         /* Slightly darker orange */
+            --dark-primary: #FFFFFF;
+            --dark-secondary: #F8F9FA;
+            --text-primary: #1A1A1A;         /* High contrast dark text */
+            --text-secondary: #2D3748;       /* Darker secondary text for better readability */
+            --text-light: #1A1A1A;
+            --text-muted: #4A5568;           /* Improved contrast for muted text */
+            --background-primary: #FFFFFF;
+            --background-secondary: #F7FAFC; /* Slightly cooler white */
+            --background-card: #FFFFFF;
+            --border-color: #E2E8F0;         /* Subtle border with better visibility */
+            --border-light: #CBD5E0;
+            --shadow-color: rgba(229, 90, 43, 0.25);  /* Updated shadow with new primary */
+            --glow-orange: rgba(229, 90, 43, 0.6);
             --glow-orange-light: rgba(255, 140, 66, 0.4);
-            --pattern-orange: #FF6B35;
+            --pattern-orange: #E55A2B;
             --pattern-orange-light: #FF8C42;
+
+            /* Additional contrast colors for accessibility */
+            --text-on-orange: #FFFFFF;       /* White text on orange backgrounds */
+            --orange-hover: #D14D1F;         /* Darker orange for hover states */
+            --success-color: #38A169;        /* Green for success states */
+            --warning-color: #D69E2E;        /* Amber for warnings */
+            --error-color: #E53E3E;          /* Red for errors */
         }
     }
 
@@ -209,7 +216,7 @@
     @layer components {
         .btn-primary {
             background-color: var(--primary-color);
-            color: var(--background-primary);
+            color: var(--text-on-orange);
             padding: 0.75rem 1.5rem;
             border-radius: 0.5rem;
             font-weight: 600;
@@ -243,10 +250,11 @@
         }
 
         .btn-primary:hover {
-            background-color: transparent;
-            color: var(--primary-color);
+            background-color: var(--orange-hover);
+            color: var(--text-on-orange);
             transform: translateY(-3px) scale(1.05);
             box-shadow: 0 15px 35px var(--shadow-color);
+            border-color: var(--orange-hover);
         }
 
         .btn-secondary {
@@ -286,11 +294,11 @@
         }
 
         .btn-secondary:hover {
-            color: var(--background-primary);
-            border-color: var(--primary-color);
+            color: var(--text-on-orange);
+            border-color: var(--orange-hover);
             transform: translateY(-3px) scale(1.05);
             box-shadow: 0 15px 35px var(--shadow-color);
-            text-shadow: 0 0 5px rgba(0,0,0,0.5);
+            text-shadow: none;
         }
 
         .section-padding {
@@ -301,6 +309,12 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 1rem;
+        }
+
+        /* Header specific styling for tight logo alignment */
+        header .max-w-full {
+            max-width: 100%;
+            margin: 0;
         }
 
         .card-shadow {

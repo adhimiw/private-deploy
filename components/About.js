@@ -81,6 +81,10 @@ function About() {
                   <div className="icon-mail text-[var(--primary-color)]"></div>
                   <span>info@varmanconstructions.in</span>
                 </div>
+                <div className="flex items-center space-x-2 text-[var(--text-secondary)]">
+                  <div className="icon-briefcase text-[var(--primary-color)]"></div>
+                  <span>GSTIN: 33BTGPM9877H1Z3</span>
+                </div>
               </div>
             </div>
 
