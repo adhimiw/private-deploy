@@ -35,11 +35,7 @@ function Hero() {
           {/* Prominent Logo Section */}
           <div className="text-center mb-4 md:mb-6 animate-fade-in">
             <div className="inline-block">
-              <img
-                src="assets/hero.png"
-                alt="VARMAN CONSTRUCTIONS Logo"
-                className="h-32 md:h-40 lg:h-48 xl:h-56 w-64 md:w-72 lg:w-80 xl:w-96 object-contain mx-auto mb-2 transition-all duration-500 transform hover:scale-105 drop-shadow-2xl"
-              />
+              
             </div>
           </div>
 
