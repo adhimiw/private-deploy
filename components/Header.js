@@ -11,7 +11,7 @@ function Header() {
     };
 
     const handleCallNow = () => {
-      window.open('tel:+917708484811', '_self');
+      window.open('https://wa.me/917708484811', '_blank');
     };
 
     return (
@@ -58,10 +58,10 @@ function Header() {
                 <div className="text-sm font-semibold text-[var(--text-primary)]">
                   <span style={{color: 'var(--primary-color)'}}>+91 77084 84811</span>
                 </div>
-                <div className="text-xs text-[var(--text-secondary)]">Call for Quote</div>
+                <div className="text-xs text-[var(--text-secondary)]">GSTIN: 33BTGPM9877H1Z3</div>
               </div>
               <button onClick={handleCallNow} className="btn-primary text-sm">
-                Call Now
+                Whatsapp Now
               </button>
             </div>
 
@@ -98,7 +98,7 @@ function Header() {
 
                 {/* Mobile Contact */}
                 <div className="px-4 py-3 border-t border-[var(--border-color)]">
-                  <div className="text-sm font-semibold text-[var(--text-primary)] mb-1">Call for Quote</div>
+                  <div className="text-sm font-semibold text-[var(--text-primary)] mb-1">GSTIN: 33BTGPM9877H1Z3</div>
                   <div className="flex flex-col space-y-2">
                     <button onClick={() => window.open('tel:+917708484811', '_self')} className="text-sm text-[var(--text-secondary)] hover:text-[var(--primary-color)] font-medium transition-colors duration-300">
                       +91 77084 84811
