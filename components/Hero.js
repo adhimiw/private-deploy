@@ -21,32 +21,32 @@ function Hero() {
     return (
       <section
         id="home"
-        className="pt-24 section-padding bg-dark relative overflow-hidden min-h-screen flex hexagon-pattern"
+        className="pt-16 pb-8 bg-dark relative overflow-hidden min-h-screen"
         data-name="hero"
         data-file="components/Hero.js"
         style={{
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=95')`,
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6)), url('assets/herobg.jpg')`,
           backgroundSize: 'cover',
           backgroundPosition: 'top',
           backgroundAttachment: 'fixed'
         }}
       >
-        <div className="container-max relative z-10 w-full">
+        <div className="container-max relative z-10 w-full max-w-7xl mx-auto px-6 md:px-8 lg:px-12">
           {/* Prominent Logo Section */}
-          <div className="text-center mb-16 animate-fade-in">
+          <div className="text-center mb-4 md:mb-6 animate-fade-in">
             <div className="inline-block">
               <img
                 src="assets/hero.png"
                 alt="VARMAN CONSTRUCTIONS Logo"
-                className="h-48 md:h-60 lg:h-72 xl:h-80 w-auto object-contain mx-auto mb-6 transition-all duration-500 transform hover:scale-105 drop-shadow-2xl"
+                className="h-32 md:h-40 lg:h-48 xl:h-56 w-64 md:w-72 lg:w-80 xl:w-96 object-contain mx-auto mb-2 transition-all duration-500 transform hover:scale-105 drop-shadow-2xl"
               />
             </div>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-16 items-center">
+          <div className="grid md:grid-cols-2 gap-8 md:gap-16 lg:gap-20 items-start">
             {/* Content */}
-            <div className="space-y-4 animate-slide-up">
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-none">
+            <div className="space-y-3 animate-slide-up">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
                 Premium <span className="text-gradient" style={{
                   background: `linear-gradient(135deg, var(--primary-color), var(--secondary-color))`,
                   WebkitBackgroundClip: 'text',
@@ -56,12 +56,12 @@ function Hero() {
                 }}>Building Materials</span> Supplier Across India
               </h1>
 
-              <p className="text-xl text-gray-200 leading-relaxed max-w-2xl">
+              <p className="text-lg md:text-xl text-gray-200 leading-relaxed max-w-2xl">
                 Your trusted partner since <span style={{color: 'var(--primary-color)', fontWeight: 'bold'}}>2020</span> for high-quality building materials. We supply <span style={{color: 'var(--secondary-color)'}}>M-Sand, Blue Metal, Cement, Bricks</span>, and specialized construction supplies across India with guaranteed quality and timely delivery.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-6">
-                <button onClick={handleCallNow} className="btn-primary flex items-center justify-center space-x-3">
+              <div className="flex flex-col sm:flex-row gap-4">
+                <button onClick={handleCallNow} className="btn-primary flex items-center justify-center space-x-2">
                   <div className="icon-phone text-lg"></div>
                   <span>Call Now</span>
                 </button>
@@ -69,32 +69,32 @@ function Hero() {
                   Get Quote
                 </button>
               </div>
-              
+
               {/* Contact Info */}
-              <div className="flex flex-col sm:flex-row gap-6 pt-6 text-sm text-white">
-                <div className="flex items-center space-x-3 hover:text-[var(--primary-color)] transition-colors duration-300">
+              <div className="flex flex-col sm:flex-row gap-4 pt-3 text-sm text-white">
+                <div className="flex items-center space-x-2 hover:text-[var(--primary-color)] transition-colors duration-300">
                   <div className="icon-phone text-[var(--primary-color)]"></div>
                   <span className="font-medium">+91 77084 84811</span>
                 </div>
-                <div className="flex items-center space-x-3 hover:text-[var(--primary-color)] transition-colors duration-300">
+                <div className="flex items-center space-x-2 hover:text-[var(--primary-color)] transition-colors duration-300">
                   <div className="icon-phone text-[var(--primary-color)]"></div>
                   <span className="font-medium">+91 99652 37777</span>
                 </div>
               </div>
 
               {/* Stats */}
-              <div className="grid grid-cols-3 gap-8 pt-12">
+              <div className="grid grid-cols-3 gap-3 pt-4">
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-[var(--primary-color)] mb-2">200+</div>
-                  <div className="text-sm text-gray-300 font-medium uppercase tracking-wide">Projects Completed</div>
+                  <div className="text-2xl md:text-3xl font-bold text-[var(--primary-color)] mb-1">200+</div>
+                  <div className="text-xs text-gray-300 font-medium uppercase tracking-wide">Projects Completed</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-[var(--primary-color)] mb-2">5+</div>
-                  <div className="text-sm text-gray-300 font-medium uppercase tracking-wide">Years Experience</div>
+                  <div className="text-2xl md:text-3xl font-bold text-[var(--primary-color)] mb-1">5+</div>
+                  <div className="text-xs text-gray-300 font-medium uppercase tracking-wide">Years Experience</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-[var(--primary-color)] mb-2">3+</div>
-                  <div className="text-sm text-gray-300 font-medium uppercase tracking-wide">States Covered</div>
+                  <div className="text-2xl md:text-3xl font-bold text-[var(--primary-color)] mb-1">3+</div>
+                  <div className="text-xs text-gray-300 font-medium uppercase tracking-wide">States Covered</div>
                 </div>
               </div>
             </div>
@@ -121,36 +121,36 @@ function Hero() {
           </div>
           
           {/* Product Highlights */}
-          <div className="mt-24 animate-fade-in">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-white mb-4">Our Premium Materials</h2>
-              <p className="text-gray-300 text-lg">High-quality construction materials for all your building needs</p>
+          <div className="mt-8 md:mt-12 animate-fade-in">
+            <div className="text-center mb-4 md:mb-6">
+              <h2 className="text-xl md:text-2xl font-bold text-white mb-2">Our Premium Materials</h2>
+              <p className="text-gray-300 text-sm md:text-base">High-quality construction materials for all your building needs</p>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-              <div className="bg-card p-6 rounded-xl border-subtle text-center card-shadow group cursor-pointer">
-                <div className="text-3xl mb-3">🏗️</div>
-                <div className="text-sm font-semibold text-[var(--text-primary)] group-hover:text-[var(--primary-color)] transition-colors duration-300">M-Sand</div>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6 lg:gap-8">
+              <div className="bg-card p-3 md:p-4 rounded-xl border-subtle text-center card-shadow group cursor-pointer">
+                <div className="text-xl md:text-2xl mb-1 md:mb-2">🏗️</div>
+                <div className="text-xs font-semibold text-[var(--text-primary)] group-hover:text-[var(--primary-color)] transition-colors duration-300">M-Sand</div>
               </div>
-              <div className="bg-card p-6 rounded-xl border-subtle text-center card-shadow group cursor-pointer">
-                <div className="text-3xl mb-3">⚡</div>
-                <div className="text-sm font-semibold text-[var(--text-primary)] group-hover:text-[var(--primary-color)] transition-colors duration-300">Blue Metal</div>
+              <div className="bg-card p-3 md:p-4 rounded-xl border-subtle text-center card-shadow group cursor-pointer">
+                <div className="text-xl md:text-2xl mb-1 md:mb-2">⚡</div>
+                <div className="text-xs font-semibold text-[var(--text-primary)] group-hover:text-[var(--primary-color)] transition-colors duration-300">Blue Metal</div>
               </div>
-              <div className="bg-card p-6 rounded-xl border-subtle text-center card-shadow group cursor-pointer">
-                <div className="text-3xl mb-3">🧱</div>
-                <div className="text-sm font-semibold text-[var(--text-primary)] group-hover:text-[var(--primary-color)] transition-colors duration-300">Red Bricks</div>
+              <div className="bg-card p-3 md:p-4 rounded-xl border-subtle text-center card-shadow group cursor-pointer">
+                <div className="text-xl md:text-2xl mb-1 md:mb-2">🧱</div>
+                <div className="text-xs font-semibold text-[var(--text-primary)] group-hover:text-[var(--primary-color)] transition-colors duration-300">Red Bricks</div>
               </div>
-              <div className="bg-card p-6 rounded-xl border-subtle text-center card-shadow group cursor-pointer">
-                <div className="text-3xl mb-3">🏢</div>
-                <div className="text-sm font-semibold text-[var(--text-primary)] group-hover:text-[var(--primary-color)] transition-colors duration-300">AAC Blocks</div>
+              <div className="bg-card p-3 md:p-4 rounded-xl border-subtle text-center card-shadow group cursor-pointer">
+                <div className="text-xl md:text-2xl mb-1 md:mb-2">🏢</div>
+                <div className="text-xs font-semibold text-[var(--text-primary)] group-hover:text-[var(--primary-color)] transition-colors duration-300">AAC Blocks</div>
               </div>
-              <div className="bg-card p-6 rounded-xl border-subtle text-center card-shadow group cursor-pointer">
-                <div className="text-3xl mb-3">🔨</div>
-                <div className="text-sm font-semibold text-[var(--text-primary)] group-hover:text-[var(--primary-color)] transition-colors duration-300">Cement</div>
+              <div className="bg-card p-3 md:p-4 rounded-xl border-subtle text-center card-shadow group cursor-pointer">
+                <div className="text-xl md:text-2xl mb-1 md:mb-2">🔨</div>
+                <div className="text-xs font-semibold text-[var(--text-primary)] group-hover:text-[var(--primary-color)] transition-colors duration-300">Cement</div>
               </div>
-              <div className="bg-card p-6 rounded-xl border-subtle text-center card-shadow group cursor-pointer">
-                <div className="text-3xl mb-3">🪨</div>
-                <div className="text-sm font-semibold text-[var(--text-primary)] group-hover:text-[var(--primary-color)] transition-colors duration-300">Size Stone</div>
+              <div className="bg-card p-3 md:p-4 rounded-xl border-subtle text-center card-shadow group cursor-pointer">
+                <div className="text-xl md:text-2xl mb-1 md:mb-2">🪨</div>
+                <div className="text-xs font-semibold text-[var(--text-primary)] group-hover:text-[var(--primary-color)] transition-colors duration-300">Size Stone</div>
               </div>
             </div>
           </div>

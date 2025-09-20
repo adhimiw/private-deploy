@@ -13,7 +13,7 @@ function Services() {
         specifications: ['Fineness Modulus: 2.6-3.0', 'Silt Content: <3%', 'Water Absorption: <2%', 'Bulk Density: 1.75-1.85 kg/m³'],
         uses: ['Concrete mixing', 'Plastering work', 'Block work', 'Foundation construction'],
         advantages: ['Consistent quality', 'No impurities', 'Better workability', 'Environmentally friendly'],
-        unit: 'per cubic meter',
+        unit: 'per unit',
         image: './assets/msand.webp'
       },
       {
@@ -25,7 +25,7 @@ function Services() {
         specifications: ['Particle Size: 0.15-2mm', 'Silt Content: <2%', 'Clay Content: <1%', 'Fineness Modulus: 1.5-2.5'],
         uses: ['Wall plastering', 'Ceiling work', 'Finishing work', 'Tile fixing'],
         advantages: ['Smooth finish', 'Easy workability', 'No cracking', 'Better adhesion'],
-        unit: 'per cubic meter',
+        unit: 'per unit',
         image: './assets/psand.webp'
       },
       {
@@ -43,7 +43,7 @@ function Services() {
         },
         specifications: ['Crushing Strength: >200 N/mm²', 'Water Absorption: <1%', 'Impact Value: <10%', 'Specific Gravity: 2.6-2.8'],
         uses: ['Concrete construction', 'Road construction', 'Drainage work', 'Industrial flooring'],
-        unit: 'per cubic meter',
+        unit: 'per unit',
         image: './assets/blue metals.webp'
       },
       {
@@ -58,7 +58,7 @@ function Services() {
         },
         specifications: ['Size: 230x110x75mm', 'Compressive Strength: 3.5-7 N/mm²', 'Water Absorption: 15-20%', 'Size Tolerance: ±3mm'],
         uses: ['Load bearing walls', 'Non-load bearing walls', 'Partition walls', 'General construction'],
-        unit: 'per 1000 nos',
+        unit: 'per nos',
         image: './assets/red brick.webp'
       },
       {
@@ -70,7 +70,7 @@ function Services() {
         specifications: ['Size: 230x110x75mm', 'Compressive Strength: 7.5-10 N/mm²', 'Water Absorption: 10-15%', 'Density: 1800-2000 kg/m³'],
         uses: ['Load bearing walls', 'High-rise construction', 'Earthquake resistant construction', 'Thermal insulation'],
         advantages: ['Higher strength', 'Lower weight', 'Better thermal insulation', 'Eco-friendly'],
-        unit: 'per 1000 nos',
+        unit: 'per nos',
         image: './assets/brick.webp'
       },
       {
@@ -111,7 +111,7 @@ function Services() {
         specifications: ['Sizes: 600x200x100/150/200mm', 'Density: 550-650 kg/m³', 'Compressive Strength: 3-4.5 N/mm²', 'Thermal Conductivity: 0.16-0.18 W/mK'],
         uses: ['Load bearing walls', 'Partition walls', 'Thermal insulation', 'Sound insulation'],
         advantages: ['Lightweight', 'Excellent insulation', 'Fire resistant', 'Earthquake resistant'],
-        unit: 'per cubic meter',
+        unit: 'per no',
         image: './assets/acc.webp'
       },
       {
@@ -126,7 +126,7 @@ function Services() {
         },
         specifications: ['Compressive Strength: >100 N/mm²', 'Water Absorption: <0.5%', 'Custom sizes available'],
         uses: ['Flooring', 'Wall cladding', 'Landscaping', 'Decorative work'],
-        unit: 'per sq.m / cubic meter',
+        unit: 'per no',
         image: './assets/sizestone.webp'
       }
     ];

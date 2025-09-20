@@ -47,9 +47,9 @@ function About() {
           <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
             {/* Content */}
             <div className="space-y-6">
-              <div className="inline-flex items-center px-4 py-2 bg-card rounded-full shadow-sm border border-[var(--border-color)] mb-4">
-                <div className="w-2 h-2 bg-[var(--primary-color)] rounded-full mr-2"></div>
-                <span className="text-sm font-medium text-[var(--text-primary)]">About VARMAN CONSTRUCTIONS</span>
+              <div className="inline-flex items-center px-6 py-3 bg-card rounded-full shadow-sm border border-[var(--border-color)] mb-4">
+                <div className="w-3 h-3 bg-[var(--primary-color)] rounded-full mr-3"></div>
+                <span className="text-base font-medium text-[var(--text-primary)]">About VARMAN CONSTRUCTIONS</span>
               </div>
               
               <h2 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)]">

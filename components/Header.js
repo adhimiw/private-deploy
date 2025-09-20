@@ -23,7 +23,7 @@ function Header() {
               <img
                 src="assets/logo.png"
                 alt="VARMAN CONSTRUCTIONS Logo"
-                className="h-20 md:h-28 w-auto object-contain transition-all duration-500 group-hover:scale-105 drop-shadow-lg"
+                className="h-20 md:h-20 w-auto object-contain transition-all duration-500 group-hover:scale-105 drop-shadow-lg"
               />
               <div>
                 <span className="text-lg md:text-xl font-bold text-[var(--text-primary)] group-hover:text-[var(--primary-color)] transition-colors duration-300">
