@@ -46,12 +46,7 @@ function Hero() {
           <div className="grid md:grid-cols-2 gap-16 items-center">
             {/* Content */}
             <div className="space-y-8 animate-slide-up">
-              <div className="inline-flex items-center px-6 py-3 bg-card border-subtle rounded-full mb-6">
-                <div className="w-3 h-3 bg-[var(--primary-color)] rounded-full mr-3"></div>
-                <span className="text-sm font-medium text-[var(--text-secondary)] uppercase tracking-wide">Established 2020 • Trusted Supplier</span>
-              </div>
-
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
                 Premium <span className="text-gradient" style={{
                   background: `linear-gradient(135deg, var(--primary-color), var(--secondary-color))`,
                   WebkitBackgroundClip: 'text',
