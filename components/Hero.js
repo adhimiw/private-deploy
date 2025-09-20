@@ -27,7 +27,7 @@ function Hero() {
         style={{
           backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=95')`,
           backgroundSize: 'cover',
-          backgroundPosition: 'center',
+          backgroundPosition: 'top',
           backgroundAttachment: 'fixed'
         }}
       >
@@ -45,8 +45,8 @@ function Hero() {
 
           <div className="grid md:grid-cols-2 gap-16 items-center">
             {/* Content */}
-            <div className="space-y-8 animate-slide-up">
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
+            <div className="space-y-6 animate-slide-up">
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-none">
                 Premium <span className="text-gradient" style={{
                   background: `linear-gradient(135deg, var(--primary-color), var(--secondary-color))`,
                   WebkitBackgroundClip: 'text',
