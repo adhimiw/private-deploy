@@ -21,7 +21,7 @@ function Hero() {
     return (
       <section
         id="home"
-        className="pt-16 pb-8 bg-dark relative overflow-hidden min-h-screen"
+        className="pt-32 pb-8 bg-dark relative overflow-hidden min-h-screen"
         data-name="hero"
         data-file="components/Hero.js"
         style={{
@@ -125,11 +125,11 @@ function Hero() {
 
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6 lg:gap-8">
               <div className="bg-card p-3 md:p-4 rounded-xl border-subtle text-center card-shadow group cursor-pointer">
-                <div className="text-xl md:text-2xl mb-1 md:mb-2">🏗️</div>
-                <div className="text-xs font-semibold text-[var(--text-primary)] group-hover:text-[var(--primary-color)] transition-colors duration-300">M-Sand</div>
+                <img src="assets/sand.png" alt="M-Sand" className="w-12 h-12 mx-auto mb-2 object-contain"/>
+                <div className="text-xs font-semibold text-[var(--text-primary)] group-hover:text-[var(--primary-color)] transition-colors duration-300">Sand</div>
               </div>
               <div className="bg-card p-3 md:p-4 rounded-xl border-subtle text-center card-shadow group cursor-pointer">
-                <div className="text-xl md:text-2xl mb-1 md:mb-2">⚡</div>
+                <div className="text-xl md:text-2xl mb-1 md:mb-2"> 🪨</div>
                 <div className="text-xs font-semibold text-[var(--text-primary)] group-hover:text-[var(--primary-color)] transition-colors duration-300">Blue Metal</div>
               </div>
               <div className="bg-card p-3 md:p-4 rounded-xl border-subtle text-center card-shadow group cursor-pointer">
@@ -137,15 +137,15 @@ function Hero() {
                 <div className="text-xs font-semibold text-[var(--text-primary)] group-hover:text-[var(--primary-color)] transition-colors duration-300">Red Bricks</div>
               </div>
               <div className="bg-card p-3 md:p-4 rounded-xl border-subtle text-center card-shadow group cursor-pointer">
-                <div className="text-xl md:text-2xl mb-1 md:mb-2">🏢</div>
+                <img src="assets/accblock.jpg" alt="AAC Blocks" className="w-12 h-12 mx-auto mb-2 object-contain"/>
                 <div className="text-xs font-semibold text-[var(--text-primary)] group-hover:text-[var(--primary-color)] transition-colors duration-300">AAC Blocks</div>
               </div>
               <div className="bg-card p-3 md:p-4 rounded-xl border-subtle text-center card-shadow group cursor-pointer">
-                <div className="text-xl md:text-2xl mb-1 md:mb-2">🔨</div>
+                <img src="assets/cement1.jpg" alt="Cement" className="w-12 h-12 mx-auto mb-2 object-contain"/>
                 <div className="text-xs font-semibold text-[var(--text-primary)] group-hover:text-[var(--primary-color)] transition-colors duration-300">Cement</div>
               </div>
               <div className="bg-card p-3 md:p-4 rounded-xl border-subtle text-center card-shadow group cursor-pointer">
-                <div className="text-xl md:text-2xl mb-1 md:mb-2">🪨</div>
+                <img src="assets/sizestone.jpg" alt="Size Stone" className="w-12 h-12 mx-auto mb-2 object-contain"/>
                 <div className="text-xs font-semibold text-[var(--text-primary)] group-hover:text-[var(--primary-color)] transition-colors duration-300">Size Stone</div>
               </div>
             </div>

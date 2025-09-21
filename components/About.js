@@ -49,7 +49,9 @@ function About() {
             <div className="space-y-6">
               <div className="inline-flex items-center px-6 py-3 bg-card rounded-full shadow-sm border border-[var(--border-color)] mb-4">
                 <div className="w-3 h-3 bg-[var(--primary-color)] rounded-full mr-3"></div>
-                <span className="text-base font-medium text-[var(--text-primary)]">About VARMAN CONSTRUCTIONS</span>
+                <span className="text-2xl font-bold text-[var(--text-primary)]">
+                  ABOUT
+                </span>
               </div>
               
               <h2 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)]">
@@ -72,18 +74,18 @@ function About() {
               </div>
 
               {/* Contact Info */}
-              <div className="flex flex-col sm:flex-row gap-4 text-sm">
+              <div className="flex flex-col sm:flex-row gap-4 text-xl"> {/* Increased text size even further */}
                 <div className="flex items-center space-x-2 text-[var(--text-secondary)]">
-                  <div className="icon-phone text-[var(--primary-color)]"></div>
-                  <span>+91 77084 84811</span>
+                  <div className="icon-phone text-[var(--primary-color)] text-2xl"></div> {/* Increased icon size */}
+                  <span className="font-black whitespace-nowrap flex-shrink-0">+91 77084 84811</span> {/* Made text stronger and prevented wrapping */}
                 </div>
                 <div className="flex items-center space-x-2 text-[var(--text-secondary)]">
-                  <div className="icon-mail text-[var(--primary-color)]"></div>
-                  <span>info@varmanconstructions.in</span>
+                  <div className="icon-mail text-[var(--primary-color)] text-2xl"></div> {/* Increased icon size */}
+                  <span className="font-black whitespace-nowrap flex-shrink-0">info@varmanconstructions.in</span> {/* Made text stronger and prevented wrapping */}
                 </div>
                 <div className="flex items-center space-x-2 text-[var(--text-secondary)]">
-                  <div className="icon-briefcase text-[var(--primary-color)]"></div>
-                  <span>GSTIN: 33BTGPM9877H1Z3</span>
+                  <div className="icon-briefcase text-[var(--primary-color)] text-2xl"></div> {/* Increased icon size */}
+                  <span className="font-black whitespace-nowrap flex-shrink-0">GSTIN: 33BTGPM9877H1Z3</span> {/* Made text stronger and prevented wrapping */}
                 </div>
               </div>
             </div>
