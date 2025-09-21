@@ -32,16 +32,14 @@ function About() {
         description: 'Rigorous quality checks and testing for all materials before dispatch'
       }
     ];
-
     const stats = [
       { number: '200+', label: 'Projects Completed', icon: 'building' },
       { number: '3+', label: 'States Covered', icon: 'map' },
       { number: '5+', label: 'Years Experience', icon: 'calendar' },
       { number: '24-48', label: 'Hours Delivery', icon: 'clock' }
     ];
-
     return (
-      <section id="about" className="section-padding bg-dark" data-name="about" data-file="components/About.js">
+      <section className="section-padding bg-dark" data-file="components/About.js" data-name="about" id="about">
         <div className="container-max">
           {/* Main Content */}
           <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
@@ -49,9 +47,7 @@ function About() {
             <div className="space-y-6">
               <div className="inline-flex items-center px-6 py-3 bg-card rounded-full shadow-sm border border-[var(--border-color)] mb-4">
                 <div className="w-3 h-3 bg-[var(--primary-color)] rounded-full mr-3"></div>
-                <span className="text-2xl font-bold text-[var(--text-primary)]">
-                  ABOUT
-                </span>
+                <span className="text-base font-medium text-[var(--text-primary)]">About VARMAN CONSTRUCTIONS</span>
               </div>
               
               <h2 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)]">
@@ -59,37 +55,34 @@ function About() {
               </h2>
               
               <p className="text-lg text-[var(--text-secondary)] leading-relaxed">
-                <strong>VARMAN CONSTRUCTIONS</strong>, established in 2020, has rapidly grown to become a trusted supplier of premium building materials across India. Despite being a relatively new player in the market, our commitment to quality and customer satisfaction has helped us serve over 200+ construction projects successfully.
+                VARMAN CONSTRUCTIONS, established in 2020, has rapidly grown to become a trusted supplier of premium building materials across India. Despite being a relatively new player in the market, our commitment to quality and customer satisfaction has helped us serve over 200+ construction projects successfully.
               </p>
               
               <p className="text-[var(--text-secondary)] leading-relaxed">
                 We specialize in supplying high-quality construction materials including M-Sand, Blue Metal (Jalli), various types of bricks, cement, AAC blocks, and natural stones. Our extensive network now covers 3+ states with a primary focus on South Indian markets, ensuring that quality construction materials reach every corner of our service area.
               </p>
-
               <div className="bg-card p-6 rounded-lg border border-[var(--border-color)] shadow-sm">
                 <h4 className="font-semibold text-[var(--text-primary)] mb-3">Our Commitment</h4>
                 <p className="text-[var(--text-secondary)] text-sm leading-relaxed">
                   "We believe that every construction project deserves the best materials. Our mission is to provide consistent quality, competitive pricing, and reliable service that helps our customers build with confidence. From small residential projects to large infrastructure developments, we are committed to being your trusted material supplier partner."
                 </p>
               </div>
-
               {/* Contact Info */}
               <div className="flex flex-col sm:flex-row gap-4 text-xl"> {/* Increased text size even further */}
                 <div className="flex items-center space-x-2 text-[var(--text-secondary)]">
-                  <div className="icon-phone text-[var(--primary-color)] text-2xl"></div> {/* Increased icon size */}
-                  <span className="font-black whitespace-nowrap flex-shrink-0">+91 77084 84811</span> {/* Made text stronger and prevented wrapping */}
+                  <div className="icon-phone text-[var(--primary-color)]"></div>
+                  <span>+91 77084 84811</span>
                 </div>
                 <div className="flex items-center space-x-2 text-[var(--text-secondary)]">
-                  <div className="icon-mail text-[var(--primary-color)] text-2xl"></div> {/* Increased icon size */}
-                  <span className="font-black whitespace-nowrap flex-shrink-0">info@varmanconstructions.in</span> {/* Made text stronger and prevented wrapping */}
+                  <div className="icon-mail text-[var(--primary-color)]"></div>
+                  <span>info@varmanconstructions.in</span>
                 </div>
                 <div className="flex items-center space-x-2 text-[var(--text-secondary)]">
-                  <div className="icon-briefcase text-[var(--primary-color)] text-2xl"></div> {/* Increased icon size */}
-                  <span className="font-black whitespace-nowrap flex-shrink-0">GSTIN: 33BTGPM9877H1Z3</span> {/* Made text stronger and prevented wrapping */}
+                  <div className="icon-briefcase text-[var(--primary-color)]"></div>
+                  <span>GSTIN: 33BTGPM9877H1Z3</span>
                 </div>
               </div>
             </div>
-
             {/* Image */}
             <div className="relative">
               <img 
@@ -116,20 +109,18 @@ function About() {
               </div>
             </div>
           </div>
-
           {/* Stats Section */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
             {stats.map((stat, index) => (
-              <div key={index} className="bg-card p-6 rounded-lg border border-[var(--border-color)] text-center card-shadow">
+              <div className="bg-card p-6 rounded-lg border border-[var(--border-color)] text-center card-shadow" key={index}>
                 <div className="w-12 h-12 bg-[var(--primary-color)] rounded-lg flex items-center justify-center mx-auto mb-3">
-                  <div className={`icon-${stat.icon} text-xl text-[var(--background-primary)]`}></div>
+                  <div className={`icon-${stat.icon} text-[var(--background-primary)] text-xl`}></div>
                 </div>
                 <div className="text-2xl font-bold text-[var(--primary-color)] mb-1">{stat.number}</div>
                 <div className="text-sm text-[var(--text-secondary)]">{stat.label}</div>
               </div>
             ))}
           </div>
-
           {/* Features Grid */}
           <div>
             <div className="text-center mb-12">
@@ -140,12 +131,11 @@ function About() {
                 Our commitment to quality, service, and customer satisfaction sets us apart in the building materials industry
               </p>
             </div>
-
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {features.map((feature, index) => (
-                <div key={index} className="bg-card p-6 rounded-lg border border-[var(--border-color)] card-shadow">
+                <div className="bg-card p-6 rounded-lg border border-[var(--border-color)] card-shadow" key={index}>
                   <div className="w-12 h-12 bg-[var(--primary-color)] rounded-lg flex items-center justify-center mb-4">
-                    <div className={`icon-${feature.icon} text-xl text-[var(--background-primary)]`}></div>
+                    <div className={`icon-${feature.icon} text-[var(--background-primary)] text-xl`}></div>
                   </div>
                   <h4 className="text-lg font-semibold text-[var(--text-primary)] mb-3">
                     {feature.title}
@@ -157,7 +147,6 @@ function About() {
               ))}
             </div>
           </div>
-
           {/* Our Mission & Vision */}
           <div className="mt-16 grid md:grid-cols-2 gap-8">
             <div className="bg-card p-8 rounded-lg border border-[var(--border-color)]">
@@ -171,7 +160,6 @@ function About() {
                 To be the most trusted supplier of high-quality building materials across India, providing exceptional value to our customers through reliable products, competitive pricing, and outstanding service that supports their construction dreams.
               </p>
             </div>
-
             <div className="bg-card p-8 rounded-lg border border-[var(--border-color)]">
               <div className="flex items-center mb-4">
                 <div className="w-10 h-10 bg-[var(--primary-color)] rounded-lg flex items-center justify-center mr-3">
