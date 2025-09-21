@@ -17,19 +17,19 @@ function Header() {
     return (
       <header className="bg-dark-secondary shadow-elevated fixed w-full top-0 z-50 border-b border-[var(--border-color)]" data-name="header" data-file="components/Header.js">
         <div className="max-w-full relative z-10 px-4">
-          <div className="flex items-center justify-between h-20">
+          <div className="flex items-center justify-between h-24 md:h-28">
             {/* Logo with Enhanced Prominence */}
-            <div className="flex items-center space-x-3 group">
+            <div className="flex items-center space-x-4 group">
               <img
                 src="assets/logo.png"
                 alt="VARMAN CONSTRUCTIONS Logo"
-                className="h-24 md:h-28 w-auto object-contain transition-all duration-500 group-hover:scale-105 drop-shadow-lg"
+                className="h-32 md:h-36 lg:h-40 w-auto object-contain transition-all duration-500 group-hover:scale-105 drop-shadow-lg"
               />
               <div>
-                <span className="text-lg md:text-xl font-bold text-[var(--text-primary)] group-hover:text-[var(--primary-color)] transition-colors duration-300">
+                <span className="text-xl md:text-2xl lg:text-3xl font-bold text-[var(--text-primary)] group-hover:text-[var(--primary-color)] transition-colors duration-300 leading-tight">
                   <span style={{color: 'var(--primary-color)'}}>VARMAN</span> CONSTRUCTIONS
                 </span>
-                
+
               </div>
             </div>
 
