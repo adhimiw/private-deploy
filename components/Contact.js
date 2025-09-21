@@ -152,7 +152,7 @@ function Contact() {
               {/* Service Areas */}
               <div>
                 <h4 className="font-semibold text-[var(--text-primary)] mb-3">Service Areas</h4>
-                <p className="text-[var(--text-secondary)] mb-3 text-sm">We supply building materials across India with focus on:</p>
+                <p className="text-[var(--text-secondary)] mb-3 text-sm">We supply building materials across Tamilnadu with focus on:</p>
                 <div className="grid grid-cols-1 gap-2 text-sm text-[var(--text-secondary)]">
                   <div className="flex items-center"><span className="text-[var(--primary-color)] mr-2">•</span>Tamil Nadu (Primary)</div>
                   <div className="flex items-center"><span className="text-[var(--primary-color)] mr-2">•</span>Karnataka</div>

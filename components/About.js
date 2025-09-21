@@ -4,7 +4,7 @@ function About() {
       {
         icon: 'award',
         title: 'IS Certified Materials',
-        description: 'All our materials meet Indian Standard specifications with proper certification'
+        description: 'All our materials meet Tamilnadun Standard specifications with proper certification'
       },
       {
         icon: 'clock',
@@ -23,8 +23,8 @@ function About() {
       },
       {
         icon: 'truck',
-        title: 'Pan-India Supply',
-        description: 'Serving customers across India with focus on South Indian states'
+        title: 'Pan-Tamilnadu Supply',
+        description: 'Serving customers across Tamilnadu with focus on South Tamilnadun states'
       },
       {
         icon: 'shield-check',
@@ -51,15 +51,15 @@ function About() {
               </div>
               
               <h2 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)]">
-                Building India's Future with <span className="text-gradient">Quality Materials</span> Since 2020
+                Building Tamilnadu's Future with <span className="text-gradient">Quality Materials</span> Since 2020
               </h2>
               
               <p className="text-lg text-[var(--text-secondary)] leading-relaxed">
-                VARMAN CONSTRUCTIONS, established in 2020, has rapidly grown to become a trusted supplier of premium building materials across India. Despite being a relatively new player in the market, our commitment to quality and customer satisfaction has helped us serve over 200+ construction projects successfully.
+                VARMAN CONSTRUCTIONS, established in 2020, has rapidly grown to become a trusted supplier of premium building materials across Tamilnadu. Despite being a relatively new player in the market, our commitment to quality and customer satisfaction has helped us serve over 200+ construction projects successfully.
               </p>
               
               <p className="text-[var(--text-secondary)] leading-relaxed">
-                We specialize in supplying high-quality construction materials including M-Sand, Blue Metal (Jalli), various types of bricks, cement, AAC blocks, and natural stones. Our extensive network now covers 3+ states with a primary focus on South Indian markets, ensuring that quality construction materials reach every corner of our service area.
+                We specialize in supplying high-quality construction materials including M-Sand, Blue Metal (Jalli), various types of bricks, cement, AAC blocks, and natural stones. Our extensive network now covers 3+ states with a primary focus on South Tamilnadun markets, ensuring that quality construction materials reach every corner of our service area.
               </p>
               <div className="bg-card p-6 rounded-lg border border-[var(--border-color)] shadow-sm">
                 <h4 className="font-semibold text-[var(--text-primary)] mb-3">Our Commitment</h4>
@@ -157,7 +157,7 @@ function About() {
                 <h4 className="text-xl font-semibold text-[var(--text-primary)]">Our Mission</h4>
               </div>
               <p className="text-[var(--text-secondary)] leading-relaxed">
-                To be the most trusted supplier of high-quality building materials across India, providing exceptional value to our customers through reliable products, competitive pricing, and outstanding service that supports their construction dreams.
+                To be the most trusted supplier of high-quality building materials across Tamilnadu, providing exceptional value to our customers through reliable products, competitive pricing, and outstanding service that supports their construction dreams.
               </p>
             </div>
             <div className="bg-card p-8 rounded-lg border border-[var(--border-color)]">
@@ -168,7 +168,7 @@ function About() {
                 <h4 className="text-xl font-semibold text-[var(--text-primary)]">Our Vision</h4>
               </div>
               <p className="text-[var(--text-secondary)] leading-relaxed">
-                To become the preferred choice for construction materials across India by consistently delivering superior quality products, innovative solutions, and establishing new benchmarks for customer satisfaction and industry excellence.
+                To become the preferred choice for construction materials across Tamilnadu by consistently delivering superior quality products, innovative solutions, and establishing new benchmarks for customer satisfaction and industry excellence.
               </p>
             </div>
           </div>

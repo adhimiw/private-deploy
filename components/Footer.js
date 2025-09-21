@@ -12,7 +12,7 @@ function Footer() {
                 <img
                   src="assets/logo.png"
                   alt="VARMAN CONSTRUCTIONS Logo"
-                  className="h-12 w-auto object-contain transition-all duration-500 group-hover:scale-105"
+                  className="h-22 w-24 object-contain transition-all duration-500 group-hover:scale-105"
                 />
                 <div>
                   <span className="text-xl font-bold text-[var(--text-primary)] group-hover:text-[var(--primary-color)] transition-colors duration-300">
@@ -22,7 +22,7 @@ function Footer() {
                 </div>
               </div>
               <p className="text-[var(--text-secondary)] mb-6 leading-relaxed">
-                Your trusted partner for premium building materials since <span style={{color: 'var(--primary-color)', fontWeight: 'bold'}}>2020</span>. We supply high-quality <span style={{color: 'var(--secondary-color)'}}>M-Sand, Blue Metal, Cement, Bricks</span>, and construction materials across India with guaranteed quality and timely delivery.
+                Your trusted partner for premium building materials since <span style={{color: 'var(--primary-color)', fontWeight: 'bold'}}>2020</span>. We supply high-quality <span style={{color: 'var(--secondary-color)'}}>M-Sand, Blue Metal, Cement, Bricks</span>, and construction materials across Tamilnadu with guaranteed quality and timely delivery.
               </p>
 
               {/* Contact Info */}
@@ -101,7 +101,7 @@ function Footer() {
             <div className="grid md:grid-cols-2 gap-4 items-center">
               <div>
                 <p className="text-gray-300 text-sm">
-                  © {currentYear} VARMAN CONSTRUCTIONS. All rights reserved. Building India with quality materials.
+                  © {currentYear} VARMAN CONSTRUCTIONS. All rights reserved. Building Tamilnadu with quality materials.
                 </p>
               </div>
               <div className="md:text-right">

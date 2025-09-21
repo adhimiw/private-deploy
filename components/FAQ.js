@@ -14,8 +14,8 @@ function FAQ() {
             answer: 'We deliver within 24-48 hours for most materials within our primary service areas (Tamil Nadu and neighboring states). For large orders or distant locations, delivery is typically within 2-3 days. We coordinate delivery schedules to match your project timeline.'
           },
           {
-            question: 'Do you deliver to all areas in India?',
-            answer: 'Yes, we deliver across India with focus on South Indian states. Our primary coverage includes Tamil Nadu, Karnataka, Kerala. For other states, delivery is available with advance notice and may have additional charges based on distance.'
+            question: 'Do you deliver to all areas in Tamilnadu?',
+            answer: 'Yes, we deliver across Tamilnadu with focus on South Tamilnadun states. Our primary coverage includes Tamil Nadu, Karnataka, Kerala. For other states, delivery is available with advance notice and may have additional charges based on distance.'
           },
           {
             question: 'What are the delivery charges?',
@@ -80,7 +80,7 @@ function FAQ() {
         questions: [
           {
             question: 'Are your materials tested for quality?',
-            answer: 'Yes, all our materials undergo rigorous quality testing and meet IS (Indian Standards) specifications. We source from certified manufacturers and conduct regular quality checks. Test certificates are provided on request for all major materials.'
+            answer: 'Yes, all our materials undergo rigorous quality testing and meet IS (Tamilnadun Standards) specifications. We source from certified manufacturers and conduct regular quality checks. Test certificates are provided on request for all major materials.'
           },
           {
             question: 'Do you provide material certificates?',

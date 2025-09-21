@@ -49,11 +49,11 @@ function Hero() {
                   WebkitTextFillColor: 'transparent',
                   backgroundClip: 'text',
                   textShadow: '0 0 30px var(--glow-orange)'
-                }}>Building Materials</span> Supplier Across India
+                }}>Building Materials</span> Supplier Across Tamilnadu
               </h1>
 
               <p className="text-lg md:text-xl text-gray-200 leading-relaxed max-w-2xl">
-                Your trusted partner since <span style={{color: 'var(--primary-color)', fontWeight: 'bold'}}>2020</span> for high-quality building materials. We supply <span style={{color: 'var(--secondary-color)'}}>M-Sand, Blue Metal, Cement, Bricks</span>, and specialized construction supplies across India with guaranteed quality and timely delivery.
+                Your trusted partner since <span style={{color: 'var(--primary-color)', fontWeight: 'bold'}}>2020</span> for high-quality building materials. We supply <span style={{color: 'var(--secondary-color)'}}>M-Sand, Blue Metal, Cement, Bricks</span>, and specialized construction supplies across Tamilnadu with guaranteed quality and timely delivery.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4">
