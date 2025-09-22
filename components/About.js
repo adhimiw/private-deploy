@@ -45,12 +45,12 @@ function About() {
           <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
             {/* Content */}
             <div className="space-y-6">
-              <div className="inline-flex items-center px-16 py-8 bg-card rounded-full shadow-md border border-[var(--border-color)] mb-6 md:mb-8 whitespace-nowrap shrink-0 w-max">
-                <div className="w-10 h-10 bg-[var(--primary-color)] rounded-full mr-6"></div>
-                <span className="text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--text-primary)] leading-none whitespace-nowrap">About VARMAN CONSTRUCTIONS</span>
+              <div className="inline-flex items-center w-full md:w-max px-6 py-3 sm:px-8 sm:py-4 md:px-16 md:py-8 bg-card rounded-full shadow-md border border-[var(--border-color)] mb-6 md:mb-8 md:whitespace-nowrap md:shrink-0">
+                <div className="w-4 h-4 sm:w-6 sm:h-6 md:w-10 md:h-10 bg-[var(--primary-color)] rounded-full mr-3 sm:mr-4 md:mr-6"></div>
+                <span className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-semibold text-[var(--text-primary)] leading-tight md:leading-none">About VARMAN CONSTRUCTIONS</span>
               </div>
               
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[var(--text-primary)]">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-[var(--text-primary)]">
                 Building Tamilnadu's Future with <span className="text-gradient">Quality Materials</span> Since 2020
               </h2>
               
@@ -68,7 +68,7 @@ function About() {
                 </p>
               </div>
               {/* Contact Info */}
-              <div className="flex flex-col md:flex-row items-center gap-6 md:gap-10 text-xl font-bold flex-wrap md:flex-nowrap"> {/* Keep straight line on md+ */}
+              <div className="flex flex-col md:flex-row items-start md:items-center text-left gap-4 sm:gap-6 md:gap-10 text-base sm:text-lg md:text-xl font-bold flex-wrap md:flex-nowrap w-full"> {/* Keep straight line on md+ */}
                 <div className="inline-flex items-center space-x-3 text-[var(--text-secondary)] whitespace-nowrap">
                   <div className="icon-phone text-[var(--primary-color)]"></div>
                   <span className="whitespace-nowrap">+91 77084 84811</span>
