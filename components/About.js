@@ -39,26 +39,26 @@ function About() {
       { number: '24-48', label: 'Hours Delivery', icon: 'clock' }
     ];
     return (
-      <section className="section-padding bg-dark" data-file="components/About.js" data-name="about" id="about">
+      <section className="section-padding bg-dark py-24 md:py-32" data-file="components/About.js" data-name="about" id="about">
         <div className="container-max">
           {/* Main Content */}
           <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
             {/* Content */}
             <div className="space-y-6">
-              <div className="inline-flex items-center px-6 py-3 bg-card rounded-full shadow-sm border border-[var(--border-color)] mb-4">
-                <div className="w-3 h-3 bg-[var(--primary-color)] rounded-full mr-3"></div>
-                <span className="text-base font-medium text-[var(--text-primary)]">About VARMAN CONSTRUCTIONS</span>
+              <div className="inline-flex items-center px-16 py-8 bg-card rounded-full shadow-md border border-[var(--border-color)] mb-6 md:mb-8 whitespace-nowrap shrink-0 w-max">
+                <div className="w-10 h-10 bg-[var(--primary-color)] rounded-full mr-6"></div>
+                <span className="text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--text-primary)] leading-none whitespace-nowrap">About VARMAN CONSTRUCTIONS</span>
               </div>
               
-              <h2 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)]">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[var(--text-primary)]">
                 Building Tamilnadu's Future with <span className="text-gradient">Quality Materials</span> Since 2020
               </h2>
               
-              <p className="text-lg text-[var(--text-secondary)] leading-relaxed">
+              <p className="text-xl md:text-2xl text-[var(--text-secondary)] leading-relaxed">
                 VARMAN CONSTRUCTIONS, established in 2020, has rapidly grown to become a trusted supplier of premium building materials across Tamilnadu. Despite being a relatively new player in the market, our commitment to quality and customer satisfaction has helped us serve over 200+ construction projects successfully.
               </p>
               
-              <p className="text-[var(--text-secondary)] leading-relaxed">
+              <p className="text-lg md:text-xl text-[var(--text-secondary)] leading-relaxed">
                 We specialize in supplying high-quality construction materials including M-Sand, Blue Metal (Jalli), various types of bricks, cement, AAC blocks, and natural stones. Our extensive network now covers 3+ states with a primary focus on South Tamilnadun markets, ensuring that quality construction materials reach every corner of our service area.
               </p>
               <div className="bg-card p-6 rounded-lg border border-[var(--border-color)] shadow-sm">
@@ -68,18 +68,18 @@ function About() {
                 </p>
               </div>
               {/* Contact Info */}
-              <div className="flex flex-col sm:flex-row gap-4 text-xl"> {/* Increased text size even further */}
-                <div className="flex items-center space-x-2 text-[var(--text-secondary)]">
+              <div className="flex flex-col md:flex-row items-center gap-6 md:gap-10 text-xl font-bold flex-wrap md:flex-nowrap"> {/* Keep straight line on md+ */}
+                <div className="inline-flex items-center space-x-3 text-[var(--text-secondary)] whitespace-nowrap">
                   <div className="icon-phone text-[var(--primary-color)]"></div>
-                  <span>+91 77084 84811</span>
+                  <span className="whitespace-nowrap">+91 77084 84811</span>
                 </div>
-                <div className="flex items-center space-x-2 text-[var(--text-secondary)]">
+                <div className="inline-flex items-center space-x-3 text-[var(--text-secondary)] whitespace-nowrap">
                   <div className="icon-mail text-[var(--primary-color)]"></div>
-                  <span>info@varmanconstructions.in</span>
+                  <span className="whitespace-nowrap">info@varmanconstructions.in</span>
                 </div>
-                <div className="flex items-center space-x-2 text-[var(--text-secondary)]">
+                <div className="inline-flex items-center space-x-3 text-[var(--text-secondary)] whitespace-nowrap">
                   <div className="icon-briefcase text-[var(--primary-color)]"></div>
-                  <span>GSTIN: 33BTGPM9877H1Z3</span>
+                  <span className="whitespace-nowrap">GSTIN: 33BTGPM9877H1Z3</span>
                 </div>
               </div>
             </div>
