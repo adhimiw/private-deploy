@@ -21,7 +21,7 @@ function Hero() {
     return (
       <section
         id="home"
-        className="pt-32 pb-8 bg-dark relative overflow-hidden min-h-screen"
+        className="pt-20 md:pt-32 pb-8 bg-dark relative overflow-hidden md:min-h-screen"
         data-name="hero"
         data-file="components/Hero.js"
       >
@@ -85,7 +85,7 @@ function Hero() {
                 Your trusted partner since <span style={{color: '#FF8C42', fontWeight: 'bold', textShadow: '1px 1px 3px rgba(0, 0, 0, 0.8)'}}>2020</span> for high-quality building materials. We supply <span style={{color: '#FFB366', fontWeight: '600', textShadow: '1px 1px 3px rgba(0, 0, 0, 0.8)'}}>M-Sand, Blue Metal, Cement, Bricks</span>, and specialized construction supplies across Tamilnadu with guaranteed quality and timely delivery.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4 relative z-10">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 relative z-10">
                 <button onClick={handleCallNow} className="btn-primary flex items-center justify-center space-x-2">
                   <div className="icon-phone text-lg"></div>
                   <span>Call Now</span>
@@ -96,26 +96,26 @@ function Hero() {
                   style={{
                     backgroundColor: 'rgba(255, 255, 255, 0.15)',
                     backdropFilter: 'blur(10px)',
-                    color: '#FFFFFF',
-                    borderColor: '#FFFFFF',
+                    color: '#000000',
+                    borderColor: '#000000',
                     borderWidth: '2px',
-                    textShadow: '1px 1px 4px rgba(0, 0, 0, 0.8)',
-                    boxShadow: '0 4px 15px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
+                    textShadow: 'none',
+                    boxShadow: '0 4px 15px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
                     fontWeight: '600'
                   }}
                   onMouseEnter={(e) => {
                     e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.25)';
                     e.target.style.borderColor = 'var(--primary-color)';
-                    e.target.style.color = 'var(--primary-color)';
+                    e.target.style.color = '#000000';
                     e.target.style.transform = 'translateY(-3px) scale(1.05)';
                     e.target.style.boxShadow = '0 15px 35px rgba(229, 90, 43, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3)';
                   }}
                   onMouseLeave={(e) => {
                     e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.15)';
-                    e.target.style.borderColor = '#FFFFFF';
-                    e.target.style.color = '#FFFFFF';
+                    e.target.style.borderColor = '#000000';
+                    e.target.style.color = '#000000';
                     e.target.style.transform = 'translateY(0) scale(1)';
-                    e.target.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2)';
+                    e.target.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.2)';
                   }}
                 >
                   Get Quote
@@ -125,15 +125,15 @@ function Hero() {
               {/* Contact Info */}
               <div className="flex flex-col sm:flex-row gap-4 pt-3 text-sm relative">
                 <div className="flex items-center space-x-2 hover:text-[var(--primary-color)] transition-colors duration-300" style={{
-                  color: '#FFFFFF',
-                  textShadow: '1px 1px 4px rgba(0, 0, 0, 0.7)'
+                  color: '#000000',
+                  textShadow: 'none'
                 }}>
                   <div className="icon-phone text-[var(--primary-color)]" style={{filter: 'drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.8))'}}></div>
                   <span className="font-medium">+91 77084 84811</span>
                 </div>
                 <div className="flex items-center space-x-2 hover:text-[var(--primary-color)] transition-colors duration-300" style={{
-                  color: '#FFFFFF',
-                  textShadow: '1px 1px 4px rgba(0, 0, 0, 0.7)'
+                  color: '#000000',
+                  textShadow: 'none'
                 }}>
                   <div className="icon-phone text-[var(--primary-color)]" style={{filter: 'drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.8))'}}></div>
                   <span className="font-medium">+91 99652 37777</span>
@@ -176,11 +176,11 @@ function Hero() {
             </div>
 
             {/* Image */}
-            <div className="relative animate-scale-in">
+              <div className="relative animate-scale-in">
               <img
                 src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
                 alt="Construction materials and building site - VARMAN CONSTRUCTIONS"
-                className="rounded-xl shadow-elevated w-full h-96 object-cover border-subtle hover:scale-105 transition-all duration-300"
+                className="rounded-xl shadow-elevated w-full h-64 md:h-96 object-cover border-subtle hover:scale-105 transition-all duration-300"
                 loading="lazy"
                 decoding="async"
                 style={{ willChange: 'transform' }}
