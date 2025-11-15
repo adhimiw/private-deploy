@@ -144,32 +144,32 @@ function Hero() {
               <div className="grid grid-cols-3 gap-3 pt-4 relative">
                 <div className="text-center">
                   <div className="text-2xl md:text-3xl font-bold mb-1" style={{
-                        color: '#000000',
-                        textShadow: '2px 2px 6px rgba(0, 0, 0, 0.8), 0 0 15px rgba(255, 140, 66, 0.5)'
-                      }}>200+</div>
-                  <div className="text-xs font-medium uppercase tracking-wide" style={{
-                    color: '#E8E8E8',
-                    textShadow: '1px 1px 3px rgba(0, 0, 0, 0.8)'
-                  }}>Projects Completed</div>
+                      color: '#FF8C42',
+                      textShadow: '2px 2px 6px rgba(0, 0, 0, 0.08)'
+                    }}>200+</div>
+                    <div className="text-xs font-medium uppercase tracking-wide" style={{
+                      color: '#000000',
+                      textShadow: 'none'
+                    }}>Projects Completed</div>
                 </div>
                 <div className="text-center">
                   <div className="text-2xl md:text-3xl font-bold mb-1" style={{
-                    color: '#000000',
-                    textShadow: '2px 2px 6px rgba(0, 0, 0, 0.8), 0 0 15px rgba(255, 140, 66, 0.5)'
+                    color: '#FF8C42',
+                    textShadow: '2px 2px 6px rgba(0, 0, 0, 0.08)'
                   }}>5+</div>
                   <div className="text-xs font-medium uppercase tracking-wide" style={{
-                    color: '#E8E8E8',
-                    textShadow: '1px 1px 3px rgba(0, 0, 0, 0.8)'
+                    color: '#000000',
+                    textShadow: 'none'
                   }}>Years Experience</div>
                 </div>
                 <div className="text-center">
                   <div className="text-2xl md:text-3xl font-bold mb-1" style={{
-                    color: '#000000',
-                    textShadow: '2px 2px 6px rgba(0, 0, 0, 0.8), 0 0 15px rgba(255, 140, 66, 0.5)'
+                    color: '#FF8C42',
+                    textShadow: '2px 2px 6px rgba(0, 0, 0, 0.08)'
                   }}>3+</div>
                   <div className="text-xs font-medium uppercase tracking-wide" style={{
-                    color: '#E8E8E8',
-                    textShadow: '1px 1px 3px rgba(0, 0, 0, 0.8)'
+                    color: '#000000',
+                    textShadow: 'none'
                   }}>States Covered</div>
                 </div>
               </div>
