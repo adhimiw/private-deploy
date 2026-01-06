@@ -8,7 +8,7 @@ function Hero() {
     };
 
     const handleCallNow = () => {
-      window.open('https://wa.me/917708484811', '_blank');
+      window.open('tel:+917708484811', '_self');
     };
 
     const handleGetQuote = () => {
@@ -21,24 +21,27 @@ function Hero() {
     return (
       <section
         id="home"
-        className="pt-32 md:pt-40 pb-20 md:pb-32 bg-white relative overflow-hidden min-h-screen flex items-center"
+        className="pt-20 md:pt-32 pb-8 bg-dark relative overflow-hidden md:min-h-screen"
         data-name="hero"
         data-file="components/Hero.js"
       >
-        {/* Modern gradient background */}
+        {/* Brightened background layer */}
         <div 
-          style={{
+        style={{
             position: 'absolute',
             top: 0,
             left: 0,
             right: 0,
             bottom: 0,
-            background: 'linear-gradient(135deg, #FFFFFF 0%, #FFF5F0 50%, #FFE8DC 100%)',
+            backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.15), rgba(0, 0, 0, 0.15)), url('assets/herobg.jpg')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'top',
+            backgroundAttachment: 'fixed',
+            filter: 'brightness(1.2) contrast(1.15) saturate(1.1)',
             zIndex: 0
           }}
         />
-        
-        {/* Subtle pattern overlay */}
+        {/* Light overlay to enhance brightness */}
         <div 
           style={{
             position: 'absolute',
@@ -46,183 +49,156 @@ function Hero() {
             left: 0,
             right: 0,
             bottom: 0,
-            backgroundImage: `radial-gradient(circle at 20% 50%, rgba(229, 90, 43, 0.05) 0%, transparent 50%),
-                            radial-gradient(circle at 80% 80%, rgba(255, 140, 66, 0.05) 0%, transparent 50%)`,
-            zIndex: 1
-          }}
+            background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 140, 66, 0.1) 50%, rgba(255, 255, 255, 0.08) 100%)',
+            zIndex: 1,
+            pointerEvents: 'none'
+        }}
         />
-
-        <div className="container-max relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            
-            {/* Hero Content - Left Side */}
-            <div className="space-y-8 animate-slide-up">
+        <div className="container-max relative z-10 w-full max-w-7xl mx-auto px-6 md:px-8 lg:px-12">
+          {/* Prominent Logo Section */}
+          <div className="text-center mb-4 md:mb-6 animate-fade-in">
+            <div className="inline-block">
               
-              {/* Main Headline - Clear Value Proposition */}
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight tracking-tight" style={{
-                color: '#1A1A1A'
+            </div>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8 md:gap-16 lg:gap-20 items-start">
+            {/* Content */}
+            <div className="space-y-3 animate-slide-up relative z-10">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight relative" style={{
+                background: 'linear-gradient(180deg, #111111 0%, #333333 50%, #000000 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent'
               }}>
-                Quality Building Materials,{' '}
-                <span style={{
-                  background: `linear-gradient(135deg, #E55A2B 0%, #FF8C42 100%)`,
+                Premium <span style={{
+                  background: `linear-gradient(135deg, var(--primary-color), var(--secondary-color))`,
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
-                  display: 'inline-block'
-                }}>
-                  Delivered Fast
-                </span>
+                  fontWeight: 'bold'
+                }}>Building Materials</span> Supplier Across Tamilnadu
               </h1>
 
-              {/* Concise Supporting Text */}
-              <p className="text-xl md:text-2xl leading-relaxed max-w-xl" style={{
-                color: '#4A5568',
-                fontWeight: '400'
+              <p className="text-lg md:text-xl leading-relaxed max-w-2xl relative" style={{
+                color: '#0F0F0F',
+                textShadow: 'none'
               }}>
-                Premium M-Sand, Blue Metal, Cement & Bricks across Tamil Nadu. Trusted by 200+ projects since 2020.
+                Your trusted partner since <span style={{color: '#FF8C42', fontWeight: 'bold', textShadow: '1px 1px 3px rgba(0, 0, 0, 0.8)'}}>2020</span> for high-quality building materials. We supply <span style={{color: '#FFB366', fontWeight: '600', textShadow: '1px 1px 3px rgba(0, 0, 0, 0.8)'}}>M-Sand, Blue Metal, Cement, Bricks</span>, and specialized construction supplies across Tamilnadu with guaranteed quality and timely delivery.
               </p>
 
-              {/* Strong CTAs */}
-              <div className="flex flex-col sm:flex-row gap-4 pt-2">
-                <button 
-                  onClick={handleCallNow} 
-                  className="btn-primary text-base px-8 py-4 flex items-center justify-center space-x-3 group"
-                  style={{
-                    fontSize: '1.125rem',
-                    boxShadow: '0 10px 30px rgba(229, 90, 43, 0.3)'
-                  }}
-                >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
-                  </svg>
-                  <span className="font-semibold">Get Instant Quote</span>
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 relative z-10">
+                <button onClick={handleCallNow} className="btn-primary flex items-center justify-center space-x-2">
+                  <div className="icon-phone text-lg"></div>
+                  <span>Call Now</span>
                 </button>
-                
                 <button 
-                  onClick={scrollToProducts}
-                  className="btn-secondary text-base px-8 py-4 flex items-center justify-center space-x-3"
+                  onClick={handleGetQuote} 
+                  className="btn-secondary"
                   style={{
-                    fontSize: '1.125rem',
-                    backgroundColor: 'white',
-                    color: '#E55A2B',
-                    borderColor: '#E55A2B',
-                    boxShadow: '0 4px 15px rgba(0, 0, 0, 0.1)'
+                    backgroundColor: 'rgba(255, 255, 255, 0.15)',
+                    backdropFilter: 'blur(10px)',
+                    color: '#000000',
+                    borderColor: '#000000',
+                    borderWidth: '2px',
+                    textShadow: 'none',
+                    boxShadow: '0 4px 15px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
+                    fontWeight: '600'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.25)';
+                    e.target.style.borderColor = 'var(--primary-color)';
+                    e.target.style.color = '#000000';
+                    e.target.style.transform = 'translateY(-3px) scale(1.05)';
+                    e.target.style.boxShadow = '0 15px 35px rgba(229, 90, 43, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.15)';
+                    e.target.style.borderColor = '#000000';
+                    e.target.style.color = '#000000';
+                    e.target.style.transform = 'translateY(0) scale(1)';
+                    e.target.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.2)';
                   }}
                 >
-                  <span className="font-semibold">View Products</span>
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"/>
-                  </svg>
+                  Get Quote
                 </button>
               </div>
 
-              {/* Trust Indicators - Stats */}
-              <div className="grid grid-cols-3 gap-6 pt-8 border-t border-gray-200">
-                <div>
-                  <div className="text-3xl md:text-4xl font-bold mb-1" style={{ color: '#E55A2B' }}>
-                    200+
-                  </div>
-                  <div className="text-sm font-medium text-gray-600 uppercase tracking-wide">
-                    Projects
-                  </div>
+              {/* Contact Info */}
+              <div className="flex flex-col sm:flex-row gap-4 pt-3 text-sm relative">
+                <div className="flex items-center space-x-2 hover:text-[var(--primary-color)] transition-colors duration-300" style={{
+                  color: '#000000',
+                  textShadow: 'none'
+                }}>
+                  <div className="icon-phone text-[var(--primary-color)]" style={{filter: 'drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.8))'}}></div>
+                  <span className="font-medium">+91 77084 84811</span>
                 </div>
-                <div>
-                  <div className="text-3xl md:text-4xl font-bold mb-1" style={{ color: '#E55A2B' }}>
-                    24-48h
-                  </div>
-                  <div className="text-sm font-medium text-gray-600 uppercase tracking-wide">
-                    Delivery
-                  </div>
+                <div className="flex items-center space-x-2 hover:text-[var(--primary-color)] transition-colors duration-300" style={{
+                  color: '#000000',
+                  textShadow: 'none'
+                }}>
+                  <div className="icon-phone text-[var(--primary-color)]" style={{filter: 'drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.8))'}}></div>
+                  <span className="font-medium">+91 99652 37777</span>
                 </div>
-                <div>
-                  <div className="text-3xl md:text-4xl font-bold mb-1" style={{ color: '#E55A2B' }}>
-                    5+ Years
-                  </div>
-                  <div className="text-sm font-medium text-gray-600 uppercase tracking-wide">
-                    Trusted
-                  </div>
+              </div>
+
+              {/* Stats */}
+              <div className="grid grid-cols-3 gap-3 pt-4 relative">
+                <div className="text-center">
+                  <div className="text-2xl md:text-3xl font-bold mb-1" style={{
+                      color: '#FF8C42',
+                      textShadow: '2px 2px 6px rgba(0, 0, 0, 0.08)'
+                    }}>200+</div>
+                    <div className="text-xs font-medium uppercase tracking-wide" style={{
+                      color: '#000000',
+                      textShadow: 'none'
+                    }}>Projects Completed</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl md:text-3xl font-bold mb-1" style={{
+                    color: '#FF8C42',
+                    textShadow: '2px 2px 6px rgba(0, 0, 0, 0.08)'
+                  }}>5+</div>
+                  <div className="text-xs font-medium uppercase tracking-wide" style={{
+                    color: '#000000',
+                    textShadow: 'none'
+                  }}>Years Experience</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl md:text-3xl font-bold mb-1" style={{
+                    color: '#FF8C42',
+                    textShadow: '2px 2px 6px rgba(0, 0, 0, 0.08)'
+                  }}>3+</div>
+                  <div className="text-xs font-medium uppercase tracking-wide" style={{
+                    color: '#000000',
+                    textShadow: 'none'
+                  }}>States Covered</div>
                 </div>
               </div>
             </div>
 
-            {/* Hero Image - Right Side */}
-            <div className="relative animate-scale-in hidden lg:block">
-              <div className="relative">
-                {/* Main image with modern styling */}
-                <img
-                  src="https://images.unsplash.com/photo-1590856029826-c7a73142bbf1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
-                  alt="Premium construction materials - VARMAN CONSTRUCTIONS"
-                  className="rounded-2xl w-full h-[600px] object-cover shadow-2xl"
-                  loading="eager"
-                  style={{
-                    border: '1px solid rgba(229, 90, 43, 0.2)'
-                  }}
-                />
-                
-                {/* Floating quality badge */}
-                <div 
-                  className="absolute -bottom-6 -left-6 bg-white p-6 rounded-2xl shadow-2xl border border-gray-100"
-                  style={{
-                    animation: 'float 3s ease-in-out infinite'
-                  }}
-                >
-                  <div className="flex items-center space-x-4">
-                    <div 
-                      className="w-14 h-14 rounded-full flex items-center justify-center"
-                      style={{ backgroundColor: '#E55A2B' }}
-                    >
-                      <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5 13l4 4L19 7"/>
-                      </svg>
-                    </div>
-                    <div>
-                      <div className="font-bold text-gray-900 text-lg">IS Certified</div>
-                      <div className="text-sm text-gray-600">Quality Assured</div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Floating contact card */}
-                <div 
-                  className="absolute top-6 -right-6 bg-white p-5 rounded-xl shadow-xl border border-gray-100"
-                  style={{
-                    animation: 'float 3s ease-in-out infinite 1.5s'
-                  }}
-                >
-                  <div className="text-sm font-semibold text-gray-500 mb-2">CALL US NOW</div>
-                  <a 
-                    href="tel:+917708484811"
-                    className="text-xl font-bold hover:text-[var(--primary-color)] transition-colors"
-                    style={{ color: '#1A1A1A' }}
-                  >
-                    +91 77084 84811
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            {/* Mobile Image */}
-            <div className="relative lg:hidden">
+            {/* Image */}
+              <div className="relative animate-scale-in">
               <img
-                src="https://images.unsplash.com/photo-1590856029826-c7a73142bbf1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                alt="Premium construction materials"
-                className="rounded-xl w-full h-64 object-cover shadow-lg"
-                style={{ border: '1px solid rgba(229, 90, 43, 0.2)' }}
+                src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                alt="Construction materials and building site - VARMAN CONSTRUCTIONS"
+                className="rounded-xl shadow-elevated w-full h-64 md:h-96 object-cover border-subtle hover:scale-105 transition-all duration-300"
+                loading="lazy"
+                decoding="async"
+                style={{ willChange: 'transform' }}
               />
+              <div className="absolute -bottom-6 -left-6 bg-card p-6 rounded-xl shadow-elevated border-subtle">
+                <div className="flex items-center space-x-4">
+                  <div className="w-12 h-12 bg-[var(--primary-color)] rounded-full flex items-center justify-center">
+                    <div className="icon-check text-xl text-[var(--background-primary)]"></div>
+                  </div>
+                  <div>
+                    <div className="font-semibold text-[var(--text-primary)] text-lg">Quality Assured</div>
+                    <div className="text-sm text-[var(--text-secondary)]">IS Standard Materials</div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-
-        {/* Floating animation keyframes */}
-        <style>{`
-          @keyframes float {
-            0%, 100% {
-              transform: translateY(0px);
-            }
-            50% {
-              transform: translateY(-10px);
-            }
-          }
-        `}</style>
       </section>
     );
   } catch (error) {
