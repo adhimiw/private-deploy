@@ -21,12 +21,12 @@ function Hero() {
     return (
       <section
         id="home"
-        className="pt-20 md:pt-32 pb-8 bg-dark relative overflow-hidden md:min-h-screen"
+        className="pt-24 md:pt-28 pb-8 bg-dark relative overflow-hidden md:min-h-screen"
         data-name="hero"
         data-file="components/Hero.js"
       >
         {/* Brightened background layer */}
-        <div 
+        <div
         style={{
             position: 'absolute',
             top: 0,
@@ -41,15 +41,15 @@ function Hero() {
             zIndex: 0
           }}
         />
-        {/* Light overlay to enhance brightness */}
-        <div 
+        {/* Light overlay to enhance brightness and improve text readability */}
+        <div
           style={{
             position: 'absolute',
             top: 0,
             left: 0,
             right: 0,
             bottom: 0,
-            background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 140, 66, 0.1) 50%, rgba(255, 255, 255, 0.08) 100%)',
+            background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.3) 100%)',
             zIndex: 1,
             pointerEvents: 'none'
         }}
@@ -64,25 +64,26 @@ function Hero() {
 
           <div className="grid md:grid-cols-2 gap-8 md:gap-16 lg:gap-20 items-start">
             {/* Content */}
-            <div className="space-y-3 animate-slide-up relative z-10">
+            <div className="space-y-4 animate-slide-up relative z-10">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight relative" style={{
-                background: 'linear-gradient(180deg, #111111 0%, #333333 50%, #000000 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent'
+                color: '#1A1A1A',
+                textShadow: '0 2px 4px rgba(255, 255, 255, 0.5)'
               }}>
                 Premium <span style={{
                   background: `linear-gradient(135deg, var(--primary-color), var(--secondary-color))`,
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
-                  fontWeight: 'bold'
+                  fontWeight: 'bold',
+                  filter: 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3))'
                 }}>Building Materials</span> Supplier Across Tamilnadu
               </h1>
 
               <p className="text-lg md:text-xl leading-relaxed max-w-2xl relative" style={{
-                color: '#0F0F0F',
-                textShadow: 'none'
+                color: '#2D2D2D',
+                textShadow: '0 1px 2px rgba(255, 255, 255, 0.4)',
+                fontWeight: '500'
               }}>
-                Your trusted partner since <span style={{color: '#FF8C42', fontWeight: 'bold', textShadow: '1px 1px 3px rgba(0, 0, 0, 0.8)'}}>2020</span> for high-quality building materials. We supply <span style={{color: '#FFB366', fontWeight: '600', textShadow: '1px 1px 3px rgba(0, 0, 0, 0.8)'}}>M-Sand, Blue Metal, Cement, Bricks</span>, and specialized construction supplies across Tamilnadu with guaranteed quality and timely delivery.
+                Your trusted partner since <span style={{color: 'var(--primary-color)', fontWeight: 'bold'}}>2020</span> for high-quality building materials. We supply <span style={{color: 'var(--primary-color)', fontWeight: '600'}}>M-Sand, Blue Metal, Cement, Bricks</span>, and specialized construction supplies across Tamilnadu with guaranteed quality and timely delivery.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 relative z-10">
@@ -123,64 +124,58 @@ function Hero() {
               </div>
 
               {/* Contact Info */}
-              <div className="flex flex-col sm:flex-row gap-4 pt-3 text-sm relative">
+              <div className="flex flex-col sm:flex-row gap-4 pt-4 text-sm relative">
                 <div className="flex items-center space-x-2 hover:text-[var(--primary-color)] transition-colors duration-300" style={{
-                  color: '#000000',
-                  textShadow: 'none'
+                  color: '#2D2D2D',
+                  textShadow: '0 1px 2px rgba(255, 255, 255, 0.3)'
                 }}>
-                  <div className="icon-phone text-[var(--primary-color)]" style={{filter: 'drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.8))'}}></div>
-                  <span className="font-medium">+91 77084 84811</span>
+                  <div className="icon-phone text-[var(--primary-color)]"></div>
+                  <span className="font-semibold">+91 77084 84811</span>
                 </div>
                 <div className="flex items-center space-x-2 hover:text-[var(--primary-color)] transition-colors duration-300" style={{
-                  color: '#000000',
-                  textShadow: 'none'
+                  color: '#2D2D2D',
+                  textShadow: '0 1px 2px rgba(255, 255, 255, 0.3)'
                 }}>
-                  <div className="icon-phone text-[var(--primary-color)]" style={{filter: 'drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.8))'}}></div>
-                  <span className="font-medium">+91 99652 37777</span>
+                  <div className="icon-phone text-[var(--primary-color)]"></div>
+                  <span className="font-semibold">+91 99652 37777</span>
                 </div>
               </div>
 
               {/* Stats */}
-              <div className="grid grid-cols-3 gap-3 pt-4 relative">
-                <div className="text-center">
+              <div className="grid grid-cols-3 gap-4 pt-6 relative">
+                <div className="text-center p-3 rounded-lg" style={{backgroundColor: 'rgba(255, 255, 255, 0.5)', backdropFilter: 'blur(8px)'}}>
                   <div className="text-2xl md:text-3xl font-bold mb-1" style={{
-                      color: '#FF8C42',
-                      textShadow: '2px 2px 6px rgba(0, 0, 0, 0.08)'
+                      color: 'var(--primary-color)'
                     }}>200+</div>
-                    <div className="text-xs font-medium uppercase tracking-wide" style={{
-                      color: '#000000',
-                      textShadow: 'none'
+                    <div className="text-xs font-semibold uppercase tracking-wide" style={{
+                      color: '#1A1A1A'
                     }}>Projects Completed</div>
                 </div>
-                <div className="text-center">
+                <div className="text-center p-3 rounded-lg" style={{backgroundColor: 'rgba(255, 255, 255, 0.5)', backdropFilter: 'blur(8px)'}}>
                   <div className="text-2xl md:text-3xl font-bold mb-1" style={{
-                    color: '#FF8C42',
-                    textShadow: '2px 2px 6px rgba(0, 0, 0, 0.08)'
+                    color: 'var(--primary-color)'
                   }}>5+</div>
-                  <div className="text-xs font-medium uppercase tracking-wide" style={{
-                    color: '#000000',
-                    textShadow: 'none'
+                  <div className="text-xs font-semibold uppercase tracking-wide" style={{
+                    color: '#1A1A1A'
                   }}>Years Experience</div>
                 </div>
-                <div className="text-center">
+                <div className="text-center p-3 rounded-lg" style={{backgroundColor: 'rgba(255, 255, 255, 0.5)', backdropFilter: 'blur(8px)'}}>
                   <div className="text-2xl md:text-3xl font-bold mb-1" style={{
-                    color: '#FF8C42',
-                    textShadow: '2px 2px 6px rgba(0, 0, 0, 0.08)'
+                    color: 'var(--primary-color)'
                   }}>3+</div>
-                  <div className="text-xs font-medium uppercase tracking-wide" style={{
-                    color: '#000000',
-                    textShadow: 'none'
+                  <div className="text-xs font-semibold uppercase tracking-wide" style={{
+                    color: '#1A1A1A'
                   }}>States Covered</div>
                 </div>
               </div>
             </div>
 
             {/* Image */}
-              <div className="relative animate-scale-in">
+              <div className="relative animate-scale-in hidden md:block">
               <img
                 src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
                 alt="Construction materials and building site - VARMAN CONSTRUCTIONS"
-                className="rounded-xl shadow-elevated w-full h-64 md:h-96 object-cover border-subtle hover:scale-105 transition-all duration-300"
+                className="rounded-xl shadow-elevated w-full h-80 md:h-96 object-cover border-subtle hover:scale-105 transition-all duration-300"
                 loading="lazy"
                 decoding="async"
                 style={{ willChange: 'transform' }}
