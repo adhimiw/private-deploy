@@ -1,12 +1,5 @@
 function Hero() {
   try {
-    const scrollToProducts = () => {
-      const element = document.getElementById('services');
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
-    };
-
     const handleCallNow = () => {
       window.open('tel:+917708484811', '_self');
     };
@@ -21,27 +14,16 @@ function Hero() {
     return (
       <section
         id="home"
-        className="pt-20 md:pt-32 pb-8 bg-dark relative overflow-hidden md:min-h-screen"
+        className="relative overflow-hidden"
         data-name="hero"
         data-file="components/Hero.js"
-      >
-        {/* Brightened background layer */}
-        <div 
         style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.15), rgba(0, 0, 0, 0.15)), url('assets/herobg.jpg')`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'top',
-            backgroundAttachment: 'fixed',
-            filter: 'brightness(1.2) contrast(1.15) saturate(1.1)',
-            zIndex: 0
-          }}
-        />
-        {/* Light overlay to enhance brightness */}
+          minHeight: '100vh',
+          display: 'flex',
+          alignItems: 'center'
+        }}
+      >
+        {/* Dark gradient background like reference image */}
         <div 
           style={{
             position: 'absolute',
@@ -49,156 +31,164 @@ function Hero() {
             left: 0,
             right: 0,
             bottom: 0,
-            background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 140, 66, 0.1) 50%, rgba(255, 255, 255, 0.08) 100%)',
+            background: 'linear-gradient(135deg, #1a0a00 0%, #2d1810 25%, #3d2015 50%, #4a2818 75%, #2d1810 100%)',
+            zIndex: 0
+          }}
+        />
+        
+        {/* Warm orange glow effect */}
+        <div 
+          style={{
+            position: 'absolute',
+            top: '-20%',
+            right: '-10%',
+            width: '70%',
+            height: '80%',
+            background: 'radial-gradient(ellipse at center, rgba(255, 140, 66, 0.3) 0%, rgba(229, 90, 43, 0.15) 40%, transparent 70%)',
             zIndex: 1,
             pointerEvents: 'none'
-        }}
+          }}
         />
-        <div className="container-max relative z-10 w-full max-w-7xl mx-auto px-6 md:px-8 lg:px-12">
-          {/* Prominent Logo Section */}
-          <div className="text-center mb-4 md:mb-6 animate-fade-in">
-            <div className="inline-block">
-              
-            </div>
-          </div>
+        
+        {/* Subtle texture overlay */}
+        <div 
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundImage: `url('assets/herobg.jpg')`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center bottom',
+            opacity: 0.15,
+            zIndex: 1,
+            pointerEvents: 'none'
+          }}
+        />
 
-          <div className="grid md:grid-cols-2 gap-8 md:gap-16 lg:gap-20 items-start">
-            {/* Content */}
-            <div className="space-y-3 animate-slide-up relative z-10">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight relative" style={{
-                background: 'linear-gradient(180deg, #111111 0%, #333333 50%, #000000 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent'
-              }}>
-                Premium <span style={{
-                  background: `linear-gradient(135deg, var(--primary-color), var(--secondary-color))`,
+        <div className="container-max relative z-10 w-full max-w-7xl mx-auto px-6 md:px-8 lg:px-12 pt-24 pb-16">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            
+            {/* Left Content */}
+            <div className="space-y-6 animate-slide-up">
+              {/* Main Headline */}
+              <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight">
+                <span style={{ color: '#FFFFFF' }}>Premium Building Materials</span>
+                <br />
+                <span style={{ color: '#FFFFFF' }}>Supplier Across </span>
+                <span style={{
+                  background: 'linear-gradient(135deg, #FF8C42, #FFB366)',
                   WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  fontWeight: 'bold'
-                }}>Building Materials</span> Supplier Across Tamilnadu
+                  WebkitTextFillColor: 'transparent'
+                }}>Tamilnadu</span>
               </h1>
 
-              <p className="text-lg md:text-xl leading-relaxed max-w-2xl relative" style={{
-                color: '#0F0F0F',
-                textShadow: 'none'
+              {/* Supporting Text */}
+              <p className="text-lg md:text-xl leading-relaxed max-w-lg" style={{
+                color: 'rgba(255, 255, 255, 0.85)'
               }}>
-                Your trusted partner since <span style={{color: '#FF8C42', fontWeight: 'bold', textShadow: '1px 1px 3px rgba(0, 0, 0, 0.8)'}}>2020</span> for high-quality building materials. We supply <span style={{color: '#FFB366', fontWeight: '600', textShadow: '1px 1px 3px rgba(0, 0, 0, 0.8)'}}>M-Sand, Blue Metal, Cement, Bricks</span>, and specialized construction supplies across Tamilnadu with guaranteed quality and timely delivery.
+                Your trusted partner since 2020 for high-quality building materials. We supply <span style={{color: '#FF8C42', fontWeight: '600'}}>M-Sand, Blue Metal, Cement, Bricks</span>, and specialized construction supplies across Tamilnadu with guaranteed quality and timely delivery.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 relative z-10">
-                <button onClick={handleCallNow} className="btn-primary flex items-center justify-center space-x-2">
-                  <div className="icon-phone text-lg"></div>
-                  <span>Call Now</span>
-                </button>
+              {/* CTA Buttons */}
+              <div className="flex flex-col sm:flex-row gap-4 pt-2">
                 <button 
-                  onClick={handleGetQuote} 
-                  className="btn-secondary"
+                  onClick={handleGetQuote}
                   style={{
-                    backgroundColor: 'rgba(255, 255, 255, 0.15)',
-                    backdropFilter: 'blur(10px)',
-                    color: '#000000',
-                    borderColor: '#000000',
-                    borderWidth: '2px',
-                    textShadow: 'none',
-                    boxShadow: '0 4px 15px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
-                    fontWeight: '600'
+                    background: 'linear-gradient(135deg, #FF8C42, #E55A2B)',
+                    color: '#FFFFFF',
+                    padding: '16px 32px',
+                    borderRadius: '8px',
+                    fontWeight: '700',
+                    fontSize: '1rem',
+                    letterSpacing: '0.05em',
+                    textTransform: 'uppercase',
+                    border: 'none',
+                    cursor: 'pointer',
+                    boxShadow: '0 8px 30px rgba(255, 140, 66, 0.4)',
+                    transition: 'all 0.3s ease'
                   }}
                   onMouseEnter={(e) => {
-                    e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.25)';
-                    e.target.style.borderColor = 'var(--primary-color)';
-                    e.target.style.color = '#000000';
-                    e.target.style.transform = 'translateY(-3px) scale(1.05)';
-                    e.target.style.boxShadow = '0 15px 35px rgba(229, 90, 43, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3)';
+                    e.target.style.transform = 'translateY(-3px) scale(1.02)';
+                    e.target.style.boxShadow = '0 12px 40px rgba(255, 140, 66, 0.5)';
                   }}
                   onMouseLeave={(e) => {
-                    e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.15)';
-                    e.target.style.borderColor = '#000000';
-                    e.target.style.color = '#000000';
                     e.target.style.transform = 'translateY(0) scale(1)';
-                    e.target.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.2)';
+                    e.target.style.boxShadow = '0 8px 30px rgba(255, 140, 66, 0.4)';
                   }}
                 >
                   Get Quote
                 </button>
+                <a 
+                  href="tel:+917708484811"
+                  style={{
+                    background: 'transparent',
+                    color: '#FFFFFF',
+                    padding: '16px 32px',
+                    borderRadius: '8px',
+                    fontWeight: '700',
+                    fontSize: '1rem',
+                    letterSpacing: '0.05em',
+                    textTransform: 'uppercase',
+                    border: '2px solid #FF8C42',
+                    cursor: 'pointer',
+                    transition: 'all 0.3s ease',
+                    textDecoration: 'none',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '8px'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.target.style.background = 'rgba(255, 140, 66, 0.1)';
+                    e.target.style.transform = 'translateY(-3px)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.target.style.background = 'transparent';
+                    e.target.style.transform = 'translateY(0)';
+                  }}
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                  </svg>
+                  Call Now
+                </a>
               </div>
 
               {/* Contact Info */}
-              <div className="flex flex-col sm:flex-row gap-4 pt-3 text-sm relative">
-                <div className="flex items-center space-x-2 hover:text-[var(--primary-color)] transition-colors duration-300" style={{
-                  color: '#000000',
-                  textShadow: 'none'
-                }}>
-                  <div className="icon-phone text-[var(--primary-color)]" style={{filter: 'drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.8))'}}></div>
+              <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                <a href="tel:+917708484811" className="flex items-center space-x-2 transition-colors duration-300 hover:opacity-80" style={{ color: 'rgba(255, 255, 255, 0.8)' }}>
+                  <div className="icon-phone" style={{ color: '#FF8C42' }}></div>
                   <span className="font-medium">+91 77084 84811</span>
-                </div>
-                <div className="flex items-center space-x-2 hover:text-[var(--primary-color)] transition-colors duration-300" style={{
-                  color: '#000000',
-                  textShadow: 'none'
-                }}>
-                  <div className="icon-phone text-[var(--primary-color)]" style={{filter: 'drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.8))'}}></div>
+                </a>
+                <a href="tel:+919965237777" className="flex items-center space-x-2 transition-colors duration-300 hover:opacity-80" style={{ color: 'rgba(255, 255, 255, 0.8)' }}>
+                  <div className="icon-phone" style={{ color: '#FF8C42' }}></div>
                   <span className="font-medium">+91 99652 37777</span>
-                </div>
-              </div>
-
-              {/* Stats */}
-              <div className="grid grid-cols-3 gap-3 pt-4 relative">
-                <div className="text-center">
-                  <div className="text-2xl md:text-3xl font-bold mb-1" style={{
-                      color: '#FF8C42',
-                      textShadow: '2px 2px 6px rgba(0, 0, 0, 0.08)'
-                    }}>200+</div>
-                    <div className="text-xs font-medium uppercase tracking-wide" style={{
-                      color: '#000000',
-                      textShadow: 'none'
-                    }}>Projects Completed</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl md:text-3xl font-bold mb-1" style={{
-                    color: '#FF8C42',
-                    textShadow: '2px 2px 6px rgba(0, 0, 0, 0.08)'
-                  }}>5+</div>
-                  <div className="text-xs font-medium uppercase tracking-wide" style={{
-                    color: '#000000',
-                    textShadow: 'none'
-                  }}>Years Experience</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl md:text-3xl font-bold mb-1" style={{
-                    color: '#FF8C42',
-                    textShadow: '2px 2px 6px rgba(0, 0, 0, 0.08)'
-                  }}>3+</div>
-                  <div className="text-xs font-medium uppercase tracking-wide" style={{
-                    color: '#000000',
-                    textShadow: 'none'
-                  }}>States Covered</div>
-                </div>
+                </a>
               </div>
             </div>
 
-            {/* Image */}
-              <div className="relative animate-scale-in">
-              <img
-                src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                alt="Construction materials and building site - VARMAN CONSTRUCTIONS"
-                className="rounded-xl shadow-elevated w-full h-64 md:h-96 object-cover border-subtle hover:scale-105 transition-all duration-300"
-                loading="lazy"
-                decoding="async"
-                style={{ willChange: 'transform' }}
-              />
-              <div className="absolute -bottom-6 -left-6 bg-card p-6 rounded-xl shadow-elevated border-subtle">
-                <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-[var(--primary-color)] rounded-full flex items-center justify-center">
-                    <div className="icon-check text-xl text-[var(--background-primary)]"></div>
-                  </div>
-                  <div>
-                    <div className="font-semibold text-[var(--text-primary)] text-lg">Quality Assured</div>
-                    <div className="text-sm text-[var(--text-secondary)]">IS Standard Materials</div>
-                  </div>
-                </div>
+            {/* Right Side - Hero Visual with Stats */}
+            <div className="relative animate-scale-in flex justify-center lg:justify-end">
+              {/* Central Hero Image - Construction/Helmet Style */}
+              <div className="relative">
+                <img
+                  src="assets/hero.png"
+                  alt="Construction materials - VARMAN CONSTRUCTIONS"
+                  className="relative z-10"
+                  style={{
+                    maxWidth: '450px',
+                    width: '100%',
+                    height: 'auto',
+                    filter: 'drop-shadow(0 20px 40px rgba(0, 0, 0, 0.4))'
+                  }}
+                  loading="eager"
+                />
               </div>
             </div>
           </div>
         </div>
+
       </section>
     );
   } catch (error) {
