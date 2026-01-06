@@ -25,7 +25,7 @@ function Hero() {
         data-name="hero"
         data-file="components/Hero.js"
       >
-        {/* Brightened background layer */}
+        {/* Brightened background layer with construction materials image */}
         <div 
         style={{
             position: 'absolute',
@@ -33,11 +33,11 @@ function Hero() {
             left: 0,
             right: 0,
             bottom: 0,
-            backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.15), rgba(0, 0, 0, 0.15)), url('assets/herobg.jpg')`,
+            backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.65)), url('https://images.unsplash.com/photo-1621905251918-48416bd8575a?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80')`,
           backgroundSize: 'cover',
-          backgroundPosition: 'top',
+          backgroundPosition: 'center',
             backgroundAttachment: 'fixed',
-            filter: 'brightness(1.2) contrast(1.15) saturate(1.1)',
+            filter: 'brightness(1.3) contrast(1.1)',
             zIndex: 0
           }}
         />
@@ -66,23 +66,24 @@ function Hero() {
             {/* Content */}
             <div className="space-y-3 animate-slide-up relative z-10">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight relative" style={{
-                background: 'linear-gradient(180deg, #111111 0%, #333333 50%, #000000 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent'
+                color: '#1A1A1A',
+                textShadow: '2px 2px 4px rgba(255, 255, 255, 0.8)'
               }}>
                 Premium <span style={{
                   background: `linear-gradient(135deg, var(--primary-color), var(--secondary-color))`,
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
-                  fontWeight: 'bold'
-                }}>Building Materials</span> Supplier Across Tamilnadu
+                  fontWeight: 'bold',
+                  textShadow: 'none'
+                }}>Building Materials</span> Supplier Across Tamil Nadu
               </h1>
 
               <p className="text-lg md:text-xl leading-relaxed max-w-2xl relative" style={{
-                color: '#0F0F0F',
-                textShadow: 'none'
+                color: '#2D3748',
+                textShadow: '1px 1px 2px rgba(255, 255, 255, 0.8)',
+                fontWeight: '500'
               }}>
-                Your trusted partner since <span style={{color: '#FF8C42', fontWeight: 'bold', textShadow: '1px 1px 3px rgba(0, 0, 0, 0.8)'}}>2020</span> for high-quality building materials. We supply <span style={{color: '#FFB366', fontWeight: '600', textShadow: '1px 1px 3px rgba(0, 0, 0, 0.8)'}}>M-Sand, Blue Metal, Cement, Bricks</span>, and specialized construction supplies across Tamilnadu with guaranteed quality and timely delivery.
+                Your trusted partner since <span style={{color: '#E55A2B', fontWeight: 'bold'}}>2020</span> for high-quality building materials. We supply <span style={{color: '#D14D1F', fontWeight: '700'}}>M-Sand, Blue Metal, Cement, Bricks</span>, and specialized construction supplies across Tamil Nadu with guaranteed quality and timely delivery.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 relative z-10">
@@ -125,51 +126,48 @@ function Hero() {
               {/* Contact Info */}
               <div className="flex flex-col sm:flex-row gap-4 pt-3 text-sm relative">
                 <div className="flex items-center space-x-2 hover:text-[var(--primary-color)] transition-colors duration-300" style={{
-                  color: '#000000',
-                  textShadow: 'none'
+                  color: '#1A1A1A',
+                  textShadow: '1px 1px 2px rgba(255, 255, 255, 0.8)'
                 }}>
-                  <div className="icon-phone text-[var(--primary-color)]" style={{filter: 'drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.8))'}}></div>
-                  <span className="font-medium">+91 77084 84811</span>
+                  <div className="icon-phone text-[var(--primary-color)]"></div>
+                  <span className="font-semibold">+91 77084 84811</span>
                 </div>
                 <div className="flex items-center space-x-2 hover:text-[var(--primary-color)] transition-colors duration-300" style={{
-                  color: '#000000',
-                  textShadow: 'none'
+                  color: '#1A1A1A',
+                  textShadow: '1px 1px 2px rgba(255, 255, 255, 0.8)'
                 }}>
-                  <div className="icon-phone text-[var(--primary-color)]" style={{filter: 'drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.8))'}}></div>
-                  <span className="font-medium">+91 99652 37777</span>
+                  <div className="icon-phone text-[var(--primary-color)]"></div>
+                  <span className="font-semibold">+91 99652 37777</span>
                 </div>
               </div>
 
               {/* Stats */}
               <div className="grid grid-cols-3 gap-3 pt-4 relative">
-                <div className="text-center">
+                <div className="text-center bg-white/80 backdrop-blur-sm rounded-lg p-3 shadow-md border border-orange-200">
                   <div className="text-2xl md:text-3xl font-bold mb-1" style={{
-                      color: '#FF8C42',
-                      textShadow: '2px 2px 6px rgba(0, 0, 0, 0.08)'
+                      color: '#E55A2B',
+                      textShadow: '1px 1px 2px rgba(255, 255, 255, 0.8)'
                     }}>200+</div>
-                    <div className="text-xs font-medium uppercase tracking-wide" style={{
-                      color: '#000000',
-                      textShadow: 'none'
+                    <div className="text-xs font-semibold uppercase tracking-wide" style={{
+                      color: '#1A1A1A'
                     }}>Projects Completed</div>
                 </div>
-                <div className="text-center">
+                <div className="text-center bg-white/80 backdrop-blur-sm rounded-lg p-3 shadow-md border border-orange-200">
                   <div className="text-2xl md:text-3xl font-bold mb-1" style={{
-                    color: '#FF8C42',
-                    textShadow: '2px 2px 6px rgba(0, 0, 0, 0.08)'
+                    color: '#E55A2B',
+                    textShadow: '1px 1px 2px rgba(255, 255, 255, 0.8)'
                   }}>5+</div>
-                  <div className="text-xs font-medium uppercase tracking-wide" style={{
-                    color: '#000000',
-                    textShadow: 'none'
+                  <div className="text-xs font-semibold uppercase tracking-wide" style={{
+                    color: '#1A1A1A'
                   }}>Years Experience</div>
                 </div>
-                <div className="text-center">
+                <div className="text-center bg-white/80 backdrop-blur-sm rounded-lg p-3 shadow-md border border-orange-200">
                   <div className="text-2xl md:text-3xl font-bold mb-1" style={{
-                    color: '#FF8C42',
-                    textShadow: '2px 2px 6px rgba(0, 0, 0, 0.08)'
+                    color: '#E55A2B',
+                    textShadow: '1px 1px 2px rgba(255, 255, 255, 0.8)'
                   }}>3+</div>
-                  <div className="text-xs font-medium uppercase tracking-wide" style={{
-                    color: '#000000',
-                    textShadow: 'none'
+                  <div className="text-xs font-semibold uppercase tracking-wide" style={{
+                    color: '#1A1A1A'
                   }}>States Covered</div>
                 </div>
               </div>
@@ -178,12 +176,12 @@ function Hero() {
             {/* Image */}
               <div className="relative animate-scale-in">
               <img
-                src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                src="https://images.unsplash.com/photo-1590856029826-c7a73142bbf1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
                 alt="Construction materials and building site - VARMAN CONSTRUCTIONS"
                 className="rounded-xl shadow-elevated w-full h-64 md:h-96 object-cover border-subtle hover:scale-105 transition-all duration-300"
                 loading="lazy"
                 decoding="async"
-                style={{ willChange: 'transform' }}
+                style={{ willChange: 'transform', border: '3px solid #E55A2B' }}
               />
               <div className="absolute -bottom-6 -left-6 bg-card p-6 rounded-xl shadow-elevated border-subtle">
                 <div className="flex items-center space-x-4">

@@ -19,17 +19,17 @@ function Header() {
         <div className="max-w-full relative z-10 px-4">
           <div className="flex items-center justify-between h-24 md:h-28">
             {/* Logo with Enhanced Prominence */}
-            <div className="flex items-center space-x-4 group">
+            <div className="flex items-center space-x-3 group">
               <img
                 src="assets/logo.png"
                 alt="VARMAN CONSTRUCTIONS Logo"
-                className="h-32 md:h-36 lg:h-40 w-auto object-contain transition-all duration-500 group-hover:scale-105 drop-shadow-lg"
+                className="h-16 md:h-20 lg:h-24 w-auto object-contain transition-all duration-500 group-hover:scale-105 drop-shadow-lg"
               />
               <div>
-                <span className="text-xl md:text-2xl lg:text-3xl font-bold text-[var(--text-primary)] group-hover:text-[var(--primary-color)] transition-colors duration-300 leading-tight">
-                  <span style={{color: 'var(--primary-color)'}}>VARMAN</span> CONSTRUCTIONS
+                <span className="text-lg md:text-xl lg:text-2xl font-extrabold text-[var(--text-primary)] group-hover:text-[var(--primary-color)] transition-colors duration-300 leading-tight tracking-tight">
+                  <span style={{color: 'var(--primary-color)'}}>VARMAN</span> <span style={{color: '#1A1A1A'}}>CONSTRUCTIONS</span>
                 </span>
-
+                <div className="text-xs text-[var(--text-muted)] font-medium tracking-wide">Premium Building Materials</div>
               </div>
             </div>
 
