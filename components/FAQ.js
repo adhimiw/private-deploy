@@ -1,7 +1,7 @@
 function FAQ() {
   try {
     const [expandedCategory, setExpandedCategory] = React.useState('delivery');
-    const [expandedQuestion, setExpandedQuestion] = React.useState(null);
+    const [expandedQuestion, setExpandedQuestion] = React.useState('delivery-0');
 
     const faqCategories = [
       {
@@ -15,7 +15,7 @@ function FAQ() {
           },
           {
             question: 'Do you deliver to all areas in Tamilnadu?',
-            answer: 'Yes, we deliver across Tamilnadu with focus on South Tamilnadun states. Our primary coverage includes Tamil Nadu, Karnataka, Kerala. For other states, delivery is available with advance notice and may have additional charges based on distance.'
+            answer: 'Yes, we deliver across Tamil Nadu with focus on Southern India. Our primary coverage includes Tamil Nadu, Karnataka, and Kerala. For other states, delivery is available with advance notice and may have additional charges based on distance.'
           },
           {
             question: 'What are the delivery charges?',
@@ -80,7 +80,7 @@ function FAQ() {
         questions: [
           {
             question: 'Are your materials tested for quality?',
-            answer: 'Yes, all our materials undergo rigorous quality testing and meet IS (Tamilnadun Standards) specifications. We source from certified manufacturers and conduct regular quality checks. Test certificates are provided on request for all major materials.'
+            answer: 'Yes, all our materials undergo rigorous quality testing and meet IS (Indian Standards) specifications. We source from certified manufacturers and conduct regular quality checks. Test certificates are provided on request for all major materials.'
           },
           {
             question: 'Do you provide material certificates?',

@@ -4,7 +4,7 @@ function About() {
       {
         icon: 'award',
         title: 'IS Certified Materials',
-        description: 'All our materials meet Tamilnadun Standard specifications with proper certification'
+        description: 'All our materials meet IS (Indian Standard) specifications with proper certification'
       },
       {
         icon: 'clock',
@@ -24,7 +24,7 @@ function About() {
       {
         icon: 'truck',
         title: 'Pan-Tamilnadu Supply',
-        description: 'Serving customers across Tamilnadu with focus on South Tamilnadun states'
+        description: 'Serving customers across Tamil Nadu with focus on Southern India'
       },
       {
         icon: 'shield-check',
@@ -39,47 +39,53 @@ function About() {
       { number: '24-48', label: 'Hours Delivery', icon: 'clock' }
     ];
     return (
-      <section className="section-padding bg-dark py-24 md:py-32" data-file="components/About.js" data-name="about" id="about">
-        <div className="container-max">
+      <section className="section-padding bg-dark py-16 md:py-24 lg:py-32" data-file="components/About.js" data-name="about" id="about">
+        <div className="container-max px-4 md:px-6">
           {/* Main Content */}
-          <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center mb-12 md:mb-16">
             {/* Content */}
-            <div className="space-y-6 min-w-0">
-              <div className="inline-flex items-center w-full md:w-max px-6 py-3 sm:px-8 sm:py-4 md:px-16 md:py-8 bg-card rounded-full shadow-md border border-[var(--border-color)] mb-6 md:mb-8 md:whitespace-nowrap md:shrink-0">
-                <div className="w-4 h-4 sm:w-6 sm:h-6 md:w-10 md:h-10 bg-[var(--primary-color)] rounded-full mr-3 sm:mr-4 md:mr-6"></div>
-                <span className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-semibold text-[var(--text-primary)] leading-tight md:leading-none">About VARMAN CONSTRUCTIONS</span>
+            <div className="space-y-5 md:space-y-6 min-w-0">
+              {/* Section Badge - Mobile Optimized */}
+              <div className="inline-flex items-center px-4 py-2 md:px-6 md:py-3 bg-card rounded-full shadow-md border border-[var(--border-color)]">
+                <div className="w-3 h-3 md:w-4 md:h-4 bg-[var(--primary-color)] rounded-full mr-2 md:mr-3"></div>
+                <span className="text-sm md:text-base lg:text-lg font-semibold text-[var(--text-primary)]">About VARMAN CONSTRUCTIONS</span>
               </div>
               
-              <h2 className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-extrabold text-[var(--text-primary)] leading-tight whitespace-nowrap">
-                Building Tamilnadu's Future with <span className="text-gradient">Quality Materials</span> Since 2020
+              {/* Headline - Mobile Friendly */}
+              <h2 className="text-lg md:text-xl lg:text-2xl xl:text-3xl font-extrabold text-[var(--text-primary)] leading-snug">
+                Building Tamil Nadu's Future with <span className="text-gradient">Quality Materials</span> Since 2020
               </h2>
               
-              <p className="text-xl md:text-2xl text-[var(--text-secondary)] leading-relaxed text-justify">
-                VARMAN CONSTRUCTIONS, established in 2020, has rapidly grown to become a trusted supplier of premium building materials across Tamilnadu. Despite being a relatively new player in the market, our commitment to quality and customer satisfaction has helped us serve over 200+ construction projects successfully.
+              {/* Original Full Description */}
+              <p className="text-base md:text-lg lg:text-xl text-[var(--text-secondary)] leading-relaxed text-justify">
+                VARMAN CONSTRUCTIONS, established in 2020, has rapidly grown to become a trusted supplier of premium building materials across Tamil Nadu. Despite being a relatively new player in the market, our commitment to quality and customer satisfaction has helped us serve over 200+ construction projects successfully.
               </p>
               
-              <p className="text-lg md:text-xl text-[var(--text-secondary)] leading-relaxed text-justify">
-                We specialize in supplying high-quality construction materials including M-Sand, Blue Metal (Jalli), various types of bricks, cement, AAC blocks, and natural stones. Our extensive network now covers 3+ states with a primary focus on South Tamilnadun markets, ensuring that quality construction materials reach every corner of our service area.
+              <p className="text-sm md:text-base lg:text-lg text-[var(--text-secondary)] leading-relaxed text-justify">
+                We specialize in supplying high-quality construction materials including M-Sand, Blue Metal (Jalli), various types of bricks, cement, AAC blocks, and natural stones. Our extensive network now covers 3+ states with a primary focus on Tamil Nadu markets, ensuring that quality construction materials reach every corner of our service area.
               </p>
-              <div className="bg-card p-6 rounded-lg border border-[var(--border-color)] shadow-sm">
-                <h4 className="font-semibold text-[var(--text-primary)] mb-3">Our Commitment</h4>
-                <p className="text-[var(--text-secondary)] text-sm leading-relaxed text-justify">
+              
+              {/* Commitment Card */}
+              <div className="bg-card p-4 md:p-6 rounded-lg border border-[var(--border-color)] shadow-sm">
+                <h4 className="font-semibold text-[var(--text-primary)] mb-2 md:mb-3 text-sm md:text-base">Our Commitment</h4>
+                <p className="text-[var(--text-secondary)] text-xs md:text-sm leading-relaxed text-justify">
                   "We believe that every construction project deserves the best materials. Our mission is to provide consistent quality, competitive pricing, and reliable service that helps our customers build with confidence. From small residential projects to large infrastructure developments, we are committed to being your trusted material supplier partner."
                 </p>
               </div>
-              {/* Contact Info */}
-              <div className="flex flex-col md:flex-row items-start md:items-center text-left gap-4 sm:gap-6 md:gap-10 text-base sm:text-lg md:text-xl font-bold flex-wrap md:flex-nowrap w-full"> {/* Keep straight line on md+ */}
-                <div className="inline-flex items-center space-x-3 text-[var(--text-secondary)] whitespace-nowrap">
+              
+              {/* Contact Info - Stacked on Mobile */}
+              <div className="flex flex-col gap-3 text-sm md:text-base">
+                <a href="tel:+917708484811" className="inline-flex items-center space-x-2 text-[var(--text-secondary)] hover:text-[var(--primary-color)] transition-colors font-medium">
                   <div className="icon-phone text-[var(--primary-color)]"></div>
-                  <span className="whitespace-nowrap">+91 77084 84811</span>
-                </div>
-                <div className="inline-flex items-center space-x-3 text-[var(--text-secondary)] whitespace-nowrap">
+                  <span>+91 77084 84811</span>
+                </a>
+                <a href="mailto:info@varmanconstructions.in" className="inline-flex items-center space-x-2 text-[var(--text-secondary)] hover:text-[var(--primary-color)] transition-colors font-medium">
                   <div className="icon-mail text-[var(--primary-color)]"></div>
-                  <span className="whitespace-nowrap">info@varmanconstructions.in</span>
-                </div>
-                <div className="inline-flex items-center space-x-3 text-[var(--text-secondary)] whitespace-nowrap">
+                  <span>info@varmanconstructions.in</span>
+                </a>
+                <div className="inline-flex items-center space-x-2 text-[var(--text-secondary)] font-medium">
                   <div className="icon-briefcase text-[var(--primary-color)]"></div>
-                  <span className="whitespace-nowrap">GSTIN: 33BTGPM9877H1Z3</span>
+                  <span>GSTIN: 33BTGPM9877H1Z3</span>
                 </div>
               </div>
             </div>
@@ -148,27 +154,27 @@ function About() {
             </div>
           </div>
           {/* Our Mission & Vision */}
-          <div className="mt-16 grid md:grid-cols-2 gap-8">
-            <div className="bg-card p-8 rounded-lg border border-[var(--border-color)]">
-              <div className="flex items-center mb-4">
-                <div className="w-10 h-10 bg-[var(--primary-color)] rounded-lg flex items-center justify-center mr-3">
-                  <div className="icon-target text-lg text-[var(--background-primary)]"></div>
+          <div className="mt-12 md:mt-16 grid md:grid-cols-2 gap-6 md:gap-8">
+            <div className="bg-card p-5 md:p-8 rounded-lg border border-[var(--border-color)]">
+              <div className="flex items-center mb-3 md:mb-4">
+                <div className="w-8 h-8 md:w-10 md:h-10 bg-[var(--primary-color)] rounded-lg flex items-center justify-center mr-3">
+                  <div className="icon-target text-base md:text-lg text-[var(--background-primary)]"></div>
                 </div>
-                <h4 className="text-xl font-semibold text-[var(--text-primary)]">Our Mission</h4>
+                <h4 className="text-lg md:text-xl font-semibold text-[var(--text-primary)]">Our Mission</h4>
               </div>
-              <p className="text-[var(--text-secondary)] leading-relaxed text-justify">
-                To be the most trusted supplier of high-quality building materials across Tamilnadu, providing exceptional value to our customers through reliable products, competitive pricing, and outstanding service that supports their construction dreams.
+              <p className="text-sm md:text-base text-[var(--text-secondary)] leading-relaxed">
+                To be the most trusted supplier of high-quality building materials across Tamil Nadu, providing exceptional value to our customers through reliable products, competitive pricing, and outstanding service that supports their construction dreams.
               </p>
             </div>
-            <div className="bg-card p-8 rounded-lg border border-[var(--border-color)]">
-              <div className="flex items-center mb-4">
-                <div className="w-10 h-10 bg-[var(--primary-color)] rounded-lg flex items-center justify-center mr-3">
-                  <div className="icon-eye text-lg text-[var(--background-primary)]"></div>
+            <div className="bg-card p-5 md:p-8 rounded-lg border border-[var(--border-color)]">
+              <div className="flex items-center mb-3 md:mb-4">
+                <div className="w-8 h-8 md:w-10 md:h-10 bg-[var(--primary-color)] rounded-lg flex items-center justify-center mr-3">
+                  <div className="icon-eye text-base md:text-lg text-[var(--background-primary)]"></div>
                 </div>
-                <h4 className="text-xl font-semibold text-[var(--text-primary)]">Our Vision</h4>
+                <h4 className="text-lg md:text-xl font-semibold text-[var(--text-primary)]">Our Vision</h4>
               </div>
-              <p className="text-[var(--text-secondary)] leading-relaxed text-justify">
-                To become the preferred choice for construction materials across Tamilnadu by consistently delivering superior quality products, innovative solutions, and establishing new benchmarks for customer satisfaction and industry excellence.
+              <p className="text-sm md:text-base text-[var(--text-secondary)] leading-relaxed">
+                To become the preferred choice for construction materials across Tamil Nadu by consistently delivering superior quality products, innovative solutions, and establishing new benchmarks for customer satisfaction and industry excellence.
               </p>
             </div>
           </div>

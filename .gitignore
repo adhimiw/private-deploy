@@ -1,0 +1,27 @@
+# IDE and Editor folders
+.idea/
+.vscode/
+.cursor/
+.augment/
+.superdesign/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Dependencies
+node_modules/
+__pycache__/
+*.pyc
+
+# Environment files
+.env
+.env.local
+
+# Build outputs
+dist/
+build/
+
+# Logs
+*.log
+npm-debug.log*
