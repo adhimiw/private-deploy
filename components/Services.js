@@ -52,7 +52,7 @@ function Services() {
         uses: ['Concrete mixing', 'Road base', 'Drainage systems', 'Foundation work'],
         advantages: ['High strength', 'Durable', 'Weather resistant', 'Multiple sizes available'],
         unit: 'per ton',
-        image: './assets/bluemetal.webp'
+        image: './assets/blue metals.webp'
       },
       {
         id: 'red_bricks',
@@ -64,7 +64,7 @@ function Services() {
         uses: ['Wall construction', 'Boundary walls', 'Pillars', 'Load-bearing structures'],
         advantages: ['Good insulation', 'Fire resistant', 'Durable', 'Eco-friendly'],
         unit: 'per 1000 pieces',
-        image: './assets/redbricks.webp'
+        image: './assets/red brick.webp'
       },
       {
         id: 'fly_ash_bricks',
@@ -76,7 +76,7 @@ function Services() {
         uses: ['Wall construction', 'High-rise buildings', 'Commercial structures', 'Residential projects'],
         advantages: ['Higher strength', 'Uniform size', 'Less mortar required', 'Eco-friendly'],
         unit: 'per 1000 pieces',
-        image: './assets/flyashbricks.webp'
+        image: './assets/brick.webp'
       },
       {
         id: 'concrete_blocks',
@@ -88,7 +88,7 @@ function Services() {
         uses: ['Wall construction', 'Partition walls', 'Compound walls', 'Industrial buildings'],
         advantages: ['Quick construction', 'Cost-effective', 'Low maintenance', 'Sound insulation'],
         unit: 'per piece',
-        image: './assets/concreteblocks.webp'
+        image: './assets/concretate.webp'
       },
       {
         id: 'cement',
@@ -113,7 +113,7 @@ function Services() {
         uses: ['High-rise construction', 'Green buildings', 'Commercial complexes', 'Residential projects'],
         advantages: ['Lightweight', 'Thermal insulation', 'Fire resistant', 'Earthquake resistant'],
         unit: 'per cubic meter',
-        image: './assets/aacblocks.webp'
+        image: './assets/acc.webp'
       },
       {
         id: 'size_stone',
