@@ -4,6 +4,8 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const fs = require('fs');
 const path = require('path');
+const multer = require('multer');
+const crypto = require('crypto');
 require('dotenv').config();
 
 const app = express();
@@ -12,6 +14,66 @@ const JWT_SECRET = process.env.JWT_SECRET || 'varman-constructions-secret-key-20
 
 // Data file path (localStorage equivalent - persists to JSON file)
 const DATA_FILE = path.join(__dirname, 'data.json');
+
+// ============ SECURE IMAGE UPLOAD CONFIGURATION ============
+
+// Allowed file types for security
+const ALLOWED_MIME_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
+const ALLOWED_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.webp', '.gif'];
+const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB max
+
+// Upload directory (assets folder in parent directory)
+const UPLOAD_DIR = path.join(__dirname, '..', 'assets');
+
+// Ensure upload directory exists
+if (!fs.existsSync(UPLOAD_DIR)) {
+  fs.mkdirSync(UPLOAD_DIR, { recursive: true });
+}
+
+// Multer storage configuration
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, UPLOAD_DIR);
+  },
+  filename: (req, file, cb) => {
+    // Generate secure unique filename
+    const uniqueId = crypto.randomBytes(8).toString('hex');
+    const ext = path.extname(file.originalname).toLowerCase();
+    const safeName = file.originalname
+      .replace(/[^a-zA-Z0-9.-]/g, '_')
+      .replace(/_{2,}/g, '_')
+      .toLowerCase();
+    const baseName = path.basename(safeName, ext);
+    const finalName = `${baseName}_${uniqueId}${ext}`;
+    cb(null, finalName);
+  }
+});
+
+// File filter for security
+const fileFilter = (req, file, cb) => {
+  // Check MIME type
+  if (!ALLOWED_MIME_TYPES.includes(file.mimetype)) {
+    return cb(new Error('Invalid file type. Only JPEG, PNG, WebP, and GIF are allowed.'), false);
+  }
+  
+  // Check extension
+  const ext = path.extname(file.originalname).toLowerCase();
+  if (!ALLOWED_EXTENSIONS.includes(ext)) {
+    return cb(new Error('Invalid file extension.'), false);
+  }
+  
+  cb(null, true);
+};
+
+// Multer upload instance
+const upload = multer({
+  storage: storage,
+  fileFilter: fileFilter,
+  limits: {
+    fileSize: MAX_FILE_SIZE,
+    files: 1
+  }
+});
 
 // Middleware
 app.use(cors());
@@ -382,6 +444,99 @@ app.post('/api/admin/login', async (req, res) => {
 // Verify token
 app.get('/api/admin/verify', authenticateToken, (req, res) => {
   res.json({ valid: true, user: req.user });
+});
+
+// ============ ADMIN IMAGE UPLOAD ============
+
+// Upload product image
+app.post('/api/admin/upload', authenticateToken, (req, res) => {
+  upload.single('image')(req, res, (err) => {
+    if (err instanceof multer.MulterError) {
+      if (err.code === 'LIMIT_FILE_SIZE') {
+        return res.status(400).json({ error: 'File too large. Maximum size is 5MB.' });
+      }
+      return res.status(400).json({ error: `Upload error: ${err.message}` });
+    } else if (err) {
+      return res.status(400).json({ error: err.message });
+    }
+    
+    if (!req.file) {
+      return res.status(400).json({ error: 'No file uploaded' });
+    }
+    
+    // Return the path relative to the site root
+    const imagePath = `./assets/${req.file.filename}`;
+    
+    res.json({
+      success: true,
+      filename: req.file.filename,
+      path: imagePath,
+      size: req.file.size,
+      mimetype: req.file.mimetype
+    });
+  });
+});
+
+// Delete uploaded image
+app.delete('/api/admin/upload/:filename', authenticateToken, (req, res) => {
+  try {
+    const filename = req.params.filename;
+    
+    // Security: Prevent path traversal attacks
+    if (filename.includes('..') || filename.includes('/') || filename.includes('\\')) {
+      return res.status(400).json({ error: 'Invalid filename' });
+    }
+    
+    const filePath = path.join(UPLOAD_DIR, filename);
+    
+    // Check if file exists
+    if (!fs.existsSync(filePath)) {
+      return res.status(404).json({ error: 'File not found' });
+    }
+    
+    // Check if it's a default product image (protect original assets)
+    const protectedImages = [
+      'msand.webp', 'psand.webp', 'blue metals.webp', 'red brick.webp',
+      'brick.webp', 'concretate.webp', 'cement.webp', 'acc.webp',
+      'sizestone.webp', 'logo.png', 'favicon.png'
+    ];
+    
+    if (protectedImages.includes(filename)) {
+      return res.status(403).json({ error: 'Cannot delete protected default images' });
+    }
+    
+    fs.unlinkSync(filePath);
+    res.json({ success: true, message: 'Image deleted successfully' });
+    
+  } catch (error) {
+    console.error('Delete image error:', error);
+    res.status(500).json({ error: 'Failed to delete image' });
+  }
+});
+
+// List all uploaded images
+app.get('/api/admin/images', authenticateToken, (req, res) => {
+  try {
+    const files = fs.readdirSync(UPLOAD_DIR);
+    const images = files
+      .filter(file => ALLOWED_EXTENSIONS.includes(path.extname(file).toLowerCase()))
+      .map(file => {
+        const filePath = path.join(UPLOAD_DIR, file);
+        const stats = fs.statSync(filePath);
+        return {
+          filename: file,
+          path: `./assets/${file}`,
+          size: stats.size,
+          uploadedAt: stats.mtime
+        };
+      })
+      .sort((a, b) => new Date(b.uploadedAt) - new Date(a.uploadedAt));
+    
+    res.json({ images });
+  } catch (error) {
+    console.error('List images error:', error);
+    res.status(500).json({ error: 'Failed to list images' });
+  }
 });
 
 // ============ ADMIN PRODUCTS ROUTES ============

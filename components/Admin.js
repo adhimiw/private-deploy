@@ -20,6 +20,7 @@ function Admin() {
   const [showAddFaq, setShowAddFaq] = React.useState(false);
   const [showEditFaq, setShowEditFaq] = React.useState(false);
   const [confirmDelete, setConfirmDelete] = React.useState(null);
+  const [showImageGallery, setShowImageGallery] = React.useState(false);
   
   // Form states
   const [productForm, setProductForm] = React.useState({
@@ -28,6 +29,13 @@ function Admin() {
   });
   const [faqForm, setFaqForm] = React.useState({ question: '', answer: '', category: 'general' });
   const [editingId, setEditingId] = React.useState(null);
+  
+  // Image upload states
+  const [uploadingImage, setUploadingImage] = React.useState(false);
+  const [imagePreview, setImagePreview] = React.useState(null);
+  const [galleryImages, setGalleryImages] = React.useState([]);
+  const [dragActive, setDragActive] = React.useState(false);
+  const fileInputRef = React.useRef(null);
 
   const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
     ? 'http://localhost:3001' 
@@ -420,6 +428,134 @@ function Admin() {
     }
   };
 
+  // ============ IMAGE UPLOAD ============
+  
+  const fetchGalleryImages = async () => {
+    try {
+      const response = await fetch(`${API_BASE}/api/admin/images`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setGalleryImages(data.images || []);
+      }
+    } catch (err) {
+      console.error('Failed to fetch images');
+    }
+  };
+
+  const handleDrag = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (e.type === 'dragenter' || e.type === 'dragover') {
+      setDragActive(true);
+    } else if (e.type === 'dragleave') {
+      setDragActive(false);
+    }
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setDragActive(false);
+    
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      handleImageFile(e.dataTransfer.files[0]);
+    }
+  };
+
+  const handleImageSelect = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      handleImageFile(e.target.files[0]);
+    }
+  };
+
+  const handleImageFile = async (file) => {
+    // Validate file type
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
+    if (!allowedTypes.includes(file.type)) {
+      setError('Invalid file type. Only JPEG, PNG, WebP, and GIF are allowed.');
+      return;
+    }
+    
+    // Validate file size (5MB max)
+    if (file.size > 5 * 1024 * 1024) {
+      setError('File too large. Maximum size is 5MB.');
+      return;
+    }
+    
+    // Show preview
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setImagePreview(reader.result);
+    };
+    reader.readAsDataURL(file);
+    
+    // Upload file
+    setUploadingImage(true);
+    setError('');
+    
+    try {
+      const formData = new FormData();
+      formData.append('image', file);
+      
+      const response = await fetch(`${API_BASE}/api/admin/upload`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        },
+        body: formData
+      });
+      
+      const data = await response.json();
+      
+      if (response.ok) {
+        setProductForm({...productForm, image: data.path});
+        showSuccess('Image uploaded successfully!');
+        fetchGalleryImages();
+      } else {
+        setError(data.error || 'Failed to upload image');
+        setImagePreview(null);
+      }
+    } catch (err) {
+      setError('Failed to upload image. Please try again.');
+      setImagePreview(null);
+    } finally {
+      setUploadingImage(false);
+    }
+  };
+
+  const handleDeleteImage = async (filename) => {
+    try {
+      const response = await fetch(`${API_BASE}/api/admin/upload/${filename}`, {
+        method: 'DELETE',
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      
+      if (response.ok) {
+        showSuccess('Image deleted!');
+        fetchGalleryImages();
+      } else {
+        const data = await response.json();
+        setError(data.error || 'Failed to delete image');
+      }
+    } catch (err) {
+      setError('Failed to delete image');
+    }
+  };
+
+  const selectFromGallery = (imagePath) => {
+    setProductForm({...productForm, image: imagePath});
+    setImagePreview(null);
+    setShowImageGallery(false);
+    showSuccess('Image selected!');
+  };
+
+  const openImageGallery = () => {
+    fetchGalleryImages();
+    setShowImageGallery(true);
+  };
+
   // ============ RENDER MODALS ============
   
   const renderModal = (title, onClose, children) => (
@@ -500,16 +636,91 @@ function Admin() {
           </select>
         </div>
       </div>
+      
+      {/* Image Upload Section */}
       <div>
-        <label className="block text-sm text-[var(--text-secondary)] mb-1">Image Path</label>
-        <input
-          type="text"
-          value={productForm.image}
-          onChange={(e) => setProductForm({...productForm, image: e.target.value})}
-          className="w-full px-3 py-2 bg-[var(--background-secondary)] border border-[var(--border-color)] rounded-lg text-[var(--text-primary)]"
-          placeholder="./assets/product.webp"
-        />
+        <label className="block text-sm text-[var(--text-secondary)] mb-2">Product Image</label>
+        
+        {/* Current Image Preview */}
+        {(productForm.image || imagePreview) && (
+          <div className="mb-3 relative inline-block">
+            <img 
+              src={imagePreview || productForm.image} 
+              alt="Product preview" 
+              className="w-32 h-32 object-cover rounded-lg border-2 border-[var(--primary-color)]"
+              onError={(e) => e.target.src = './assets/logo.png'}
+            />
+            <button
+              type="button"
+              onClick={() => {
+                setProductForm({...productForm, image: ''});
+                setImagePreview(null);
+              }}
+              className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center text-sm hover:bg-red-600"
+            >
+              ×
+            </button>
+          </div>
+        )}
+        
+        {/* Drag & Drop Upload Zone */}
+        <div
+          onDragEnter={handleDrag}
+          onDragLeave={handleDrag}
+          onDragOver={handleDrag}
+          onDrop={handleDrop}
+          onClick={() => fileInputRef.current?.click()}
+          className={`relative border-2 border-dashed rounded-lg p-6 text-center cursor-pointer transition-all ${
+            dragActive 
+              ? 'border-[var(--primary-color)] bg-[var(--primary-color)]/10' 
+              : 'border-[var(--border-color)] hover:border-[var(--primary-color)] hover:bg-[var(--background-secondary)]'
+          } ${uploadingImage ? 'pointer-events-none opacity-50' : ''}`}
+        >
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/jpeg,image/png,image/webp,image/gif"
+            onChange={handleImageSelect}
+            className="hidden"
+          />
+          
+          {uploadingImage ? (
+            <div className="flex flex-col items-center">
+              <div className="w-8 h-8 border-2 border-[var(--primary-color)] border-t-transparent rounded-full animate-spin mb-2"></div>
+              <p className="text-[var(--text-secondary)]">Uploading...</p>
+            </div>
+          ) : (
+            <>
+              <div className="text-4xl mb-2">📷</div>
+              <p className="text-[var(--text-primary)] font-medium">
+                {dragActive ? 'Drop image here' : 'Click or drag image to upload'}
+              </p>
+              <p className="text-sm text-[var(--text-muted)] mt-1">
+                JPEG, PNG, WebP, GIF • Max 5MB
+              </p>
+            </>
+          )}
+        </div>
+        
+        {/* Gallery Button */}
+        <div className="flex gap-2 mt-2">
+          <button
+            type="button"
+            onClick={openImageGallery}
+            className="flex-1 py-2 px-4 bg-[var(--background-secondary)] text-[var(--text-secondary)] rounded-lg hover:bg-[var(--primary-color)] hover:text-white transition-colors text-sm"
+          >
+            📁 Browse Gallery
+          </button>
+          <input
+            type="text"
+            value={productForm.image}
+            onChange={(e) => setProductForm({...productForm, image: e.target.value})}
+            className="flex-1 px-3 py-2 bg-[var(--background-secondary)] border border-[var(--border-color)] rounded-lg text-[var(--text-primary)] text-sm"
+            placeholder="Or enter path: ./assets/image.webp"
+          />
+        </div>
       </div>
+      
       <div>
         <label className="block text-sm text-[var(--text-secondary)] mb-1">Specifications (one per line)</label>
         <textarea
@@ -641,6 +852,84 @@ function Admin() {
     </div>
   );
 
+  const renderImageGallery = () => showImageGallery && (
+    <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
+      <div className="bg-card rounded-xl max-w-4xl w-full max-h-[85vh] overflow-hidden border border-[var(--border-color)]">
+        <div className="sticky top-0 bg-card border-b border-[var(--border-color)] p-4 flex justify-between items-center">
+          <div>
+            <h3 className="text-lg font-bold text-[var(--text-primary)]">📁 Image Gallery</h3>
+            <p className="text-sm text-[var(--text-muted)]">{galleryImages.length} images in assets folder</p>
+          </div>
+          <button 
+            onClick={() => setShowImageGallery(false)} 
+            className="text-[var(--text-secondary)] hover:text-white text-2xl"
+          >
+            ×
+          </button>
+        </div>
+        
+        <div className="p-4 overflow-y-auto max-h-[calc(85vh-80px)]">
+          {galleryImages.length === 0 ? (
+            <div className="text-center py-12 text-[var(--text-secondary)]">
+              <div className="text-5xl mb-4">🖼️</div>
+              <p>No images found in the assets folder</p>
+              <p className="text-sm text-[var(--text-muted)] mt-2">Upload images using the product form</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+              {galleryImages.map((img, index) => (
+                <div 
+                  key={index} 
+                  className="group relative bg-[var(--background-secondary)] rounded-lg overflow-hidden border border-[var(--border-color)] hover:border-[var(--primary-color)] transition-all"
+                >
+                  <img
+                    src={img.path}
+                    alt={img.filename}
+                    className="w-full h-32 object-cover cursor-pointer"
+                    onClick={() => selectFromGallery(img.path)}
+                    onError={(e) => e.target.src = './assets/logo.png'}
+                  />
+                  
+                  {/* Overlay with actions */}
+                  <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-2">
+                    <button
+                      onClick={() => selectFromGallery(img.path)}
+                      className="px-3 py-1 bg-[var(--primary-color)] text-white rounded text-sm hover:bg-[var(--secondary-color)]"
+                    >
+                      Select
+                    </button>
+                    {/* Only show delete for user-uploaded images (containing underscore + hex) */}
+                    {img.filename.match(/_[a-f0-9]{16}\./i) && (
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleDeleteImage(img.filename);
+                        }}
+                        className="px-3 py-1 bg-red-500 text-white rounded text-sm hover:bg-red-600"
+                      >
+                        Delete
+                      </button>
+                    )}
+                  </div>
+                  
+                  {/* Filename */}
+                  <div className="p-2">
+                    <p className="text-xs text-[var(--text-secondary)] truncate" title={img.filename}>
+                      {img.filename}
+                    </p>
+                    <p className="text-xs text-[var(--text-muted)]">
+                      {(img.size / 1024).toFixed(1)} KB
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+
   // ============ LOGIN FORM ============
   
   if (!isLoggedIn) {
@@ -713,11 +1002,12 @@ function Admin() {
   return (
     <div className="min-h-screen bg-[var(--background-primary)]">
       {/* Modals */}
-      {showAddProduct && renderModal('Add New Product', () => { setShowAddProduct(false); resetProductForm(); }, renderProductForm(false))}
-      {showEditProduct && renderModal('Edit Product', () => { setShowEditProduct(false); resetProductForm(); }, renderProductForm(true))}
+      {showAddProduct && renderModal('Add New Product', () => { setShowAddProduct(false); resetProductForm(); setImagePreview(null); }, renderProductForm(false))}
+      {showEditProduct && renderModal('Edit Product', () => { setShowEditProduct(false); resetProductForm(); setImagePreview(null); }, renderProductForm(true))}
       {showAddFaq && renderModal('Add New FAQ', () => { setShowAddFaq(false); resetFaqForm(); }, renderFaqForm(false))}
       {showEditFaq && renderModal('Edit FAQ', () => { setShowEditFaq(false); resetFaqForm(); }, renderFaqForm(true))}
       {renderConfirmDelete()}
+      {renderImageGallery()}
       
       {/* Success/Error Messages */}
       {successMsg && (
