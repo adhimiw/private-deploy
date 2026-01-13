@@ -31,6 +31,51 @@ function FAQ() {
       // ... rest of initial categories
     ];
 
+    // Fallback FAQs grouped by category
+    const fallbackFaqs = [
+      {
+        id: 'delivery',
+        title: 'Delivery & Logistics',
+        icon: 'truck',
+        questions: [
+          { question: 'What areas do you deliver to?', answer: 'We deliver across Tamil Nadu with a primary focus on Southern regions including Tirunelveli, Thoothukudi, Kanyakumari, Madurai, and surrounding districts.' },
+          { question: 'How quickly can you deliver?', answer: 'Standard delivery within 24-48 hours for orders placed before 2 PM within our primary service area.' }
+        ]
+      },
+      {
+        id: 'orders',
+        title: 'Orders',
+        icon: 'package',
+        questions: [
+          { question: 'What is the minimum order quantity?', answer: 'Minimum order varies by product: M-Sand/P-Sand - 1 unit, Blue Metal - 1 ton, Bricks - 1000 pieces, Cement - 10 bags.' }
+        ]
+      },
+      {
+        id: 'quality',
+        title: 'Quality',
+        icon: 'shield-check',
+        questions: [
+          { question: 'Do you provide quality certifications?', answer: 'Yes, all our materials meet IS (Indian Standard) specifications. We provide quality test reports upon request.' }
+        ]
+      },
+      {
+        id: 'payment',
+        title: 'Payment',
+        icon: 'credit-card',
+        questions: [
+          { question: 'What are your payment terms?', answer: 'We accept cash, bank transfer, UPI, and cheques. GST bills are provided for all orders.' }
+        ]
+      },
+      {
+        id: 'pricing',
+        title: 'Pricing',
+        icon: 'tag',
+        questions: [
+          { question: 'Do you offer bulk discounts?', answer: 'Yes, we offer attractive discounts for bulk orders and regular customers.' }
+        ]
+      }
+    ];
+
     React.useEffect(() => {
       const fetchFAQs = async () => {
         try {
@@ -38,13 +83,37 @@ function FAQ() {
           if (!response.ok) throw new Error('Failed to fetch FAQs');
           const data = await response.json();
 
-          if (data.faqs) {
-            const transformedFaqs = data.faqs.map((category, index) => ({
-              id: category.category.toLowerCase().replace(/\s+/g, '_'),
-              title: category.category,
-              icon: ICON_MAP[category.category] || 'help-circle',
-              questions: category.questions
+          if (data.faqs && Array.isArray(data.faqs)) {
+            // Group flat FAQs by category
+            const groupedByCategory = {};
+            data.faqs.forEach(faq => {
+              const cat = faq.category || 'general';
+              if (!groupedByCategory[cat]) {
+                groupedByCategory[cat] = [];
+              }
+              groupedByCategory[cat].push({
+                question: faq.question,
+                answer: faq.answer
+              });
+            });
+
+            // Transform to array format
+            const categoryTitles = {
+              delivery: 'Delivery & Logistics',
+              orders: 'Orders',
+              quality: 'Quality',
+              payment: 'Payment',
+              pricing: 'Pricing',
+              general: 'General'
+            };
+
+            const transformedFaqs = Object.entries(groupedByCategory).map(([cat, questions]) => ({
+              id: cat,
+              title: categoryTitles[cat] || cat.charAt(0).toUpperCase() + cat.slice(1),
+              icon: ICON_MAP[categoryTitles[cat]] || ICON_MAP[cat] || 'help-circle',
+              questions: questions
             }));
+
             setFaqCategories(transformedFaqs);
             
             // Set first category as expanded by default if exists
@@ -55,11 +124,10 @@ function FAQ() {
           }
         } catch (error) {
           console.error('Error fetching FAQs:', error);
-          // Fallback to static data is handled by initial state if we set it, 
-          // or we can just leave it empty/loading state. 
-          // For stability, let's inject the static data if fetch fails.
-          // Since I can't easily reference the huge static array here without duplicating,
-          // I'll rely on the default state which I will set below.
+          // Use fallback data
+          setFaqCategories(fallbackFaqs);
+          setExpandedCategory('delivery');
+          setExpandedQuestion('delivery-0');
         } finally {
           setLoading(false);
         }

@@ -3,25 +3,41 @@ function Admin() {
   const [token, setToken] = React.useState(localStorage.getItem('adminToken') || '');
   const [activeTab, setActiveTab] = React.useState('dashboard');
   const [stats, setStats] = React.useState({});
-  const [products, setProducts] = React.useState({});
+  const [products, setProducts] = React.useState([]);
   const [faqs, setFaqs] = React.useState([]);
   const [contacts, setContacts] = React.useState([]);
   const [quotes, setQuotes] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState('');
+  const [successMsg, setSuccessMsg] = React.useState('');
   
   // Login form state
   const [loginForm, setLoginForm] = React.useState({ username: '', password: '' });
   
-  // Edit modals
-  const [editingProduct, setEditingProduct] = React.useState(null);
-  const [editingFaq, setEditingFaq] = React.useState(null);
+  // Modal states
+  const [showAddProduct, setShowAddProduct] = React.useState(false);
+  const [showEditProduct, setShowEditProduct] = React.useState(false);
   const [showAddFaq, setShowAddFaq] = React.useState(false);
-  const [newFaq, setNewFaq] = React.useState({ question: '', answer: '', category: 'general' });
+  const [showEditFaq, setShowEditFaq] = React.useState(false);
+  const [confirmDelete, setConfirmDelete] = React.useState(null);
+  
+  // Form states
+  const [productForm, setProductForm] = React.useState({
+    id: '', name: '', description: '', unit: '', image: '', icon: 'box',
+    specifications: '', uses: '', advantages: ''
+  });
+  const [faqForm, setFaqForm] = React.useState({ question: '', answer: '', category: 'general' });
+  const [editingId, setEditingId] = React.useState(null);
 
   const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
     ? 'http://localhost:3001' 
     : '';
+
+  // Show success message
+  const showSuccess = (msg) => {
+    setSuccessMsg(msg);
+    setTimeout(() => setSuccessMsg(''), 3000);
+  };
 
   // Check token on mount
   React.useEffect(() => {
@@ -69,7 +85,7 @@ function Admin() {
         setError(data.error || 'Login failed');
       }
     } catch (err) {
-      setError('Connection failed. Make sure the server is running.');
+      setError('Connection failed. Make sure the server is running on port 3001.');
     } finally {
       setLoading(false);
     }
@@ -95,44 +111,164 @@ function Admin() {
       ]);
       
       if (statsRes.ok) setStats(await statsRes.json());
-      if (productsRes.ok) setProducts((await productsRes.json()).products);
-      if (faqsRes.ok) setFaqs((await faqsRes.json()).faqs);
-      if (contactsRes.ok) setContacts((await contactsRes.json()).contacts);
-      if (quotesRes.ok) setQuotes((await quotesRes.json()).quotes);
+      if (productsRes.ok) setProducts((await productsRes.json()).products || []);
+      if (faqsRes.ok) setFaqs((await faqsRes.json()).faqs || []);
+      if (contactsRes.ok) setContacts((await contactsRes.json()).contacts || []);
+      if (quotesRes.ok) setQuotes((await quotesRes.json()).quotes || []);
       
     } catch (err) {
       console.error('Failed to fetch dashboard data:', err);
+      setError('Failed to load data');
     } finally {
       setLoading(false);
     }
   };
 
-  const updateProduct = async (productId, updates) => {
+  // ============ PRODUCT CRUD ============
+  
+  const resetProductForm = () => {
+    setProductForm({
+      id: '', name: '', description: '', unit: '', image: '', icon: 'box',
+      specifications: '', uses: '', advantages: ''
+    });
+    setEditingId(null);
+  };
+
+  const handleAddProduct = async () => {
+    if (!productForm.id || !productForm.name) {
+      setError('Product ID and Name are required');
+      return;
+    }
+    
     try {
-      const response = await fetch(`${API_BASE}/api/admin/products/${productId}`, {
+      const productData = {
+        ...productForm,
+        specifications: productForm.specifications.split('\n').filter(s => s.trim()),
+        uses: productForm.uses.split('\n').filter(s => s.trim()),
+        advantages: productForm.advantages.split('\n').filter(s => s.trim())
+      };
+      
+      const response = await fetch(`${API_BASE}/api/admin/products`, {
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}` 
+        },
+        body: JSON.stringify(productData)
+      });
+      
+      if (response.ok) {
+        showSuccess('Product added successfully!');
+        setShowAddProduct(false);
+        resetProductForm();
+        fetchDashboardData();
+      } else {
+        const data = await response.json();
+        setError(data.error || 'Failed to add product');
+      }
+    } catch (err) {
+      setError('Failed to add product');
+    }
+  };
+
+  const openEditProduct = (product) => {
+    setProductForm({
+      id: product.id,
+      name: product.name,
+      description: product.description || '',
+      unit: product.unit || '',
+      image: product.image || '',
+      icon: product.icon || 'box',
+      specifications: (product.specifications || []).join('\n'),
+      uses: (product.uses || []).join('\n'),
+      advantages: (product.advantages || []).join('\n')
+    });
+    setEditingId(product.id);
+    setShowEditProduct(true);
+  };
+
+  const handleUpdateProduct = async () => {
+    try {
+      const productData = {
+        name: productForm.name,
+        description: productForm.description,
+        unit: productForm.unit,
+        image: productForm.image,
+        icon: productForm.icon,
+        specifications: productForm.specifications.split('\n').filter(s => s.trim()),
+        uses: productForm.uses.split('\n').filter(s => s.trim()),
+        advantages: productForm.advantages.split('\n').filter(s => s.trim())
+      };
+      
+      const response = await fetch(`${API_BASE}/api/admin/products/${editingId}`, {
         method: 'PUT',
         headers: { 
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}` 
         },
-        body: JSON.stringify(updates)
+        body: JSON.stringify(productData)
       });
       
       if (response.ok) {
+        showSuccess('Product updated successfully!');
+        setShowEditProduct(false);
+        resetProductForm();
         fetchDashboardData();
-        setEditingProduct(null);
+      } else {
+        setError('Failed to update product');
       }
     } catch (err) {
-      console.error('Failed to update product:', err);
+      setError('Failed to update product');
     }
   };
 
   const toggleProductActive = async (productId) => {
-    const product = products[productId];
-    await updateProduct(productId, { active: !product.active });
+    const product = products.find(p => p.id === productId);
+    try {
+      await fetch(`${API_BASE}/api/admin/products/${productId}`, {
+        method: 'PUT',
+        headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}` 
+        },
+        body: JSON.stringify({ active: !product.active })
+      });
+      fetchDashboardData();
+    } catch (err) {
+      setError('Failed to update product');
+    }
   };
 
-  const addFaq = async () => {
+  const handleDeleteProduct = async (productId) => {
+    try {
+      const response = await fetch(`${API_BASE}/api/admin/products/${productId}`, {
+        method: 'DELETE',
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      
+      if (response.ok) {
+        showSuccess('Product deleted successfully!');
+        setConfirmDelete(null);
+        fetchDashboardData();
+      }
+    } catch (err) {
+      setError('Failed to delete product');
+    }
+  };
+
+  // ============ FAQ CRUD ============
+  
+  const resetFaqForm = () => {
+    setFaqForm({ question: '', answer: '', category: 'general' });
+    setEditingId(null);
+  };
+
+  const handleAddFaq = async () => {
+    if (!faqForm.question || !faqForm.answer) {
+      setError('Question and Answer are required');
+      return;
+    }
+    
     try {
       const response = await fetch(`${API_BASE}/api/admin/faqs`, {
         method: 'POST',
@@ -140,47 +276,123 @@ function Admin() {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}` 
         },
-        body: JSON.stringify(newFaq)
+        body: JSON.stringify(faqForm)
       });
       
       if (response.ok) {
-        fetchDashboardData();
+        showSuccess('FAQ added successfully!');
         setShowAddFaq(false);
-        setNewFaq({ question: '', answer: '', category: 'general' });
+        resetFaqForm();
+        fetchDashboardData();
       }
     } catch (err) {
-      console.error('Failed to add FAQ:', err);
+      setError('Failed to add FAQ');
     }
   };
 
-  const updateFaq = async (faqId, updates) => {
+  const openEditFaq = (faq) => {
+    setFaqForm({
+      question: faq.question,
+      answer: faq.answer,
+      category: faq.category || 'general'
+    });
+    setEditingId(faq.id);
+    setShowEditFaq(true);
+  };
+
+  const handleUpdateFaq = async () => {
     try {
-      const response = await fetch(`${API_BASE}/api/admin/faqs/${faqId}`, {
+      const response = await fetch(`${API_BASE}/api/admin/faqs/${editingId}`, {
         method: 'PUT',
         headers: { 
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}` 
         },
-        body: JSON.stringify(updates)
+        body: JSON.stringify(faqForm)
       });
       
       if (response.ok) {
+        showSuccess('FAQ updated successfully!');
+        setShowEditFaq(false);
+        resetFaqForm();
         fetchDashboardData();
-        setEditingFaq(null);
       }
     } catch (err) {
-      console.error('Failed to update FAQ:', err);
+      setError('Failed to update FAQ');
     }
   };
 
   const toggleFaqActive = async (faqId) => {
     const faq = faqs.find(f => f.id === faqId);
-    await updateFaq(faqId, { active: !faq.active });
+    try {
+      await fetch(`${API_BASE}/api/admin/faqs/${faqId}`, {
+        method: 'PUT',
+        headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}` 
+        },
+        body: JSON.stringify({ active: !faq.active })
+      });
+      fetchDashboardData();
+    } catch (err) {
+      setError('Failed to update FAQ');
+    }
   };
 
+  const handleDeleteFaq = async (faqId) => {
+    try {
+      const response = await fetch(`${API_BASE}/api/admin/faqs/${faqId}`, {
+        method: 'DELETE',
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      
+      if (response.ok) {
+        showSuccess('FAQ deleted successfully!');
+        setConfirmDelete(null);
+        fetchDashboardData();
+      }
+    } catch (err) {
+      setError('Failed to delete FAQ');
+    }
+  };
+
+  // ============ CONTACTS ============
+  
+  const markContactRead = async (contactId) => {
+    try {
+      await fetch(`${API_BASE}/api/admin/contacts/${contactId}`, {
+        method: 'PUT',
+        headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}` 
+        },
+        body: JSON.stringify({ read: true })
+      });
+      fetchDashboardData();
+    } catch (err) {
+      console.error('Failed to mark contact as read');
+    }
+  };
+
+  const handleDeleteContact = async (contactId) => {
+    try {
+      await fetch(`${API_BASE}/api/admin/contacts/${contactId}`, {
+        method: 'DELETE',
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      showSuccess('Contact deleted!');
+      setConfirmDelete(null);
+      fetchDashboardData();
+    } catch (err) {
+      setError('Failed to delete contact');
+    }
+  };
+
+  // ============ QUOTES ============
+  
   const updateQuoteStatus = async (quoteId, status) => {
     try {
-      const response = await fetch(`${API_BASE}/api/admin/quotes/${quoteId}`, {
+      await fetch(`${API_BASE}/api/admin/quotes/${quoteId}`, {
         method: 'PUT',
         headers: { 
           'Content-Type': 'application/json',
@@ -188,23 +400,258 @@ function Admin() {
         },
         body: JSON.stringify({ status })
       });
-      
-      if (response.ok) {
-        fetchDashboardData();
-      }
+      fetchDashboardData();
     } catch (err) {
-      console.error('Failed to update quote:', err);
+      setError('Failed to update quote');
     }
   };
 
-  // Login Form
+  const handleDeleteQuote = async (quoteId) => {
+    try {
+      await fetch(`${API_BASE}/api/admin/quotes/${quoteId}`, {
+        method: 'DELETE',
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      showSuccess('Quote deleted!');
+      setConfirmDelete(null);
+      fetchDashboardData();
+    } catch (err) {
+      setError('Failed to delete quote');
+    }
+  };
+
+  // ============ RENDER MODALS ============
+  
+  const renderModal = (title, onClose, children) => (
+    <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
+      <div className="bg-card rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-[var(--border-color)]">
+        <div className="sticky top-0 bg-card border-b border-[var(--border-color)] p-4 flex justify-between items-center">
+          <h3 className="text-lg font-bold text-[var(--text-primary)]">{title}</h3>
+          <button onClick={onClose} className="text-[var(--text-secondary)] hover:text-white text-2xl">&times;</button>
+        </div>
+        <div className="p-4">
+          {children}
+        </div>
+      </div>
+    </div>
+  );
+
+  const renderProductForm = (isEdit = false) => (
+    <div className="space-y-4">
+      {!isEdit && (
+        <div>
+          <label className="block text-sm text-[var(--text-secondary)] mb-1">Product ID (unique, lowercase)</label>
+          <input
+            type="text"
+            value={productForm.id}
+            onChange={(e) => setProductForm({...productForm, id: e.target.value.toLowerCase().replace(/\s+/g, '_')})}
+            className="w-full px-3 py-2 bg-[var(--background-secondary)] border border-[var(--border-color)] rounded-lg text-[var(--text-primary)]"
+            placeholder="e.g., river_sand"
+          />
+        </div>
+      )}
+      <div>
+        <label className="block text-sm text-[var(--text-secondary)] mb-1">Product Name *</label>
+        <input
+          type="text"
+          value={productForm.name}
+          onChange={(e) => setProductForm({...productForm, name: e.target.value})}
+          className="w-full px-3 py-2 bg-[var(--background-secondary)] border border-[var(--border-color)] rounded-lg text-[var(--text-primary)]"
+          placeholder="e.g., River Sand"
+        />
+      </div>
+      <div>
+        <label className="block text-sm text-[var(--text-secondary)] mb-1">Description</label>
+        <textarea
+          value={productForm.description}
+          onChange={(e) => setProductForm({...productForm, description: e.target.value})}
+          className="w-full px-3 py-2 bg-[var(--background-secondary)] border border-[var(--border-color)] rounded-lg text-[var(--text-primary)]"
+          rows="3"
+          placeholder="Product description..."
+        />
+      </div>
+      <div className="grid grid-cols-2 gap-4">
+        <div>
+          <label className="block text-sm text-[var(--text-secondary)] mb-1">Unit</label>
+          <input
+            type="text"
+            value={productForm.unit}
+            onChange={(e) => setProductForm({...productForm, unit: e.target.value})}
+            className="w-full px-3 py-2 bg-[var(--background-secondary)] border border-[var(--border-color)] rounded-lg text-[var(--text-primary)]"
+            placeholder="e.g., per cubic meter"
+          />
+        </div>
+        <div>
+          <label className="block text-sm text-[var(--text-secondary)] mb-1">Icon</label>
+          <select
+            value={productForm.icon}
+            onChange={(e) => setProductForm({...productForm, icon: e.target.value})}
+            className="w-full px-3 py-2 bg-[var(--background-secondary)] border border-[var(--border-color)] rounded-lg text-[var(--text-primary)]"
+          >
+            <option value="box">Box</option>
+            <option value="layers">Layers</option>
+            <option value="droplets">Droplets</option>
+            <option value="zap">Zap</option>
+            <option value="home">Home</option>
+            <option value="leaf">Leaf</option>
+            <option value="square">Square</option>
+            <option value="package">Package</option>
+            <option value="mountain">Mountain</option>
+          </select>
+        </div>
+      </div>
+      <div>
+        <label className="block text-sm text-[var(--text-secondary)] mb-1">Image Path</label>
+        <input
+          type="text"
+          value={productForm.image}
+          onChange={(e) => setProductForm({...productForm, image: e.target.value})}
+          className="w-full px-3 py-2 bg-[var(--background-secondary)] border border-[var(--border-color)] rounded-lg text-[var(--text-primary)]"
+          placeholder="./assets/product.webp"
+        />
+      </div>
+      <div>
+        <label className="block text-sm text-[var(--text-secondary)] mb-1">Specifications (one per line)</label>
+        <textarea
+          value={productForm.specifications}
+          onChange={(e) => setProductForm({...productForm, specifications: e.target.value})}
+          className="w-full px-3 py-2 bg-[var(--background-secondary)] border border-[var(--border-color)] rounded-lg text-[var(--text-primary)]"
+          rows="3"
+          placeholder="Size: 9x4x3 inches&#10;Weight: 2.5 kg&#10;Strength: >7.5 N/mm²"
+        />
+      </div>
+      <div>
+        <label className="block text-sm text-[var(--text-secondary)] mb-1">Uses (one per line)</label>
+        <textarea
+          value={productForm.uses}
+          onChange={(e) => setProductForm({...productForm, uses: e.target.value})}
+          className="w-full px-3 py-2 bg-[var(--background-secondary)] border border-[var(--border-color)] rounded-lg text-[var(--text-primary)]"
+          rows="3"
+          placeholder="Wall construction&#10;Foundation work&#10;Flooring"
+        />
+      </div>
+      <div>
+        <label className="block text-sm text-[var(--text-secondary)] mb-1">Advantages (one per line)</label>
+        <textarea
+          value={productForm.advantages}
+          onChange={(e) => setProductForm({...productForm, advantages: e.target.value})}
+          className="w-full px-3 py-2 bg-[var(--background-secondary)] border border-[var(--border-color)] rounded-lg text-[var(--text-primary)]"
+          rows="3"
+          placeholder="High durability&#10;Cost effective&#10;Eco-friendly"
+        />
+      </div>
+      <div className="flex gap-2 pt-4">
+        <button
+          onClick={isEdit ? handleUpdateProduct : handleAddProduct}
+          className="flex-1 py-2 bg-[var(--primary-color)] text-white rounded-lg font-medium hover:bg-[var(--secondary-color)]"
+        >
+          {isEdit ? 'Update Product' : 'Add Product'}
+        </button>
+        <button
+          onClick={() => { isEdit ? setShowEditProduct(false) : setShowAddProduct(false); resetProductForm(); }}
+          className="px-6 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+  );
+
+  const renderFaqForm = (isEdit = false) => (
+    <div className="space-y-4">
+      <div>
+        <label className="block text-sm text-[var(--text-secondary)] mb-1">Question *</label>
+        <input
+          type="text"
+          value={faqForm.question}
+          onChange={(e) => setFaqForm({...faqForm, question: e.target.value})}
+          className="w-full px-3 py-2 bg-[var(--background-secondary)] border border-[var(--border-color)] rounded-lg text-[var(--text-primary)]"
+          placeholder="What is your question?"
+        />
+      </div>
+      <div>
+        <label className="block text-sm text-[var(--text-secondary)] mb-1">Answer *</label>
+        <textarea
+          value={faqForm.answer}
+          onChange={(e) => setFaqForm({...faqForm, answer: e.target.value})}
+          className="w-full px-3 py-2 bg-[var(--background-secondary)] border border-[var(--border-color)] rounded-lg text-[var(--text-primary)]"
+          rows="4"
+          placeholder="Provide a detailed answer..."
+        />
+      </div>
+      <div>
+        <label className="block text-sm text-[var(--text-secondary)] mb-1">Category</label>
+        <select
+          value={faqForm.category}
+          onChange={(e) => setFaqForm({...faqForm, category: e.target.value})}
+          className="w-full px-3 py-2 bg-[var(--background-secondary)] border border-[var(--border-color)] rounded-lg text-[var(--text-primary)]"
+        >
+          <option value="general">General</option>
+          <option value="delivery">Delivery</option>
+          <option value="payment">Payment</option>
+          <option value="orders">Orders</option>
+          <option value="quality">Quality</option>
+          <option value="pricing">Pricing</option>
+        </select>
+      </div>
+      <div className="flex gap-2 pt-4">
+        <button
+          onClick={isEdit ? handleUpdateFaq : handleAddFaq}
+          className="flex-1 py-2 bg-[var(--primary-color)] text-white rounded-lg font-medium hover:bg-[var(--secondary-color)]"
+        >
+          {isEdit ? 'Update FAQ' : 'Add FAQ'}
+        </button>
+        <button
+          onClick={() => { isEdit ? setShowEditFaq(false) : setShowAddFaq(false); resetFaqForm(); }}
+          className="px-6 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+  );
+
+  const renderConfirmDelete = () => confirmDelete && (
+    <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
+      <div className="bg-card rounded-xl p-6 max-w-md w-full border border-red-500">
+        <h3 className="text-lg font-bold text-red-500 mb-4">⚠️ Confirm Delete</h3>
+        <p className="text-[var(--text-secondary)] mb-6">
+          Are you sure you want to delete this {confirmDelete.type}? This action cannot be undone.
+        </p>
+        <div className="flex gap-2">
+          <button
+            onClick={() => {
+              if (confirmDelete.type === 'product') handleDeleteProduct(confirmDelete.id);
+              else if (confirmDelete.type === 'faq') handleDeleteFaq(confirmDelete.id);
+              else if (confirmDelete.type === 'contact') handleDeleteContact(confirmDelete.id);
+              else if (confirmDelete.type === 'quote') handleDeleteQuote(confirmDelete.id);
+            }}
+            className="flex-1 py-2 bg-red-500 text-white rounded-lg font-medium hover:bg-red-600"
+          >
+            Yes, Delete
+          </button>
+          <button
+            onClick={() => setConfirmDelete(null)}
+            className="flex-1 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+
+  // ============ LOGIN FORM ============
+  
   if (!isLoggedIn) {
     return (
       <div className="min-h-screen bg-[var(--background-primary)] flex items-center justify-center p-4">
         <div className="bg-card p-8 rounded-xl shadow-2xl w-full max-w-md border border-[var(--border-color)]">
           <div className="text-center mb-8">
             <div className="w-16 h-16 bg-[var(--primary-color)] rounded-full flex items-center justify-center mx-auto mb-4">
-              <div className="icon-lock text-2xl text-white"></div>
+              <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+              </svg>
             </div>
             <h1 className="text-2xl font-bold text-[var(--text-primary)]">Admin Login</h1>
             <p className="text-[var(--text-secondary)] mt-2">Varman Constructions Dashboard</p>
@@ -250,30 +697,60 @@ function Admin() {
             </button>
           </form>
           
-          <p className="text-center text-[var(--text-muted)] text-sm mt-6">
-            Make sure the Express server is running on port 3001
-          </p>
+          <div className="mt-6 p-4 bg-[var(--background-secondary)] rounded-lg">
+            <p className="text-sm text-[var(--text-muted)] text-center">
+              <strong>Default credentials:</strong><br />
+              Username: admin | Password: varman@2024
+            </p>
+          </div>
         </div>
       </div>
     );
   }
 
-  // Admin Dashboard
+  // ============ ADMIN DASHBOARD ============
+  
   return (
     <div className="min-h-screen bg-[var(--background-primary)]">
+      {/* Modals */}
+      {showAddProduct && renderModal('Add New Product', () => { setShowAddProduct(false); resetProductForm(); }, renderProductForm(false))}
+      {showEditProduct && renderModal('Edit Product', () => { setShowEditProduct(false); resetProductForm(); }, renderProductForm(true))}
+      {showAddFaq && renderModal('Add New FAQ', () => { setShowAddFaq(false); resetFaqForm(); }, renderFaqForm(false))}
+      {showEditFaq && renderModal('Edit FAQ', () => { setShowEditFaq(false); resetFaqForm(); }, renderFaqForm(true))}
+      {renderConfirmDelete()}
+      
+      {/* Success/Error Messages */}
+      {successMsg && (
+        <div className="fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 animate-pulse">
+          ✓ {successMsg}
+        </div>
+      )}
+      {error && (
+        <div className="fixed top-4 right-4 bg-red-500 text-white px-6 py-3 rounded-lg shadow-lg z-50">
+          ✕ {error}
+          <button onClick={() => setError('')} className="ml-4 font-bold">×</button>
+        </div>
+      )}
+      
       {/* Header */}
       <header className="bg-card border-b border-[var(--border-color)] px-6 py-4">
         <div className="flex items-center justify-between max-w-7xl mx-auto">
           <div className="flex items-center space-x-4">
             <img src="./assets/logo.png" alt="Logo" className="h-10" />
-            <h1 className="text-xl font-bold text-[var(--text-primary)]">Admin Dashboard</h1>
+            <div>
+              <h1 className="text-xl font-bold text-[var(--text-primary)]">Admin Dashboard</h1>
+              <p className="text-xs text-[var(--text-muted)]">Data persisted to JSON file (localStorage style)</p>
+            </div>
           </div>
-          <button
-            onClick={logout}
-            className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors text-sm"
-          >
-            Logout
-          </button>
+          <div className="flex items-center gap-4">
+            <a href="/" className="text-[var(--text-secondary)] hover:text-[var(--primary-color)]">← Back to Site</a>
+            <button
+              onClick={logout}
+              className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors text-sm"
+            >
+              Logout
+            </button>
+          </div>
         </div>
       </header>
 
@@ -287,12 +764,25 @@ function Admin() {
               className={`px-4 py-2 rounded-lg font-medium capitalize transition-colors ${
                 activeTab === tab 
                   ? 'bg-[var(--primary-color)] text-white' 
-                  : 'bg-card text-[var(--text-secondary)] hover:bg-[var(--background-secondary)]'
+                  : 'bg-card text-[var(--text-secondary)] hover:bg-[var(--background-secondary)] border border-[var(--border-color)]'
               }`}
             >
               {tab}
+              {tab === 'contacts' && stats.unreadContacts > 0 && (
+                <span className="ml-2 bg-green-500 text-white text-xs px-2 py-0.5 rounded-full">{stats.unreadContacts}</span>
+              )}
+              {tab === 'quotes' && stats.pendingQuotes > 0 && (
+                <span className="ml-2 bg-orange-500 text-white text-xs px-2 py-0.5 rounded-full">{stats.pendingQuotes}</span>
+              )}
             </button>
           ))}
+          <button
+            onClick={fetchDashboardData}
+            disabled={loading}
+            className="px-4 py-2 rounded-lg bg-[var(--background-secondary)] text-[var(--text-secondary)] hover:bg-[var(--primary-color)] hover:text-white border border-[var(--border-color)] ml-auto"
+          >
+            {loading ? '⟳ Loading...' : '⟳ Refresh'}
+          </button>
         </div>
 
         {/* Dashboard Tab */}
@@ -301,18 +791,22 @@ function Admin() {
             <div className="bg-card p-6 rounded-xl border border-[var(--border-color)]">
               <div className="text-3xl font-bold text-[var(--primary-color)]">{stats.products || 0}</div>
               <div className="text-[var(--text-secondary)]">Active Products</div>
+              <div className="text-xs text-[var(--text-muted)]">{stats.totalProducts || 0} total</div>
             </div>
             <div className="bg-card p-6 rounded-xl border border-[var(--border-color)]">
               <div className="text-3xl font-bold text-[var(--primary-color)]">{stats.faqs || 0}</div>
               <div className="text-[var(--text-secondary)]">Active FAQs</div>
+              <div className="text-xs text-[var(--text-muted)]">{stats.totalFaqs || 0} total</div>
             </div>
             <div className="bg-card p-6 rounded-xl border border-[var(--border-color)]">
               <div className="text-3xl font-bold text-orange-500">{stats.pendingQuotes || 0}</div>
               <div className="text-[var(--text-secondary)]">Pending Quotes</div>
+              <div className="text-xs text-[var(--text-muted)]">{stats.totalQuotes || 0} total</div>
             </div>
             <div className="bg-card p-6 rounded-xl border border-[var(--border-color)]">
               <div className="text-3xl font-bold text-green-500">{stats.unreadContacts || 0}</div>
-              <div className="text-[var(--text-secondary)]">New Contacts</div>
+              <div className="text-[var(--text-secondary)]">Unread Contacts</div>
+              <div className="text-xs text-[var(--text-muted)]">{stats.totalContacts || 0} total</div>
             </div>
           </div>
         )}
@@ -320,25 +814,45 @@ function Admin() {
         {/* Products Tab */}
         {activeTab === 'products' && (
           <div className="bg-card rounded-xl border border-[var(--border-color)] overflow-hidden">
-            <div className="p-4 border-b border-[var(--border-color)]">
-              <h2 className="text-lg font-semibold text-[var(--text-primary)]">Manage Products</h2>
+            <div className="p-4 border-b border-[var(--border-color)] flex justify-between items-center">
+              <h2 className="text-lg font-semibold text-[var(--text-primary)]">
+                Manage Products ({products.length})
+              </h2>
+              <button
+                onClick={() => setShowAddProduct(true)}
+                className="px-4 py-2 bg-[var(--primary-color)] text-white rounded-lg text-sm hover:bg-[var(--secondary-color)]"
+              >
+                + Add Product
+              </button>
             </div>
             <div className="divide-y divide-[var(--border-color)]">
-              {Object.entries(products).map(([id, product]) => (
-                <div key={id} className={`p-4 flex items-center justify-between ${!product.active ? 'opacity-50' : ''}`}>
+              {products.map(product => (
+                <div key={product.id} className={`p-4 flex items-center justify-between ${!product.active ? 'opacity-50 bg-gray-900/30' : ''}`}>
                   <div className="flex items-center space-x-4">
-                    <img src={product.image} alt={product.name} className="w-16 h-16 object-cover rounded-lg" />
+                    <img src={product.image} alt={product.name} className="w-16 h-16 object-cover rounded-lg bg-gray-800" onError={(e) => e.target.src = './assets/logo.png'} />
                     <div>
                       <h3 className="font-semibold text-[var(--text-primary)]">{product.name}</h3>
-                      <p className="text-sm text-[var(--text-secondary)]">Unit: {product.unit}</p>
+                      <p className="text-sm text-[var(--text-secondary)]">ID: {product.id} | Unit: {product.unit}</p>
                     </div>
                   </div>
                   <div className="flex items-center space-x-2">
                     <button
-                      onClick={() => toggleProductActive(id)}
-                      className={`px-3 py-1 rounded text-sm ${product.active ? 'bg-green-500' : 'bg-gray-500'} text-white`}
+                      onClick={() => openEditProduct(product)}
+                      className="px-3 py-1 rounded text-sm bg-blue-500 text-white hover:bg-blue-600"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => toggleProductActive(product.id)}
+                      className={`px-3 py-1 rounded text-sm ${product.active ? 'bg-green-500 hover:bg-green-600' : 'bg-gray-500 hover:bg-gray-600'} text-white`}
                     >
                       {product.active ? 'Active' : 'Inactive'}
+                    </button>
+                    <button
+                      onClick={() => setConfirmDelete({ type: 'product', id: product.id })}
+                      className="px-3 py-1 rounded text-sm bg-red-500 text-white hover:bg-red-600"
+                    >
+                      Delete
                     </button>
                   </div>
                 </div>
@@ -351,52 +865,47 @@ function Admin() {
         {activeTab === 'faqs' && (
           <div className="bg-card rounded-xl border border-[var(--border-color)] overflow-hidden">
             <div className="p-4 border-b border-[var(--border-color)] flex justify-between items-center">
-              <h2 className="text-lg font-semibold text-[var(--text-primary)]">Manage FAQs</h2>
+              <h2 className="text-lg font-semibold text-[var(--text-primary)]">
+                Manage FAQs ({faqs.length})
+              </h2>
               <button
                 onClick={() => setShowAddFaq(true)}
-                className="px-4 py-2 bg-[var(--primary-color)] text-white rounded-lg text-sm"
+                className="px-4 py-2 bg-[var(--primary-color)] text-white rounded-lg text-sm hover:bg-[var(--secondary-color)]"
               >
                 + Add FAQ
               </button>
             </div>
-            
-            {showAddFaq && (
-              <div className="p-4 bg-[var(--background-secondary)] border-b border-[var(--border-color)]">
-                <input
-                  type="text"
-                  placeholder="Question"
-                  value={newFaq.question}
-                  onChange={(e) => setNewFaq({...newFaq, question: e.target.value})}
-                  className="w-full mb-2 px-3 py-2 bg-card border border-[var(--border-color)] rounded text-[var(--text-primary)]"
-                />
-                <textarea
-                  placeholder="Answer"
-                  value={newFaq.answer}
-                  onChange={(e) => setNewFaq({...newFaq, answer: e.target.value})}
-                  className="w-full mb-2 px-3 py-2 bg-card border border-[var(--border-color)] rounded text-[var(--text-primary)]"
-                  rows="3"
-                />
-                <div className="flex gap-2">
-                  <button onClick={addFaq} className="px-4 py-2 bg-green-500 text-white rounded text-sm">Save</button>
-                  <button onClick={() => setShowAddFaq(false)} className="px-4 py-2 bg-gray-500 text-white rounded text-sm">Cancel</button>
-                </div>
-              </div>
-            )}
-            
             <div className="divide-y divide-[var(--border-color)]">
               {faqs.map(faq => (
-                <div key={faq.id} className={`p-4 ${!faq.active ? 'opacity-50' : ''}`}>
+                <div key={faq.id} className={`p-4 ${!faq.active ? 'opacity-50 bg-gray-900/30' : ''}`}>
                   <div className="flex justify-between items-start">
-                    <div className="flex-1">
+                    <div className="flex-1 pr-4">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="text-xs px-2 py-0.5 bg-[var(--primary-color)]/20 text-[var(--primary-color)] rounded">{faq.category}</span>
+                      </div>
                       <h3 className="font-semibold text-[var(--text-primary)]">{faq.question}</h3>
-                      <p className="text-sm text-[var(--text-secondary)] mt-1">{faq.answer}</p>
+                      <p className="text-sm text-[var(--text-secondary)] mt-1 line-clamp-2">{faq.answer}</p>
                     </div>
-                    <button
-                      onClick={() => toggleFaqActive(faq.id)}
-                      className={`px-3 py-1 rounded text-sm ml-4 ${faq.active ? 'bg-green-500' : 'bg-gray-500'} text-white`}
-                    >
-                      {faq.active ? 'Active' : 'Inactive'}
-                    </button>
+                    <div className="flex items-center space-x-2 flex-shrink-0">
+                      <button
+                        onClick={() => openEditFaq(faq)}
+                        className="px-3 py-1 rounded text-sm bg-blue-500 text-white hover:bg-blue-600"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        onClick={() => toggleFaqActive(faq.id)}
+                        className={`px-3 py-1 rounded text-sm ${faq.active ? 'bg-green-500 hover:bg-green-600' : 'bg-gray-500 hover:bg-gray-600'} text-white`}
+                      >
+                        {faq.active ? 'Active' : 'Inactive'}
+                      </button>
+                      <button
+                        onClick={() => setConfirmDelete({ type: 'faq', id: faq.id })}
+                        className="px-3 py-1 rounded text-sm bg-red-500 text-white hover:bg-red-600"
+                      >
+                        Delete
+                      </button>
+                    </div>
                   </div>
                 </div>
               ))}
@@ -408,23 +917,49 @@ function Admin() {
         {activeTab === 'contacts' && (
           <div className="bg-card rounded-xl border border-[var(--border-color)] overflow-hidden">
             <div className="p-4 border-b border-[var(--border-color)]">
-              <h2 className="text-lg font-semibold text-[var(--text-primary)]">Contact Submissions ({contacts.length})</h2>
+              <h2 className="text-lg font-semibold text-[var(--text-primary)]">
+                Contact Submissions ({contacts.length})
+              </h2>
             </div>
             <div className="divide-y divide-[var(--border-color)]">
               {contacts.length === 0 ? (
                 <div className="p-8 text-center text-[var(--text-secondary)]">No contact submissions yet</div>
               ) : (
                 contacts.map(contact => (
-                  <div key={contact.id} className="p-4">
+                  <div key={contact.id} className={`p-4 ${!contact.read ? 'bg-green-500/5 border-l-4 border-l-green-500' : ''}`}>
                     <div className="flex justify-between items-start">
-                      <div>
-                        <h3 className="font-semibold text-[var(--text-primary)]">{contact.name}</h3>
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2">
+                          <h3 className="font-semibold text-[var(--text-primary)]">{contact.name}</h3>
+                          {!contact.read && <span className="text-xs bg-green-500 text-white px-2 py-0.5 rounded">NEW</span>}
+                        </div>
                         <p className="text-sm text-[var(--text-secondary)]">{contact.email} • {contact.phone}</p>
-                        <p className="text-sm text-[var(--text-secondary)] mt-1">Material: {contact.material}</p>
-                        <p className="text-[var(--text-primary)] mt-2">{contact.message}</p>
+                        <p className="text-sm text-[var(--primary-color)] mt-1">Material: {contact.material}</p>
+                        <p className="text-[var(--text-primary)] mt-2 bg-[var(--background-secondary)] p-3 rounded-lg">{contact.message}</p>
+                        {contact.project_location && (
+                          <p className="text-sm text-[var(--text-muted)] mt-1">📍 {contact.project_location}</p>
+                        )}
                       </div>
-                      <div className="text-xs text-[var(--text-muted)]">
-                        {new Date(contact.created_at).toLocaleDateString()}
+                      <div className="flex flex-col items-end gap-2 ml-4">
+                        <div className="text-xs text-[var(--text-muted)]">
+                          {new Date(contact.created_at).toLocaleString()}
+                        </div>
+                        <div className="flex gap-2">
+                          {!contact.read && (
+                            <button
+                              onClick={() => markContactRead(contact.id)}
+                              className="px-3 py-1 rounded text-sm bg-green-500 text-white hover:bg-green-600"
+                            >
+                              Mark Read
+                            </button>
+                          )}
+                          <button
+                            onClick={() => setConfirmDelete({ type: 'contact', id: contact.id })}
+                            className="px-3 py-1 rounded text-sm bg-red-500 text-white hover:bg-red-600"
+                          >
+                            Delete
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -438,42 +973,53 @@ function Admin() {
         {activeTab === 'quotes' && (
           <div className="bg-card rounded-xl border border-[var(--border-color)] overflow-hidden">
             <div className="p-4 border-b border-[var(--border-color)]">
-              <h2 className="text-lg font-semibold text-[var(--text-primary)]">Quote Requests ({quotes.length})</h2>
+              <h2 className="text-lg font-semibold text-[var(--text-primary)]">
+                Quote Requests ({quotes.length})
+              </h2>
             </div>
             <div className="divide-y divide-[var(--border-color)]">
               {quotes.length === 0 ? (
                 <div className="p-8 text-center text-[var(--text-secondary)]">No quote requests yet</div>
               ) : (
                 quotes.map(quote => (
-                  <div key={quote.id} className="p-4">
+                  <div key={quote.id} className={`p-4 ${quote.status === 'pending' ? 'bg-orange-500/5 border-l-4 border-l-orange-500' : ''}`}>
                     <div className="flex justify-between items-start">
-                      <div>
+                      <div className="flex-1">
                         <h3 className="font-semibold text-[var(--text-primary)]">{quote.name}</h3>
                         <p className="text-sm text-[var(--text-secondary)]">{quote.email} • {quote.phone}</p>
-                        <p className="text-sm text-[var(--primary-color)] mt-1">
+                        <p className="text-[var(--primary-color)] font-medium mt-2">
                           Materials: {quote.materials.join(', ')}
                         </p>
                         <p className="text-sm text-[var(--text-secondary)]">Quantity: {quote.quantity}</p>
-                        <p className="text-[var(--text-primary)] mt-2">{quote.project_details}</p>
+                        <p className="text-sm text-[var(--text-secondary)]">Timeline: {quote.timeline}</p>
+                        {quote.project_details && (
+                          <p className="text-[var(--text-primary)] mt-2 bg-[var(--background-secondary)] p-3 rounded-lg">{quote.project_details}</p>
+                        )}
                       </div>
-                      <div className="text-right">
+                      <div className="flex flex-col items-end gap-2 ml-4">
                         <select
                           value={quote.status}
                           onChange={(e) => updateQuoteStatus(quote.id, e.target.value)}
-                          className={`px-3 py-1 rounded text-sm ${
+                          className={`px-3 py-1 rounded text-sm text-white ${
                             quote.status === 'pending' ? 'bg-orange-500' :
                             quote.status === 'contacted' ? 'bg-blue-500' :
                             quote.status === 'completed' ? 'bg-green-500' : 'bg-gray-500'
-                          } text-white`}
+                          }`}
                         >
                           <option value="pending">Pending</option>
                           <option value="contacted">Contacted</option>
                           <option value="completed">Completed</option>
                           <option value="cancelled">Cancelled</option>
                         </select>
-                        <div className="text-xs text-[var(--text-muted)] mt-2">
-                          {new Date(quote.created_at).toLocaleDateString()}
+                        <div className="text-xs text-[var(--text-muted)]">
+                          {new Date(quote.created_at).toLocaleString()}
                         </div>
+                        <button
+                          onClick={() => setConfirmDelete({ type: 'quote', id: quote.id })}
+                          className="px-3 py-1 rounded text-sm bg-red-500 text-white hover:bg-red-600"
+                        >
+                          Delete
+                        </button>
                       </div>
                     </div>
                   </div>

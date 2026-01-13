@@ -140,50 +140,44 @@ function Services() {
           if (!response.ok) throw new Error('Failed to fetch products');
           const data = await response.json();
           
-          if (data.products) {
-            const transformedProducts = Object.entries(data.products).map(([key, value]) => {
-              // Transform specifications or properties object to array
-              let specsSource = value.specifications || value.properties;
+          if (data.products && Array.isArray(data.products)) {
+            // API returns array of products
+            const transformedProducts = data.products.map((product) => {
+              // Transform specifications if needed
               let specsArray = [];
-
-              if (specsSource && typeof specsSource === 'object' && !Array.isArray(specsSource)) {
-                specsArray = Object.entries(specsSource).map(([k, v]) => {
-                  // Format key from snake_case to Title Case
-                  const label = k.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
-                  return `${label}: ${v}`;
-                });
-              } else if (Array.isArray(specsSource)) {
-                specsArray = specsSource;
+              if (product.specifications) {
+                if (typeof product.specifications === 'object' && !Array.isArray(product.specifications)) {
+                  specsArray = Object.entries(product.specifications).map(([k, v]) => {
+                    const label = k.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+                    return `${label}: ${v}`;
+                  });
+                } else if (Array.isArray(product.specifications)) {
+                  specsArray = product.specifications;
+                }
               }
 
               return {
-                id: key,
-                icon: ICON_MAP[key] || 'box', // Fallback icon
-                title: value.name,
-                shortDescription: value.description, 
-                description: value.description, 
+                id: product.id,
+                icon: product.icon || ICON_MAP[product.id] || 'box',
+                title: product.name,
+                shortDescription: product.description, 
+                description: product.description, 
                 specifications: specsArray,
-                uses: value.uses || [],
-                advantages: value.advantages || [],
-                unit: value.unit,
-                image: value.image || `./assets/${key}.webp`,
-                sizes: value.sizes,
-                types: value.types,
-                grades: value.grades,
-                brands: value.brands
+                uses: product.uses || [],
+                advantages: product.advantages || [],
+                unit: product.unit,
+                image: product.image || `./assets/${product.id}.webp`,
+                sizes: product.sizes,
+                types: product.types,
+                grades: product.grades,
+                brands: product.brands
               };
             });
             setProducts(transformedProducts);
           }
         } catch (error) {
           console.error('Error fetching products:', error);
-          // If API fails, we could setProducts(initialProducts) if we had the full list hardcoded
-          // For now, let's keep the existing hardcoded list as a fallback if fetch fails?
-          // To strictly follow "Refactor", we usually replace. 
-          // But to ensure stability, I'll keep the hardcoded list as default state 
-          // and only override if API succeeds. 
-          // Since I can't put the huge array in initialProducts variable easily without copying it all,
-          // I will define the full hardcoded array as the initial state.
+          // On error, keep using the fallback initialProducts already set in state
         } finally {
           setLoading(false);
         }
