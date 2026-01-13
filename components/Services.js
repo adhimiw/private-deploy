@@ -2,8 +2,6 @@ function Services() {
   try {
     const [selectedProduct, setSelectedProduct] = React.useState(null);
     const [showProductModal, setShowProductModal] = React.useState(false);
-    const [products, setProducts] = React.useState([]);
-    const [loading, setLoading] = React.useState(true);
 
     const ICON_MAP = {
       m_sand: 'layers',
@@ -32,8 +30,108 @@ function Services() {
         unit: 'per cubic meter',
         image: './assets/msand.webp'
       },
-      // ... other initial items can be kept or we just rely on API
+      {
+        id: 'p_sand',
+        icon: 'droplets',
+        title: 'P-Sand (Plastering Sand)',
+        shortDescription: 'Fine plastering sand for smooth wall finishes',
+        description: 'Specially processed plastering sand for achieving smooth and durable wall finishes.',
+        specifications: ['Fineness Modulus: 1.8-2.2', 'Silt Content: <2%', 'Grain Size: 0.15-2.36mm'],
+        uses: ['Wall plastering', 'Ceiling work', 'Fine finishing', 'Decorative plastering'],
+        advantages: ['Ultra-fine texture', 'Smooth finish', 'Better adhesion', 'Reduced cracking'],
+        unit: 'per cubic meter',
+        image: './assets/psand.webp'
+      },
+      {
+        id: 'blue_metal',
+        icon: 'zap',
+        title: 'Blue Metal (Jalli)',
+        shortDescription: 'Crushed stone aggregate for concrete and road construction',
+        description: 'High-quality crushed blue granite stone available in various sizes for construction needs.',
+        specifications: ['20mm - Standard concrete', '40mm - Road construction', '12mm - Fine concrete work'],
+        uses: ['Concrete mixing', 'Road base', 'Drainage systems', 'Foundation work'],
+        advantages: ['High strength', 'Durable', 'Weather resistant', 'Multiple sizes available'],
+        unit: 'per ton',
+        image: './assets/bluemetal.webp'
+      },
+      {
+        id: 'red_bricks',
+        icon: 'home',
+        title: 'Red Bricks',
+        shortDescription: 'Traditional clay bricks for wall construction',
+        description: 'Traditional kiln-fired clay bricks known for durability and thermal insulation properties.',
+        specifications: ['Size: 9x4.5x3 inches', 'Compressive Strength: >3.5 N/mm²', 'Water Absorption: <20%'],
+        uses: ['Wall construction', 'Boundary walls', 'Pillars', 'Load-bearing structures'],
+        advantages: ['Good insulation', 'Fire resistant', 'Durable', 'Eco-friendly'],
+        unit: 'per 1000 pieces',
+        image: './assets/redbricks.webp'
+      },
+      {
+        id: 'fly_ash_bricks',
+        icon: 'leaf',
+        title: 'Fly Ash Bricks',
+        shortDescription: 'Eco-friendly bricks made from fly ash',
+        description: 'Modern eco-friendly bricks made from fly ash, offering better strength and uniform size.',
+        specifications: ['Size: 9x4x3 inches', 'Compressive Strength: >7.5 N/mm²', 'Water Absorption: <12%'],
+        uses: ['Wall construction', 'High-rise buildings', 'Commercial structures', 'Residential projects'],
+        advantages: ['Higher strength', 'Uniform size', 'Less mortar required', 'Eco-friendly'],
+        unit: 'per 1000 pieces',
+        image: './assets/flyashbricks.webp'
+      },
+      {
+        id: 'concrete_blocks',
+        icon: 'square',
+        title: 'Concrete Blocks',
+        shortDescription: 'Solid and hollow concrete blocks for construction',
+        description: 'Machine-made concrete blocks available in solid and hollow variants for various construction needs.',
+        specifications: ['Solid: 16x8x8 inches', 'Hollow: 16x8x8 inches', 'Compressive Strength: >4 N/mm²'],
+        uses: ['Wall construction', 'Partition walls', 'Compound walls', 'Industrial buildings'],
+        advantages: ['Quick construction', 'Cost-effective', 'Low maintenance', 'Sound insulation'],
+        unit: 'per piece',
+        image: './assets/concreteblocks.webp'
+      },
+      {
+        id: 'cement',
+        icon: 'package',
+        title: 'Cement',
+        shortDescription: 'Premium quality cement from top brands',
+        description: 'We supply cement from leading brands including UltraTech, ACC, Ramco, Dalmia, and Chettinad.',
+        specifications: ['OPC 53 Grade', 'PPC Grade', 'PSC Grade available'],
+        uses: ['Concrete mixing', 'Plastering', 'Masonry work', 'Foundation'],
+        advantages: ['Top brands', 'Fresh stock', 'Bulk discounts', 'Doorstep delivery'],
+        unit: 'per bag (50kg)',
+        brands: ['UltraTech', 'ACC', 'Ramco', 'Dalmia', 'Chettinad'],
+        image: './assets/cement.webp'
+      },
+      {
+        id: 'aac_blocks',
+        icon: 'box',
+        title: 'AAC Blocks',
+        shortDescription: 'Lightweight autoclaved aerated concrete blocks',
+        description: 'Modern AAC blocks offering excellent thermal insulation and faster construction.',
+        specifications: ['Sizes: 600x200x100mm to 600x200x300mm', 'Density: 550-650 kg/m³', 'Compressive Strength: 3-4.5 N/mm²'],
+        uses: ['High-rise construction', 'Green buildings', 'Commercial complexes', 'Residential projects'],
+        advantages: ['Lightweight', 'Thermal insulation', 'Fire resistant', 'Earthquake resistant'],
+        unit: 'per cubic meter',
+        image: './assets/aacblocks.webp'
+      },
+      {
+        id: 'size_stone',
+        icon: 'mountain',
+        title: 'Size Stone / Rough Stone',
+        shortDescription: 'Natural stones for foundation and compound walls',
+        description: 'Natural rough stones and cut size stones for foundation work and compound wall construction.',
+        specifications: ['Rough Stone: Various sizes', 'Size Stone: 9x6 inches standard'],
+        uses: ['Foundation work', 'Compound walls', 'Retaining walls', 'Landscaping'],
+        advantages: ['Natural material', 'High durability', 'Load-bearing capacity', 'Aesthetic appeal'],
+        unit: 'per sq.ft',
+        image: './assets/sizestone.webp'
+      }
     ];
+
+    // Initialize with fallback products
+    const [products, setProducts] = React.useState(initialProducts);
+    const [loading, setLoading] = React.useState(true);
 
     React.useEffect(() => {
       const fetchProducts = async () => {
