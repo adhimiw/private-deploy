@@ -6,11 +6,67 @@ const fs = require('fs');
 const path = require('path');
 const multer = require('multer');
 const crypto = require('crypto');
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
+const { body, validationResult } = require('express-validator');
 require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3001;
-const JWT_SECRET = process.env.JWT_SECRET || 'varman-constructions-secret-key-2024';
+
+// ============ SECURITY: JWT Secret Validation ============
+const JWT_SECRET = process.env.JWT_SECRET;
+if (!JWT_SECRET || JWT_SECRET.length < 32) {
+  console.error('⚠️  WARNING: JWT_SECRET must be set in .env file and be at least 32 characters!');
+  console.error('⚠️  Using default secret for development only. DO NOT USE IN PRODUCTION!');
+}
+const SECURE_JWT_SECRET = JWT_SECRET || 'varman-constructions-dev-secret-key-2024-do-not-use-in-prod';
+
+// ============ SECURITY: Rate Limiting ============
+const generalLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // Limit each IP to 100 requests per windowMs
+  message: { error: 'Too many requests, please try again later.' },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 5, // Limit each IP to 5 login attempts per windowMs
+  message: { error: 'Too many login attempts, please try again after 15 minutes.' },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+const formLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000, // 1 hour
+  max: 10, // Limit each IP to 10 form submissions per hour
+  message: { error: 'Too many submissions, please try again later.' },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+// ============ SECURITY: CORS Configuration ============
+const allowedOrigins = process.env.ALLOWED_ORIGINS 
+  ? process.env.ALLOWED_ORIGINS.split(',') 
+  : ['http://localhost:3001', 'http://127.0.0.1:3001'];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin) || process.env.NODE_ENV !== 'production') {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+  maxAge: 86400 // 24 hours
+};
 
 // Data file path (localStorage equivalent - persists to JSON file)
 const DATA_FILE = path.join(__dirname, 'data.json');
@@ -75,10 +131,48 @@ const upload = multer({
   }
 });
 
-// Middleware
-app.use(cors());
-app.use(express.json());
-app.use(express.static(path.join(__dirname, '..')));
+// ============ SECURITY MIDDLEWARE ============
+
+// Helmet for security headers
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com", "https://cdn.jsdelivr.net"],
+      fontSrc: ["'self'", "https://fonts.gstatic.com"],
+      scriptSrc: ["'self'", "'unsafe-inline'", "https://cdn.jsdelivr.net", "https://unpkg.com"],
+      imgSrc: ["'self'", "data:", "https:"],
+      connectSrc: ["'self'", "https://wa.me"],
+    },
+  },
+  crossOriginEmbedderPolicy: false,
+}));
+
+// CORS with secure configuration
+app.use(cors(corsOptions));
+
+// Rate limiting
+app.use('/api/', generalLimiter);
+
+// Body parser with size limit (prevent large payload attacks)
+app.use(express.json({ limit: '10kb' }));
+app.use(express.urlencoded({ extended: true, limit: '10kb' }));
+
+// Serve static files
+app.use(express.static(path.join(__dirname, '..'), {
+  dotfiles: 'ignore',
+  etag: true,
+  maxAge: '1d',
+}));
+
+// ============ INPUT SANITIZATION HELPER ============
+const sanitizeInput = (str) => {
+  if (typeof str !== 'string') return str;
+  return str
+    .replace(/[<>]/g, '') // Remove < and > to prevent HTML injection
+    .trim()
+    .slice(0, 5000); // Limit string length
+};
 
 // ============ LOCAL STORAGE (JSON FILE) HELPER FUNCTIONS ============
 
@@ -288,7 +382,7 @@ const authenticateToken = (req, res, next) => {
     return res.status(401).json({ error: 'Access token required' });
   }
   
-  jwt.verify(token, JWT_SECRET, (err, user) => {
+  jwt.verify(token, SECURE_JWT_SECRET, (err, user) => {
     if (err) {
       return res.status(403).json({ error: 'Invalid or expired token' });
     }
@@ -297,7 +391,29 @@ const authenticateToken = (req, res, next) => {
   });
 };
 
+// ============ INPUT VALIDATION RULES ============
+
+const contactValidation = [
+  body('name').trim().notEmpty().isLength({ max: 100 }).escape(),
+  body('email').trim().isEmail().normalizeEmail(),
+  body('phone').trim().notEmpty().isLength({ max: 20 }),
+  body('message').trim().notEmpty().isLength({ max: 2000 }),
+];
+
+const quoteValidation = [
+  body('name').trim().notEmpty().isLength({ max: 100 }).escape(),
+  body('email').trim().isEmail().normalizeEmail(),
+  body('phone').trim().notEmpty().isLength({ max: 20 }),
+  body('materials').notEmpty(),
+  body('quantity').trim().notEmpty().isLength({ max: 200 }),
+];
+
 // ============ PUBLIC API ROUTES ============
+
+// Health check
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'ok', timestamp: new Date().toISOString() });
+});
 
 // Get all active products
 app.get('/api/products', (req, res) => {
@@ -320,8 +436,14 @@ app.get('/api/faqs', (req, res) => {
   res.json({ faqs: activeFaqs });
 });
 
-// Submit contact form
-app.post('/api/contact', async (req, res) => {
+// Submit contact form (with rate limiting and validation)
+app.post('/api/contact', formLimiter, contactValidation, async (req, res) => {
+  // Check validation errors
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ error: 'Invalid input data', details: errors.array() });
+  }
+  
   try {
     const { name, email, phone, material, message, project_location } = req.body;
     
@@ -362,20 +484,22 @@ app.post('/api/contact', async (req, res) => {
   }
 });
 
-// Submit quote request
-app.post('/api/quote', async (req, res) => {
+// Submit quote request (with rate limiting and validation)
+app.post('/api/quote', formLimiter, quoteValidation, async (req, res) => {
+  // Check validation errors
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ error: 'Invalid input data', details: errors.array() });
+  }
+  
   try {
     const { name, email, phone, materials, quantity, project_details, timeline } = req.body;
     
-    if (!name || !email || !phone || !materials || !quantity) {
-      return res.status(400).json({ error: 'Required fields missing' });
-    }
-    
     const quote = {
       id: Date.now(),
-      name,
+      name: sanitizeInput(name),
       email,
-      phone,
+      phone: sanitizeInput(phone),
       materials: Array.isArray(materials) ? materials : [materials],
       quantity,
       project_details: project_details || '',
@@ -408,13 +532,23 @@ app.post('/api/quote', async (req, res) => {
 
 // ============ ADMIN AUTH ROUTES ============
 
-// Admin login
-app.post('/api/admin/login', async (req, res) => {
+// Admin login (with strict rate limiting to prevent brute force)
+app.post('/api/admin/login', authLimiter, async (req, res) => {
   try {
     const { username, password } = req.body;
     
-    const admin = data.adminUsers.find(u => u.username === username);
+    // Validate input
+    if (!username || !password || typeof username !== 'string' || typeof password !== 'string') {
+      return res.status(400).json({ error: 'Invalid credentials format' });
+    }
+    
+    // Sanitize username
+    const sanitizedUsername = username.trim().toLowerCase().slice(0, 50);
+    
+    const admin = data.adminUsers.find(u => u.username === sanitizedUsername);
     if (!admin) {
+      // Use same delay to prevent timing attacks
+      await new Promise(resolve => setTimeout(resolve, 100));
       return res.status(401).json({ error: 'Invalid credentials' });
     }
     
@@ -425,7 +559,7 @@ app.post('/api/admin/login', async (req, res) => {
     
     const token = jwt.sign(
       { id: admin.id, username: admin.username, role: admin.role },
-      JWT_SECRET,
+      SECURE_JWT_SECRET,
       { expiresIn: '24h' }
     );
     
