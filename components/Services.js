@@ -194,8 +194,8 @@ function Services() {
                     </div>
                   </div>
                 </div>
-              ))}
-            
+              ))
+              )}
             </div>
 
             {/* Call to Action */}
