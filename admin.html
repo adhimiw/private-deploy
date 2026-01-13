@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Admin Dashboard - Varman Constructions</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- React -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary-color: #E55A2B;
+      --secondary-color: #FF8C42;
+      --background-primary: #0a1628;
+      --background-secondary: #0f2847;
+      --background-card: #132a4a;
+      --text-primary: #ffffff;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --border-color: #1e3a5f;
+    }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--background-primary);
+      color: var(--text-primary);
+      margin: 0;
+      padding: 0;
+    }
+    
+    .bg-card {
+      background-color: var(--background-card);
+    }
+    
+    /* Icon classes (simplified) */
+    .icon-lock::before { content: '🔒'; }
+    .icon-dashboard::before { content: '📊'; }
+    .icon-box::before { content: '📦'; }
+    .icon-help::before { content: '❓'; }
+    .icon-mail::before { content: '✉️'; }
+    .icon-file::before { content: '📄'; }
+  </style>
+</head>
+<body>
+  <div id="admin-root"></div>
+  
+  <script type="text/babel" src="components/Admin.js"></script>
+  
+  <script type="text/babel">
+    const root = ReactDOM.createRoot(document.getElementById('admin-root'));
+    root.render(<Admin />);
+  </script>
+</body>
+</html>
