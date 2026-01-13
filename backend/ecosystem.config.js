@@ -3,7 +3,7 @@ module.exports = {
     {
       name: 'varman-constructions',
       script: 'server.js',
-      cwd: '/home/u123456789/domains/yourdomain.com/public_html/backend',
+      cwd: '/home/u244089748/domains/varmanconstructions.in/public_html/backend',
       instances: 1,
       autorestart: true,
       watch: false,
