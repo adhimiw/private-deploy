@@ -83,21 +83,21 @@ function Hero() {
 
               {/* Main Headline - Clear Value Proposition */}
               <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight">
-                <span style={{ color: '#FFFFFF' }}>Get Quality Building</span>
+                <span style={{ color: '#FFFFFF' }}>Premium Building Materials</span>
                 <br />
-                <span style={{ color: '#FFFFFF' }}>Materials </span>
+                <span style={{ color: '#FFFFFF' }}>Supplier Across </span>
                 <span style={{
                   background: 'linear-gradient(135deg, #FF8C42, #FFB366)',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent'
-                }}>Delivered Fast</span>
+                }}>Tamilnadu</span>
               </h1>
 
               {/* Clear Benefit Statement */}
               <p className="text-lg md:text-xl leading-relaxed max-w-lg" style={{
                 color: 'rgba(255, 255, 255, 0.85)'
               }}>
-                Save time and money with premium <span style={{color: '#FF8C42', fontWeight: '600'}}>M-Sand, Blue Metal, Cement & Bricks</span> delivered within 24-48 hours across Tamilnadu. Quality guaranteed.
+                Your trusted partner since 2020 for high-quality building materials. We supply <span style={{color: '#FF8C42', fontWeight: '600'}}>M-Sand, Blue Metal, Cement, Bricks</span>, and specialized construction supplies across Tamilnadu with guaranteed quality and timely delivery.
               </p>
 
               {/* Key Benefits - Quick Scan */}
