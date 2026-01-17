@@ -88,7 +88,7 @@ function Admin() {
         setToken(data.token);
         localStorage.setItem('adminToken', data.token);
         setIsLoggedIn(true);
-        fetchDashboardData();
+        fetchDashboardData(data.token);
       } else {
         setError(data.error || 'Login failed');
       }
@@ -105,10 +105,10 @@ function Admin() {
     localStorage.removeItem('adminToken');
   };
 
-  const fetchDashboardData = async () => {
+  const fetchDashboardData = async (overrideToken) => {
     setLoading(true);
     try {
-      const headers = { 'Authorization': `Bearer ${token}` };
+      const headers = { 'Authorization': `Bearer ${overrideToken || token}` };
       
       const [statsRes, productsRes, faqsRes, contactsRes, quotesRes] = await Promise.all([
         fetch(`${API_BASE}/api/admin/stats`, { headers }),
