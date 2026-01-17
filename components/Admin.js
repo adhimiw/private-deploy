@@ -1074,6 +1074,19 @@ function Admin() {
               )}
             </button>
           ))}
+          
+           {/* Security Tab (Manual Add) */}
+           <button
+             onClick={() => setActiveTab('security')}
+             className={`px-4 py-2 rounded-lg font-medium capitalize transition-colors flex items-center ${
+               activeTab === 'security' 
+                 ? 'bg-red-700 text-white border border-red-500' 
+                 : 'bg-card text-gray-300 hover:bg-red-900/40 border border-gray-700'
+             }`}
+           >
+             <span className="mr-2">🛡️</span> Security
+           </button>
+
           <button
             onClick={fetchDashboardData}
             disabled={loading}
