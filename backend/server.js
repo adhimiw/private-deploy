@@ -14,6 +14,10 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+// ============ SECURITY: Trust Proxy (for Hostinger/reverse proxy) ============
+// Required for express-rate-limit to work correctly behind a reverse proxy
+app.set('trust proxy', 1);
+
 // ============ SECURITY: JWT Secret Validation ============
 const JWT_SECRET = process.env.JWT_SECRET;
 if (!JWT_SECRET || JWT_SECRET.length < 32) {
