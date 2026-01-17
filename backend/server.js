@@ -165,8 +165,8 @@ app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 // Serve static files
 app.use(express.static(path.join(__dirname, '..'), {
   dotfiles: 'ignore',
-  etag: true,
-  maxAge: '1d',
+  etag: false, // Disable ETag to prevent 304 Not Modified when we want fresh loads
+  maxAge: '0', // Disable caching during development/updates
 }));
 
 // ============ INPUT SANITIZATION HELPER ============
