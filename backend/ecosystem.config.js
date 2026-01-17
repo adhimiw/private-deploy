@@ -3,11 +3,11 @@ module.exports = {
     {
       name: 'varman-constructions',
       script: 'server.js',
-      cwd: '/home/u244089748/domains/varmanconstructions.in/public_html/backend',
+      // cwd: './', // Using relative path or removing this line lets PM2 use the current directory
       instances: 1,
       autorestart: true,
       watch: false,
-      max_memory_restart: '200M',
+      max_memory_restart: '800M',
       env: {
         NODE_ENV: 'development',
         PORT: 3001
