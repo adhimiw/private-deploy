@@ -7,6 +7,9 @@ function Admin() {
   const [faqs, setFaqs] = React.useState([]);
   const [contacts, setContacts] = React.useState([]);
   const [quotes, setQuotes] = React.useState([]);
+  // New Analytics & Security State
+  const [analytics, setAnalytics] = React.useState({ views: 0, clicks: {}, history: [] });
+  const [securityLogs, setSecurityLogs] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState('');
   const [successMsg, setSuccessMsg] = React.useState('');
@@ -118,7 +121,12 @@ function Admin() {
         fetch(`${API_BASE}/api/admin/quotes`, { headers })
       ]);
       
-      if (statsRes.ok) setStats(await statsRes.json());
+      if (statsRes.ok) {
+        const statsData = await statsRes.json();
+        setStats(statsData);
+        if (statsData.analytics) setAnalytics(statsData.analytics);
+        if (statsData.securityEvents) setSecurityLogs(statsData.securityEvents);
+      }
       if (productsRes.ok) setProducts((await productsRes.json()).products || []);
       if (faqsRes.ok) setFaqs((await faqsRes.json()).faqs || []);
       if (contactsRes.ok) setContacts((await contactsRes.json()).contacts || []);
@@ -1316,6 +1324,96 @@ function Admin() {
                 ))
               )}
             </div>
+          </div>
+        )}
+
+        {/* ========= SECURITY & ANALYTICS TAB ========= */}
+        {activeTab === 'security' && (
+          <div className="space-y-6">
+            <h2 className="text-2xl font-bold mb-6 flex items-center">
+              <span className="mr-2">🛡️</span> Level 5 Ethical Security Firewall & SEO Analytics
+            </h2>
+            
+            {/* Analytics Stats */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+              <div className="bg-card p-6 rounded-lg border border-gray-700">
+                <h3 className="text-gray-400 mb-2">Total Page Views</h3>
+                <p className="text-3xl font-bold text-green-400">{analytics.views}</p>
+                <div className="mt-4 h-2 bg-gray-700 rounded-full overflow-hidden">
+                   <div className="h-full bg-green-500" style={{ width: '100%' }}></div>
+                </div>
+              </div>
+              <div className="bg-card p-6 rounded-lg border border-gray-700">
+                <h3 className="text-gray-400 mb-2">Unauthorized Attempts Blocked</h3>
+                <p className="text-3xl font-bold text-red-500">{securityLogs.length}</p>
+                 <div className="mt-4 h-2 bg-gray-700 rounded-full overflow-hidden">
+                   <div className="h-full bg-red-600 fire-anim" style={{ width: '100%' }}></div>
+                </div>
+              </div>
+               <div className="bg-card p-6 rounded-lg border border-gray-700">
+                <h3 className="text-gray-400 mb-2">Active Firewall Status</h3>
+                <p className="text-3xl font-bold text-blue-400">ACTIVE</p>
+                <p className="text-sm text-gray-500 mt-2">Monitoring IPs & Geo-Location</p>
+              </div>
+            </div>
+
+            {/* Click Visualization */}
+             <div className="bg-card p-6 rounded-lg border border-gray-700 mb-8">
+              <h3 className="text-xl font-bold mb-4">User Engagement Heatmap (Clicks)</h3>
+              <div className="space-y-4">
+                {Object.entries(analytics.clicks || {}).map(([element, count]) => (
+                  <div key={element} className="flex items-center">
+                    <span className="w-48 text-gray-300 truncate" title={element}>{element}</span>
+                    <div className="flex-1 mx-4 h-4 bg-gray-800 rounded-full overflow-hidden">
+                      <div 
+                        className="h-full bg-yellow-500" 
+                        style={{ width: `${Math.min((count / analytics.views) * 100 * 5, 100)}%` }}
+                      ></div>
+                    </div>
+                    <span className="text-gray-400 w-12 text-right">{count}</span>
+                  </div>
+                ))}
+                {(!analytics.clicks || Object.keys(analytics.clicks).length === 0) && (
+                   <p className="text-gray-500">No interaction data yet.</p>
+                )}
+              </div>
+            </div>
+
+            {/* Security Logs Table */}
+            <div className="bg-card p-6 rounded-lg border border-red-900/30">
+              <h3 className="text-xl font-bold mb-4 text-red-400">🚨 Intrusion Detection Logs (Honeypot)</h3>
+              <div className="overflow-x-auto">
+                <table className="w-full text-left">
+                  <thead>
+                    <tr className="border-b border-gray-700 text-gray-400">
+                      <th className="p-3">Time</th>
+                      <th className="p-3">IP Address</th>
+                      <th className="p-3">Threat Type</th>
+                      <th className="p-3">User Agent</th>
+                      <th className="p-3">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {securityLogs.length > 0 ? (
+                      securityLogs.slice().reverse().map((log) => (
+                        <tr key={log.id} className="border-b border-gray-800 hover:bg-red-900/10">
+                          <td className="p-3 text-sm">{new Date(log.timestamp).toLocaleString()}</td>
+                          <td className="p-3 font-mono text-red-300">{log.ip}</td>
+                          <td className="p-3 badge"><span className="bg-red-900 text-red-200 px-2 py-1 rounded text-xs">{log.type}</span></td>
+                          <td className="p-3 text-xs text-gray-500 max-w-xs truncate" title={log.userAgent}>{log.userAgent}</td>
+                          <td className="p-3 text-green-400 font-bold text-xs">BLOCKED</td>
+                        </tr>
+                      ))
+                    ) : (
+                      <tr>
+                        <td colSpan="5" className="p-6 text-center text-gray-500">System Secure. No threats detected.</td>
+                      </tr>
+                    )}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
           </div>
         )}
       </div>

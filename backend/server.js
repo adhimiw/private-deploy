@@ -950,8 +950,62 @@ app.get('/api/admin/stats', authenticateToken, (req, res) => {
     pendingQuotes,
     unreadContacts,
     totalContacts: data.contacts.length,
-    totalQuotes: data.quotes.length
+    totalQuotes: data.quotes.length,
+    // Analytics & Security Stats
+    analytics: data.analytics || { views: 0, clicks: {} },
+    securityEvents: (data.securityLogs || []).slice(-50) // Last 50 events
   });
+});
+
+// ============ ANALYTICS & SECURITY ENDPOINTS ============
+
+// Track Page Views & Clicks (SEO/Engagement)
+app.post('/api/analytics/track', (req, res) => {
+  const { type, page, element } = req.body;
+  
+  if (!data.analytics) data.analytics = { views: 0, clicks: {}, history: [] };
+  
+  if (type === 'view') {
+    data.analytics.views = (data.analytics.views || 0) + 1;
+    // Keep 7 days history
+    const date = new Date().toISOString().split('T')[0];
+    const dayEntry = data.analytics.history.find(d => d.date === date);
+    if (dayEntry) dayEntry.views++;
+    else data.analytics.history.push({ date, views: 1 });
+  } else if (type === 'click' && element) {
+    data.analytics.clicks[element] = (data.analytics.clicks[element] || 0) + 1;
+  }
+  
+  saveData(data);
+  res.json({ success: true });
+});
+
+// Honeypot / Security Log
+app.post('/api/security/alert', (req, res) => {
+  const { type, path, userAgent, ip } = req.body;
+  const clientIp = req.ip || req.connection.remoteAddress;
+  
+  if (!data.securityLogs) data.securityLogs = [];
+  
+  const logEntry = {
+    id: Date.now(),
+    type: type || 'SUSPICIOUS_ACTIVITY',
+    path: path || 'unknown',
+    ip: ip || clientIp,
+    userAgent: sanitizeInput(userAgent || ''),
+    timestamp: new Date().toISOString(),
+    severity: 'HIGH'
+  };
+  
+  data.securityLogs.push(logEntry);
+  if (data.securityLogs.length > 500) data.securityLogs.shift(); // Keep last 500
+  
+  saveData(data);
+  
+  // Rate limit attacker
+  console.log(`🚨 SECURITY ALERT: ${logEntry.type} from ${logEntry.ip}`);
+  
+  res.json({ success: true, fakeToken: '8d9a8f9a8d9a8f...' }); // Respond with fake success to confuse attacker
 });
 
 // ============ SERVE FRONTEND ============

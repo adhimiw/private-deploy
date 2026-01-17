@@ -21,6 +21,34 @@
     <meta name="geo.position" content="11.1271;78.6569">
     <meta name="ICBM" content="11.1271, 78.6569">
 
+    <!-- SEO & SECURITY ANALYTICS TRACKING -->
+    <script>
+      (function() {
+        const API_BASE = window.location.hostname === 'localhost' ? 'http://localhost:3001' : '';
+        
+        // Track View
+        fetch(API_BASE + '/api/analytics/track', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ type: 'view', page: window.location.pathname })
+        }).catch(() => {});
+
+        // Track Clicks
+        document.addEventListener('click', (e) => {
+          const target = e.target.closest('button, a, .clickable') || e.target;
+          const elementId = target.id || target.innerText?.slice(0, 20) || target.tagName;
+          
+          if(target.tagName !== 'BODY') {
+             fetch(API_BASE + '/api/analytics/track', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ type: 'click', element: elementId, page: window.location.pathname })
+            }).catch(() => {});
+          }
+        });
+      })();
+    </script>
+
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="assets/logo.png">
     <link rel="alternate icon" href="assets/logo.png">
