@@ -1,0 +1,7 @@
+# Block direct access to internal PHP files
+<FilesMatch "^(config\.php)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+RewriteRule ^lib/ - [F,L]

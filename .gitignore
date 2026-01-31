@@ -1,0 +1,38 @@
+# IDE and Editor folders
+.idea/
+.vscode/
+.cursor/
+.augment/
+.superdesign/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Dependencies
+node_modules/
+backend/node_modules/
+__pycache__/
+*.pyc
+
+# Environment files
+.env
+.env.local
+backend/.env
+storage/config.php
+
+# Build outputs
+dist/
+build/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Local SQLite database
+storage/*.sqlite
+storage/*.sqlite-*
+storage/*.db
+
+# Local Netlify folder
+.netlify

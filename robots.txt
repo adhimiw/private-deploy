@@ -1,0 +1,71 @@
+# robots.txt for VARMAN CONSTRUCTIONS
+# https://varmanconstructions.in
+
+# Allow all standard crawlers
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /api/
+Disallow: /legacy/
+Disallow: /storage/
+Disallow: /akka.html
+
+# Google Crawlers
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+# Google AI Crawler (for AI Overviews and Gemini)
+User-agent: Google-Extended
+Allow: /
+
+# Bing Crawlers
+User-agent: Bingbot
+Allow: /
+
+# OpenAI ChatGPT Crawler
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# Anthropic Claude Crawler
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+# Perplexity AI Crawler
+User-agent: PerplexityBot
+Allow: /
+
+# Meta AI Crawler
+User-agent: FacebookBot
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+# Apple Bot
+User-agent: Applebot
+Allow: /
+
+# Common AI/Research Crawlers
+User-agent: CCBot
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+# Sitemap location
+Sitemap: https://varmanconstructions.in/sitemap.xml
