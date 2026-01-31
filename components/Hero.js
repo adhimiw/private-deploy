@@ -58,7 +58,7 @@ function Hero() {
             left: 0,
             right: 0,
             bottom: 0,
-            backgroundImage: `url('assets/herobg.jpg')`,
+            backgroundImage: `url('assets/herobg.webp')`,
             backgroundSize: 'cover',
             backgroundPosition: 'center bottom',
             opacity: 0.15,
