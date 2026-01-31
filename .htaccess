@@ -92,9 +92,7 @@ RewriteRule ^(.*)$ /index.html [L]
 <Files "portal.html">
     AuthType Basic
     AuthName "Restricted Admin"
-    # IMPORTANT: update this path on the server to your real absolute path
-    # Example on Hostinger: /home/youruser/domains/varmanconstructions.in/storage/.htpasswd_admin
-    AuthUserFile "/home/adhithan/Projects/varman/storage/.htpasswd_admin"
+    AuthUserFile "/home/u244089748/domains/varmanconstructions.in/public_html/storage/.htpasswd_admin"
     Require valid-user
 </Files>
 
