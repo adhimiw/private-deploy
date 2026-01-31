@@ -1,4 +1,8 @@
-# Block direct access to internal PHP files
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^.*$ index.php [L,QSA]
+
 <FilesMatch "^(config\.php)$">
     Order allow,deny
     Deny from all

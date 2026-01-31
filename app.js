@@ -34,6 +34,9 @@ class ErrorBoundary extends React.Component {
   }
 }
 
+// Fallback Footer to prevent ReferenceError if component script is not loaded
+const Footer = () => null;
+
 function App() {
   try {
     return (
@@ -44,7 +47,7 @@ function App() {
         <About />
         <FAQ />
         <Contact />
-        {/* <Footer /> */}
+        {/* Footer intentionally hidden for now */}
       </div>
     );
   } catch (error) {
