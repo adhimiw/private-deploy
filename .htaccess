@@ -89,7 +89,7 @@ RewriteCond %{REQUEST_URI} !^/api/
 RewriteRule ^(.*)$ /index.html [L]
 
 # Protect admin dashboard (akka.html) with HTTP Basic Auth
-<Files "akka.html">
+<Files "portal.html">
     AuthType Basic
     AuthName "Restricted Admin"
     # IMPORTANT: update this path on the server to your real absolute path
