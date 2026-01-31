@@ -5,6 +5,7 @@
 
 # Enable Rewrite Engine
 RewriteEngine On
+RewriteBase /
 
 # Preserve Authorization header for PHP
 RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
@@ -21,10 +22,10 @@ RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 # RewriteCond %{HTTP_HOST} !^www\. [NC]
 # RewriteRule ^(.*)$ https://www.%{HTTP_HOST}/$1 [R=301,L]
 
-# Route API requests to PHP router
-RewriteCond %{REQUEST_URI} ^/api/
+# Route API requests to PHP router (more robust)
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^api/?$ /api/index.php [L,QSA]
 RewriteRule ^api/(.*)$ /api/index.php [L,QSA]
 
 # Security Headers
