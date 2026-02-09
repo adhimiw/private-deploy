@@ -51,7 +51,7 @@ function Contact() {
             message: '',
             project_location: ''
           });
-          
+
           // Redirect to WhatsApp after a short delay (admin notification)
           setTimeout(() => {
             if (adminUrl) {
@@ -83,11 +83,11 @@ function Contact() {
     };
 
     return (
-      <section id="contact" className="section-padding bg-dark" data-name="contact" data-file="components/Contact.js">
+      <section id="contact" className="pt-4 pb-12 md:pt-6 md:pb-16 bg-dark" data-name="contact" data-file="components/Contact.js">
         <div className="container-max relative z-10">
-          <div className="text-center mb-16 animate-fade-in">
+          <div className="text-center mb-10 animate-fade-in">
             <h2 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)] mb-6">
-              Get in Touch with <span style={{color: 'var(--primary-color)'}}>VARMAN CONSTRUCTIONS</span>
+              Get in Touch with <span style={{ color: 'var(--primary-color)' }}>VARMAN CONSTRUCTIONS</span>
             </h2>
             <p className="text-xl text-[var(--text-secondary)] max-w-3xl mx-auto">
               Ready to start your construction project? Contact us for quotes, material information, and expert guidance.
@@ -146,15 +146,15 @@ function Contact() {
               <div className="space-y-4">
                 <h4 className="font-semibold text-[var(--text-primary)]">Quick Contact</h4>
                 <div className="space-y-3">
-                  <button 
+                  <button
                     onClick={() => window.open('tel:+917708484811', '_self')}
                     className="w-full flex items-center justify-center space-x-2 bg-[var(--primary-color)] text-[var(--background-primary)] py-3 px-4 rounded-lg hover:bg-[var(--accent-color)] transition-colors"
                   >
                     <div className="icon-phone"></div>
                     <span>Call Now</span>
                   </button>
-                  
-                  <button 
+
+                  <button
                     onClick={handleWhatsAppContact}
                     className="w-full flex items-center justify-center space-x-2 bg-green-600 text-[var(--text-primary)] py-3 px-4 rounded-lg hover:bg-green-700 transition-colors"
                   >
@@ -167,12 +167,16 @@ function Contact() {
               {/* Service Areas */}
               <div>
                 <h4 className="font-semibold text-[var(--text-primary)] mb-3">Service Areas</h4>
-                <p className="text-[var(--text-secondary)] mb-3 text-sm">We supply building materials across Tamilnadu with focus on:</p>
+                <p className="text-[var(--text-secondary)] mb-3 text-sm">We supply building materials across Tamil Nadu with focus on:</p>
                 <div className="grid grid-cols-1 gap-2 text-sm text-[var(--text-secondary)]">
-                  <div className="flex items-center"><span className="text-[var(--primary-color)] mr-2">•</span>Tamil Nadu (Primary)</div>
-                  <div className="flex items-center"><span className="text-[var(--primary-color)] mr-2">•</span>Karnataka</div>
-                  <div className="flex items-center"><span className="text-[var(--primary-color)] mr-2">•</span>Kerala</div>
-                  <div className="flex items-center"><span className="text-[var(--primary-color)] mr-2">•</span>Other states on request</div>
+                  <div className="flex items-center"><span className="text-[var(--primary-color)] mr-2">•</span>Coimbatore</div>
+                  <div className="flex items-center"><span className="text-[var(--primary-color)] mr-2">•</span>Dindigul</div>
+                  <div className="flex items-center"><span className="text-[var(--primary-color)] mr-2">•</span>Tiruppur</div>
+                  <div className="flex items-center"><span className="text-[var(--primary-color)] mr-2">•</span>Madurai</div>
+                  <div className="flex items-center"><span className="text-[var(--primary-color)] mr-2">•</span>Tirunelveli</div>
+                  <div className="flex items-center"><span className="text-[var(--primary-color)] mr-2">•</span>Thoothukudi</div>
+                  <div className="flex items-center"><span className="text-[var(--primary-color)] mr-2">•</span>Kanyakumari</div>
+                  <div className="flex items-center"><span className="text-[var(--primary-color)] mr-2">•</span>Surrounding Districts</div>
                 </div>
               </div>
             </div>
@@ -181,7 +185,7 @@ function Contact() {
             <div className="lg:col-span-2">
               <div className="bg-card p-8 rounded-lg border border-[var(--border-color)] shadow-lg">
                 <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-6">Request a Quote / Send Inquiry</h3>
-                
+
                 {submitMessage && (
                   <div className={`p-4 rounded-lg mb-6 ${submitMessage.includes('Error') ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}`}>
                     {submitMessage}
@@ -307,8 +311,8 @@ function Contact() {
                     ></textarea>
                   </div>
 
-                  <button 
-                    type="submit" 
+                  <button
+                    type="submit"
                     disabled={isSubmitting}
                     className="w-full bg-[var(--primary-color)] text-[var(--background-primary)] py-3 px-6 rounded-lg font-semibold hover:bg-[var(--accent-color)] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                   >

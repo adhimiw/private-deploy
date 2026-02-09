@@ -38,7 +38,7 @@ function FAQ() {
         title: 'Delivery & Logistics',
         icon: 'truck',
         questions: [
-          { question: 'What areas do you deliver to?', answer: 'We deliver across Tamil Nadu with a primary focus on Southern regions including Tirunelveli, Thoothukudi, Kanyakumari, Madurai, and surrounding districts.' },
+          { question: 'What areas do you deliver to?', answer: 'We deliver across Tamil Nadu with a primary focus on Coimbatore, Dindigul, Tiruppur, Madurai, Tirunelveli, Thoothukudi, Kanyakumari, and surrounding districts.' },
           { question: 'How quickly can you deliver?', answer: 'Standard delivery within 24-48 hours for orders placed before 2 PM within our primary service area.' }
         ]
       },
@@ -115,7 +115,7 @@ function FAQ() {
             }));
 
             setFaqCategories(transformedFaqs);
-            
+
             // Set first category as expanded by default if exists
             if (transformedFaqs.length > 0) {
               setExpandedCategory(transformedFaqs[0].id);
@@ -146,7 +146,7 @@ function FAQ() {
     };
 
     return (
-      <section id="faq" className="section-padding bg-dark" data-name="faq" data-file="components/FAQ.js">
+      <section id="faq" className="pt-4 pb-12 md:pt-6 md:pb-16 bg-dark" data-name="faq" data-file="components/FAQ.js">
         <div className="container-max">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)] mb-4">
@@ -162,14 +162,14 @@ function FAQ() {
               // Loading Skeleton
               <div className="space-y-6">
                 <div className="flex flex-wrap gap-2 mb-8 justify-center">
-                   {Array(4).fill(0).map((_, i) => (
-                     <div key={i} className="h-10 w-32 bg-gray-700/50 rounded-lg animate-pulse"></div>
-                   ))}
+                  {Array(4).fill(0).map((_, i) => (
+                    <div key={i} className="h-10 w-32 bg-gray-700/50 rounded-lg animate-pulse"></div>
+                  ))}
                 </div>
                 <div className="bg-card rounded-lg p-6 space-y-4 animate-pulse">
                   <div className="flex items-center mb-6">
-                     <div className="w-10 h-10 bg-gray-700/50 rounded-lg mr-3"></div>
-                     <div className="h-8 w-48 bg-gray-700/50 rounded"></div>
+                    <div className="w-10 h-10 bg-gray-700/50 rounded-lg mr-3"></div>
+                    <div className="h-8 w-48 bg-gray-700/50 rounded"></div>
                   </div>
                   {Array(3).fill(0).map((_, i) => (
                     <div key={i} className="h-16 w-full bg-gray-700/50 rounded-lg"></div>
@@ -184,11 +184,10 @@ function FAQ() {
                     <button
                       key={category.id}
                       onClick={() => toggleCategory(category.id)}
-                      className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-medium transition-colors ${
-                        expandedCategory === category.id
-                          ? 'bg-[var(--primary-color)] text-[var(--background-primary)]'
-                          : 'bg-card text-[var(--text-secondary)] hover:bg-[var(--background-secondary)]'
-                      }`}
+                      className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-medium transition-colors ${expandedCategory === category.id
+                        ? 'bg-[var(--primary-color)] text-[var(--background-primary)]'
+                        : 'bg-card text-[var(--text-secondary)] hover:bg-[var(--background-secondary)]'
+                        }`}
                     >
                       <div className={`icon-${category.icon} text-sm`}></div>
                       <span className="text-sm">{category.title}</span>
@@ -218,9 +217,8 @@ function FAQ() {
                               className="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-[var(--background-card)] transition-colors"
                             >
                               <span className="font-medium text-[var(--text-primary)] pr-4">{faq.question}</span>
-                              <div className={`icon-chevron-down text-[var(--primary-color)] transform transition-transform ${
-                                expandedQuestion === `${category.id}-${index}` ? 'rotate-180' : ''
-                              }`}></div>
+                              <div className={`icon-chevron-down text-[var(--primary-color)] transform transition-transform ${expandedQuestion === `${category.id}-${index}` ? 'rotate-180' : ''
+                                }`}></div>
                             </button>
                             {expandedQuestion === `${category.id}-${index}` && (
                               <div className="px-6 pb-4">
@@ -240,19 +238,19 @@ function FAQ() {
           </div>
 
           {/* Still have questions section */}
-          <div className="mt-12 text-center bg-card p-8 rounded-lg border border-[var(--border-color)]">
+          <div className="mt-8 text-center bg-card p-8 rounded-lg border border-[var(--border-color)]">
             <h3 className="text-2xl font-bold text-[var(--text-primary)] mb-4">Still Have Questions?</h3>
             <p className="text-[var(--text-secondary)] mb-6 max-w-2xl mx-auto">
               Our team is here to help! Contact us for personalized assistance with your building material requirements.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button 
+              <button
                 onClick={() => window.open('tel:+917708484811', '_self')}
                 className="btn-primary"
               >
                 Call Us: +91 77084 84811
               </button>
-              <button 
+              <button
                 onClick={() => {
                   const message = "Hi VARMAN CONSTRUCTIONS! I have some questions about your building materials. Can you help?";
                   window.open(`https://wa.me/917708484811?text=${encodeURIComponent(message)}`, '_blank');

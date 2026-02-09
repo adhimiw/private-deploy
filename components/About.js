@@ -39,7 +39,7 @@ function About() {
       { number: '24-48', label: 'Hours Delivery', icon: 'clock' }
     ];
     return (
-      <section className="section-padding bg-dark py-16 md:py-24 lg:py-32" data-file="components/About.js" data-name="about" id="about">
+      <section className="section-padding bg-dark py-16 md:py-20 lg:py-24 pb-8 md:pb-10 lg:pb-12" data-file="components/About.js" data-name="about" id="about">
         <div className="container-max px-4 md:px-6">
           {/* Main Content */}
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center mb-12 md:mb-16">
@@ -50,29 +50,29 @@ function About() {
                 <div className="w-3 h-3 md:w-4 md:h-4 bg-[var(--primary-color)] rounded-full mr-2 md:mr-3"></div>
                 <span className="text-sm md:text-base lg:text-lg font-semibold text-[var(--text-primary)]">About VARMAN CONSTRUCTIONS</span>
               </div>
-              
+
               {/* Headline - Mobile Friendly */}
-              <h2 className="text-lg md:text-xl lg:text-2xl xl:text-3xl font-extrabold text-[var(--text-primary)] leading-snug">
+              <h2 className="text-lg md:text-xl lg:text-2xl xl:text-3xl font-bold text-[var(--text-primary)] leading-tight">
                 Building Tamil Nadu's Future with <span className="text-gradient">Quality Materials</span> Since 2020
               </h2>
-              
+
               {/* Original Full Description */}
-              <p className="text-base md:text-lg lg:text-xl text-[var(--text-secondary)] leading-relaxed text-justify">
+              <p className="text-lg md:text-xl leading-relaxed text-[var(--text-secondary)]">
                 VARMAN CONSTRUCTIONS, established in 2020, has rapidly grown to become a trusted supplier of premium building materials across Tamil Nadu. Despite being a relatively new player in the market, our commitment to quality and customer satisfaction has helped us serve over 200+ construction projects successfully.
               </p>
-              
-              <p className="text-sm md:text-base lg:text-lg text-[var(--text-secondary)] leading-relaxed text-justify">
+
+              <p className="text-base md:text-lg leading-relaxed text-[var(--text-secondary)]">
                 We specialize in supplying high-quality construction materials including M-Sand, Blue Metal (Jalli), various types of bricks, cement, AAC blocks, and natural stones. Our extensive network now covers 3+ states with a primary focus on Tamil Nadu markets, ensuring that quality construction materials reach every corner of our service area.
               </p>
-              
+
               {/* Commitment Card */}
               <div className="bg-card p-4 md:p-6 rounded-lg border border-[var(--border-color)] shadow-sm">
-                <h4 className="font-semibold text-[var(--text-primary)] mb-2 md:mb-3 text-sm md:text-base">Our Commitment</h4>
-                <p className="text-[var(--text-secondary)] text-xs md:text-sm leading-relaxed text-justify">
+                <h4 className="font-semibold text-[var(--text-primary)] mb-2 md:mb-3 text-base md:text-lg">Our Commitment</h4>
+                <p className="text-[var(--text-secondary)] text-sm md:text-base leading-relaxed">
                   "We believe that every construction project deserves the best materials. Our mission is to provide consistent quality, competitive pricing, and reliable service that helps our customers build with confidence. From small residential projects to large infrastructure developments, we are committed to being your trusted material supplier partner."
                 </p>
               </div>
-              
+
               {/* Contact Info - Stacked on Mobile */}
               <div className="flex flex-col gap-3 text-sm md:text-base">
                 <a href="tel:+917708484811" className="inline-flex items-center space-x-2 text-[var(--text-secondary)] hover:text-[var(--primary-color)] transition-colors font-medium">
@@ -91,8 +91,8 @@ function About() {
             </div>
             {/* Image */}
             <div className="relative">
-              <img 
-                src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+              <img
+                src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
                 alt="VARMAN CONSTRUCTIONS - Building materials supplier"
                 className="rounded-lg shadow-xl w-full h-96 object-cover"
               />
