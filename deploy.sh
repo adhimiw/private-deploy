@@ -1,69 +1,91 @@
 #!/bin/bash
-# ============================================
-# VARMAN CONSTRUCTIONS - Hostinger Deploy Script (PHP)
-# ============================================
-# Run this script on your Hostinger server via SSH
+# Hostinger deployment script for the Varman site.
+# This expects a prebuilt release tarball uploaded by CI.
 
-set -e
+set -euo pipefail
 
-echo "🚀 Starting VARMAN CONSTRUCTIONS Deployment..."
-echo "================================================"
+SITE_DOMAIN="varmanconstructions.in"
+DEPLOY_ROOT="${DEPLOY_ROOT:-$HOME/domains/$SITE_DOMAIN/public_html}"
+DEPLOY_HOME="${DEPLOY_HOME:-$HOME/deployments/varman}"
+ARCHIVE_PATH="${1:-$DEPLOY_HOME/release.tar.gz}"
+RELEASE_DIR="$DEPLOY_HOME/current"
+SHARED_STORAGE_DIR="$DEPLOY_HOME/shared-storage"
+SHARED_UPLOADS_DIR="$DEPLOY_HOME/shared-uploads"
 
-SITE_DIR="$HOME/domains/varmanconstructions.in/public_html"
+echo "[deploy] Starting deployment for $SITE_DOMAIN"
+echo "[deploy] Deploy root: $DEPLOY_ROOT"
+echo "[deploy] Archive: $ARCHIVE_PATH"
 
-# Navigate to public_html
-if [ ! -d "$SITE_DIR" ]; then
-    echo "📁 Creating public_html directory..."
-    mkdir -p "$SITE_DIR"
+if [ ! -f "$ARCHIVE_PATH" ]; then
+  echo "[deploy] Release archive not found: $ARCHIVE_PATH"
+  exit 1
 fi
 
-cd "$SITE_DIR"
+mkdir -p "$DEPLOY_ROOT" "$DEPLOY_HOME" "$SHARED_STORAGE_DIR" "$SHARED_UPLOADS_DIR"
+rm -rf "$RELEASE_DIR"
+mkdir -p "$RELEASE_DIR"
 
-# Check if git is available
-if ! command -v git &> /dev/null; then
-    echo "❌ Git is not installed. Please contact Hostinger support."
-    exit 1
+echo "[deploy] Extracting release archive"
+tar -xzf "$ARCHIVE_PATH" -C "$RELEASE_DIR"
+
+mkdir -p "$RELEASE_DIR/storage" "$RELEASE_DIR/assets/uploads"
+
+if [ -f "$SHARED_STORAGE_DIR/config.php" ]; then
+  cp "$SHARED_STORAGE_DIR/config.php" "$RELEASE_DIR/storage/config.php"
+elif [ -f "$DEPLOY_ROOT/storage/config.php" ]; then
+  cp "$DEPLOY_ROOT/storage/config.php" "$RELEASE_DIR/storage/config.php"
+elif [ -f "$RELEASE_DIR/storage/config.sample.php" ]; then
+  cp "$RELEASE_DIR/storage/config.sample.php" "$RELEASE_DIR/storage/config.php"
 fi
 
-# Clone or pull the repository
-if [ -d ".git" ]; then
-    echo "📥 Updating existing repository..."
-    git fetch origin
-    git checkout main2
-    git pull origin main2
+if [ -f "$SHARED_STORAGE_DIR/varman.sqlite" ]; then
+  cp "$SHARED_STORAGE_DIR/varman.sqlite" "$RELEASE_DIR/storage/varman.sqlite"
+elif [ -f "$DEPLOY_ROOT/storage/varman.sqlite" ]; then
+  cp "$DEPLOY_ROOT/storage/varman.sqlite" "$RELEASE_DIR/storage/varman.sqlite"
 else
-    echo "📥 Cloning repository..."
-    git clone https://github.com/adhimiw/private-deploy.git .
-    git checkout main2
+  touch "$RELEASE_DIR/storage/varman.sqlite"
 fi
 
-# Ensure storage and upload directories exist
-mkdir -p storage assets/uploads
-
-# Create config file if missing
-if [ ! -f "storage/config.php" ]; then
-    echo "📝 Creating storage/config.php from sample..."
-    cp storage/config.sample.php storage/config.php
+if [ -d "$SHARED_UPLOADS_DIR" ] && [ "$(find "$SHARED_UPLOADS_DIR" -mindepth 1 -maxdepth 1 | wc -l)" -gt 0 ]; then
+  cp -R "$SHARED_UPLOADS_DIR"/. "$RELEASE_DIR/assets/uploads/"
+elif [ -d "$DEPLOY_ROOT/assets/uploads" ] && [ "$(find "$DEPLOY_ROOT/assets/uploads" -mindepth 1 -maxdepth 1 | wc -l)" -gt 0 ]; then
+  cp -R "$DEPLOY_ROOT/assets/uploads"/. "$RELEASE_DIR/assets/uploads/"
 fi
 
-# Set safe permissions
-chmod 755 storage assets/uploads || true
-chmod 600 storage/config.php || true
-
-# Optional: warm up the API (Apache/PHP should handle this)
-if command -v curl &> /dev/null; then
-    echo "🔍 Warming up API..."
-    curl -s https://varmanconstructions.in/api/health >/dev/null || true
+if command -v rsync >/dev/null 2>&1; then
+  echo "[deploy] Syncing release to public_html"
+  rsync -a --delete "$RELEASE_DIR"/ "$DEPLOY_ROOT"/
+else
+  echo "[deploy] rsync not available, using cp fallback"
+  find "$DEPLOY_ROOT" -mindepth 1 -maxdepth 1 ! -name "storage" ! -name "assets" -exec rm -rf {} +
+  mkdir -p "$DEPLOY_ROOT/assets/uploads" "$DEPLOY_ROOT/storage"
+  cp -R "$RELEASE_DIR"/. "$DEPLOY_ROOT"/
 fi
 
-echo "================================================"
-echo "🎉 DEPLOYMENT COMPLETE!"
-echo "================================================"
-echo "📌 Website: https://varmanconstructions.in"
-echo "📌 Admin panel: https://varmanconstructions.in/akka.html"
-echo "📌 API health: https://varmanconstructions.in/api/health"
-echo "------------------------------------------------"
-echo "🔐 Default Admin Credentials:"
-echo "   Username: admin"
-echo "   Password: varman@2024"
-echo "   ⚠️  Change password after first login!"
+mkdir -p "$DEPLOY_ROOT/storage" "$DEPLOY_ROOT/assets/uploads"
+cp "$DEPLOY_ROOT/storage/config.php" "$SHARED_STORAGE_DIR/config.php" 2>/dev/null || true
+cp "$DEPLOY_ROOT/storage/varman.sqlite" "$SHARED_STORAGE_DIR/varman.sqlite" 2>/dev/null || true
+
+rm -rf "$SHARED_UPLOADS_DIR"
+mkdir -p "$SHARED_UPLOADS_DIR"
+cp -R "$DEPLOY_ROOT/assets/uploads"/. "$SHARED_UPLOADS_DIR/" 2>/dev/null || true
+
+chmod 755 "$DEPLOY_ROOT/storage" "$DEPLOY_ROOT/assets/uploads" || true
+chmod 600 "$DEPLOY_ROOT/storage/config.php" 2>/dev/null || true
+chmod 664 "$DEPLOY_ROOT/storage/varman.sqlite" 2>/dev/null || true
+
+if command -v php >/dev/null 2>&1 && [ -f "$DEPLOY_ROOT/backend/artisan" ]; then
+  echo "[deploy] Running Laravel maintenance commands"
+  php "$DEPLOY_ROOT/backend/artisan" migrate --force || true
+  php "$DEPLOY_ROOT/backend/artisan" optimize:clear || true
+  php "$DEPLOY_ROOT/backend/artisan" config:cache || true
+  php "$DEPLOY_ROOT/backend/artisan" route:cache || true
+fi
+
+if command -v curl >/dev/null 2>&1; then
+  echo "[deploy] Warming the application"
+  curl -fsS "https://$SITE_DOMAIN/api/health" >/dev/null || true
+  curl -fsS "https://$SITE_DOMAIN/" >/dev/null || true
+fi
+
+echo "[deploy] Deployment complete"
