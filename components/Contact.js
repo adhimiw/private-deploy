@@ -193,20 +193,6 @@ function Contact() {
                 </div>
               </div>
 
-              <div>
-                <h4 className="font-semibold text-[var(--text-primary)] mb-3">Service Areas</h4>
-                <p className="text-[var(--text-secondary)] mb-3 text-sm">We supply building materials across Tamil Nadu with focus on:</p>
-                <div className="grid grid-cols-1 gap-2 text-sm text-[var(--text-secondary)]">
-                  <div className="flex items-center"><span className="text-[var(--primary-color)] mr-2">-</span>Coimbatore</div>
-                  <div className="flex items-center"><span className="text-[var(--primary-color)] mr-2">-</span>Dindigul</div>
-                  <div className="flex items-center"><span className="text-[var(--primary-color)] mr-2">-</span>Tiruppur</div>
-                  <div className="flex items-center"><span className="text-[var(--primary-color)] mr-2">-</span>Madurai</div>
-                  <div className="flex items-center"><span className="text-[var(--primary-color)] mr-2">-</span>Tirunelveli</div>
-                  <div className="flex items-center"><span className="text-[var(--primary-color)] mr-2">-</span>Thoothukudi</div>
-                  <div className="flex items-center"><span className="text-[var(--primary-color)] mr-2">-</span>Kanyakumari</div>
-                  <div className="flex items-center"><span className="text-[var(--primary-color)] mr-2">-</span>Surrounding Districts</div>
-                </div>
-              </div>
             </div>
 
             <div className="lg:col-span-2">
