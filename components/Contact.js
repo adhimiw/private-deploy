@@ -17,7 +17,6 @@ function Contact() {
     const secondaryWhatsAppMessage = "Hi VARMAN CONSTRUCTIONS! I want to discuss building materials with your secondary contact.";
     const emailSubject = 'Inquiry from Varman Constructions Website';
     const emailBody = 'Hello VARMAN CONSTRUCTIONS,%0D%0A%0D%0AI would like to know more about your building materials and pricing.%0D%0A%0D%0AThanks.';
-
     const handleInputChange = (e) => {
       setFormData({
         ...formData,
@@ -30,8 +29,6 @@ function Contact() {
       setIsSubmitting(true);
       setSubmitMessage('');
 
-      const whatsappPopup = window.open('', '_blank');
-
       try {
         const response = await fetch('/api/contact', {
           method: 'POST',
@@ -43,39 +40,37 @@ function Contact() {
 
         const result = await response.json();
 
-        if (!result.success) {
-          if (whatsappPopup) {
-            whatsappPopup.close();
-          }
-          setSubmitMessage('Error submitting form. Please try calling us directly.');
-          return;
-        }
+        if (result.success) {
+          setSubmitMessage(result.message);
+          const adminUrl = result.whatsapp_admin_url || result.whatsapp_url || '';
+          const userUrl = result.whatsapp_user_url || '';
+          setWhatsappAdminUrl(adminUrl);
+          setWhatsappUserUrl(userUrl);
+          setFormData({
+            name: '',
+            email: '',
+            phone: '',
+            material: '',
+            message: '',
+            project_location: ''
+          });
 
-        const adminUrl = result.whatsapp_admin_url || result.whatsapp_url || '';
-        const userUrl = result.whatsapp_user_url || '';
+          setTimeout(() => {
+            if (adminUrl) {
+              window.open(adminUrl, '_blank');
+            }
+          }, 1500);
 
-        setSubmitMessage('Inquiry sent successfully. Continue the conversation on WhatsApp.');
-        setWhatsappAdminUrl(adminUrl);
-        setWhatsappUserUrl(userUrl);
-        setFormData({
-          name: '',
-          email: '',
-          phone: '',
-          material: '',
-          message: '',
-          project_location: ''
-        });
-
-        if (adminUrl && whatsappPopup) {
-          whatsappPopup.location.replace(adminUrl);
-        } else if (whatsappPopup) {
-          whatsappPopup.close();
+          setTimeout(() => {
+            if (userUrl) {
+              window.open(userUrl, '_blank');
+            }
+          }, 2500);
+        } else {
+          setSubmitMessage(result.error || 'Error submitting form. Please try calling us directly.');
         }
       } catch (error) {
         console.error('Error submitting form:', error);
-        if (whatsappPopup) {
-          whatsappPopup.close();
-        }
         setSubmitMessage('Error submitting form. Please try calling us directly.');
       } finally {
         setIsSubmitting(false);
@@ -83,7 +78,9 @@ function Contact() {
     };
 
     const handleWhatsAppContact = () => {
-      VarmanSite.openWhatsApp("Hi VARMAN CONSTRUCTIONS! I'm interested in your building materials. Please provide more information.");
+      const message = "Hi VARMAN CONSTRUCTIONS! I'm interested in your building materials. Please provide more information.";
+      const whatsappUrl = `https://wa.me/917708484811?text=${encodeURIComponent(message)}`;
+      window.open(whatsappUrl, '_blank');
     };
 
     const handlePrimaryContactClick = () => {
@@ -102,7 +99,7 @@ function Contact() {
     };
 
     return (
-      <section id="contact" className="deferred-section pt-4 pb-12 md:pt-6 md:pb-16 bg-dark" data-name="contact" data-file="components/Contact.js">
+      <section id="contact" className="pt-4 pb-12 md:pt-6 md:pb-16 bg-dark" data-name="contact" data-file="components/Contact.js">
         <div className="container-max relative z-10">
           <div className="text-center mb-10 animate-fade-in">
             <h2 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)] mb-6">
@@ -188,7 +185,7 @@ function Contact() {
 
                   <button
                     onClick={handleWhatsAppContact}
-                    className="w-full flex items-center justify-center space-x-2 bg-green-600 text-white py-3 px-4 rounded-lg hover:bg-green-700 transition-colors"
+                    className="w-full flex items-center justify-center space-x-2 bg-green-600 text-[var(--text-primary)] py-3 px-4 rounded-lg hover:bg-green-700 transition-colors"
                   >
                     <Icon name="message-circle" className="w-4 h-4" />
                     <span>WhatsApp</span>
@@ -221,7 +218,7 @@ function Contact() {
                     {submitMessage}
                     {!submitMessage.includes('Error') && (
                       <div className="text-sm mt-2">
-                        WhatsApp opens in a new tab when the browser allows it. If it does not, use the buttons below.
+                        We'll open WhatsApp for admin notification. If pop-ups are blocked, use the buttons below.
                       </div>
                     )}
                     {!submitMessage.includes('Error') && (whatsappAdminUrl || whatsappUserUrl) && (
@@ -229,7 +226,7 @@ function Contact() {
                         {whatsappAdminUrl && (
                           <button
                             type="button"
-                            onClick={() => VarmanSite.openExternalUrl(whatsappAdminUrl)}
+                            onClick={() => window.open(whatsappAdminUrl, '_blank')}
                             className="btn-secondary"
                           >
                             Open Admin WhatsApp
@@ -238,7 +235,7 @@ function Contact() {
                         {whatsappUserUrl && (
                           <button
                             type="button"
-                            onClick={() => VarmanSite.openExternalUrl(whatsappUserUrl)}
+                            onClick={() => window.open(whatsappUserUrl, '_blank')}
                             className="btn-secondary"
                           >
                             Open My WhatsApp

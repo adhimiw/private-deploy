@@ -93,7 +93,7 @@ function Services() {
         id: 'cement',
         icon: 'package',
         title: 'Cement',
-        shortDescription: 'Premium quality cement from top brands UltraTech, ACC, and Ramco',
+        shortDescription: 'Premium quality cement from top brands UltraTech, ACC, Ramco',
         description: 'We supply cement from leading brands including UltraTech, ACC, Ramco, Dalmia, and Chettinad.',
         specifications: ['OPC 53 Grade', 'PPC Grade', 'PSC Grade available'],
         uses: ['Concrete mixing', 'Plastering', 'Masonry work', 'Foundation'],
@@ -209,7 +209,7 @@ function Services() {
 
     return (
       <>
-        <section id="services" className="section-padding deferred-section bg-dark" data-name="services" data-file="components/Services.js">
+        <section id="services" className="section-padding bg-dark" data-name="services" data-file="components/Services.js">
           <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-8 lg:px-12">
             <div className="text-center mb-16 animate-fade-in">
               <h2 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)] mb-6">
@@ -286,7 +286,7 @@ function Services() {
                           Unit: {product.unit}
                         </span>
                         <span className="text-sm text-[var(--primary-color)] font-semibold hover:underline transition-all duration-300">
-                          View Details
+                          View Details ->
                         </span>
                       </div>
                     </div>

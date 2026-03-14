@@ -23,7 +23,7 @@ function About() {
       },
       {
         icon: 'truck',
-        title: 'Pan-Tamil Nadu Supply',
+        title: 'Pan-Tamilnadu Supply',
         description: 'Serving customers across Tamil Nadu with focus on Southern India'
       },
       {
@@ -39,7 +39,7 @@ function About() {
       { number: '24-48', label: 'Hours Delivery', icon: 'clock' }
     ];
     return (
-      <section className="section-padding deferred-section bg-dark py-16 md:py-20 lg:py-24 pb-8 md:pb-10 lg:pb-12" data-file="components/About.js" data-name="about" id="about">
+      <section className="section-padding bg-dark py-16 md:py-20 lg:py-24 pb-8 md:pb-10 lg:pb-12" data-file="components/About.js" data-name="about" id="about">
         <div className="container-max px-4 md:px-6">
           {/* Main Content */}
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center mb-12 md:mb-16">
@@ -92,7 +92,7 @@ function About() {
             {/* Image */}
             <div className="relative">
               <img
-                src="./assets/herobg.webp"
+                src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
                 alt="VARMAN CONSTRUCTIONS - Building materials supplier"
                 className="rounded-lg shadow-xl w-full h-96 object-cover"
                 loading="lazy"

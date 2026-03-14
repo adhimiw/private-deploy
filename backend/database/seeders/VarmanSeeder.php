@@ -30,10 +30,6 @@ class VarmanSeeder extends Seeder
 
     private function seedProducts(): void
     {
-        if (DB::table('products')->count() > 0) {
-            return;
-        }
-
         $products = [
             [
                 'id' => 'm_sand',
@@ -43,7 +39,7 @@ class VarmanSeeder extends Seeder
                 'specifications' => ['Fineness Modulus: 2.6-3.0', 'Silt Content: <3%', 'Water Absorption: <2%', 'Bulk Density: 1.75-1.85 kg/m3'],
                 'uses' => ['Concrete mixing', 'Plastering work', 'Block work', 'Foundation construction'],
                 'advantages' => ['Consistent quality', 'No impurities', 'Better workability', 'Environmentally friendly'],
-                'unit' => 'per cubic meter',
+                'unit' => 'per Unit',
                 'image' => './assets/msand.webp',
                 'active' => 1,
             ],
@@ -55,7 +51,7 @@ class VarmanSeeder extends Seeder
                 'specifications' => ['Fineness Modulus: 1.8-2.2', 'Silt Content: <2%', 'Grain Size: 0.15-2.36mm'],
                 'uses' => ['Wall plastering', 'Ceiling work', 'Fine finishing', 'Decorative plastering'],
                 'advantages' => ['Ultra-fine texture', 'Smooth finish', 'Better adhesion', 'Reduced cracking'],
-                'unit' => 'per cubic meter',
+                'unit' => 'per Unit',
                 'image' => './assets/psand.webp',
                 'active' => 1,
             ],
@@ -79,7 +75,7 @@ class VarmanSeeder extends Seeder
                 'specifications' => ['Size: 9x4.5x3 inches', 'Compressive Strength: >3.5 N/mm2', 'Water Absorption: <20%'],
                 'uses' => ['Wall construction', 'Boundary walls', 'Pillars', 'Load-bearing structures'],
                 'advantages' => ['Good insulation', 'Fire resistant', 'Durable', 'Eco-friendly'],
-                'unit' => 'per 1000 pieces',
+                'unit' => 'per pieces',
                 'image' => './assets/red brick.webp',
                 'active' => 1,
             ],
@@ -91,7 +87,7 @@ class VarmanSeeder extends Seeder
                 'specifications' => ['Size: 9x4x3 inches', 'Compressive Strength: >7.5 N/mm2', 'Water Absorption: <12%'],
                 'uses' => ['Wall construction', 'High-rise buildings', 'Commercial structures', 'Residential projects'],
                 'advantages' => ['Higher strength', 'Uniform size', 'Less mortar required', 'Eco-friendly'],
-                'unit' => 'per 1000 pieces',
+                'unit' => 'per pieces',
                 'image' => './assets/brick.webp',
                 'active' => 1,
             ],
@@ -115,7 +111,7 @@ class VarmanSeeder extends Seeder
                 'specifications' => ['OPC 53 Grade', 'PPC Grade', 'PSC Grade available'],
                 'uses' => ['Concrete mixing', 'Plastering', 'Masonry work', 'Foundation'],
                 'advantages' => ['Top brands', 'Fresh stock', 'Bulk discounts', 'Doorstep delivery'],
-                'unit' => 'per bag (50kg)',
+                'unit' => 'per bag',
                 'brands' => ['UltraTech', 'ACC', 'Ramco', 'Dalmia', 'Chettinad'],
                 'image' => './assets/cement.webp',
                 'active' => 1,
@@ -128,7 +124,7 @@ class VarmanSeeder extends Seeder
                 'specifications' => ['Sizes: 600x200x100mm to 600x200x300mm', 'Density: 550-650 kg/m3', 'Compressive Strength: 3-4.5 N/mm2'],
                 'uses' => ['High-rise construction', 'Green buildings', 'Commercial complexes', 'Residential projects'],
                 'advantages' => ['Lightweight', 'Thermal insulation', 'Fire resistant', 'Earthquake resistant'],
-                'unit' => 'per cubic meter',
+                'unit' => 'per pieces',
                 'image' => './assets/acc.webp',
                 'active' => 1,
             ],
@@ -140,14 +136,15 @@ class VarmanSeeder extends Seeder
                 'specifications' => ['Rough Stone: Various sizes', 'Size Stone: 9x6 inches standard'],
                 'uses' => ['Foundation work', 'Compound walls', 'Retaining walls', 'Landscaping'],
                 'advantages' => ['Natural material', 'High durability', 'Load-bearing capacity', 'Aesthetic appeal'],
-                'unit' => 'per sq.ft',
+                'unit' => 'per pieces',
                 'image' => './assets/sizestone.webp',
                 'active' => 1,
             ],
         ];
 
+        $rows = [];
         foreach ($products as $product) {
-            DB::table('products')->insert([
+            $rows[] = [
                 'id' => $product['id'],
                 'icon' => $product['icon'],
                 'name' => $product['name'],
@@ -162,8 +159,14 @@ class VarmanSeeder extends Seeder
                 'types' => json_encode($product['types'] ?? []),
                 'grades' => json_encode($product['grades'] ?? []),
                 'active' => $product['active'],
-            ]);
+            ];
         }
+
+        DB::table('products')->upsert(
+            $rows,
+            ['id'],
+            ['icon', 'name', 'description', 'specifications', 'uses', 'advantages', 'unit', 'image', 'brands', 'sizes', 'types', 'grades', 'active']
+        );
     }
 
     private function seedFaqs(): void

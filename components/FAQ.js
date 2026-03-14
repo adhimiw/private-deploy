@@ -146,7 +146,7 @@ function FAQ() {
     };
 
     return (
-      <section id="faq" className="deferred-section pt-4 pb-12 md:pt-6 md:pb-16 bg-dark" data-name="faq" data-file="components/FAQ.js">
+      <section id="faq" className="pt-4 pb-12 md:pt-6 md:pb-16 bg-dark" data-name="faq" data-file="components/FAQ.js">
         <div className="container-max">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)] mb-4">
@@ -255,7 +255,7 @@ function FAQ() {
               <button
                 onClick={() => {
                   const message = "Hi VARMAN CONSTRUCTIONS! I have some questions about your building materials. Can you help?";
-                  VarmanSite.openWhatsApp(message);
+                  window.open(`https://wa.me/917708484811?text=${encodeURIComponent(message)}`, '_blank');
                 }}
                 className="btn-secondary"
               >

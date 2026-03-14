@@ -83,6 +83,7 @@ chmod 664 "$DEPLOY_ROOT/storage/varman.sqlite" 2>/dev/null || true
 if command -v php >/dev/null 2>&1 && [ -f "$DEPLOY_ROOT/backend/artisan" ]; then
   echo "[deploy] Running Laravel maintenance commands"
   php "$DEPLOY_ROOT/backend/artisan" migrate --force || true
+  php "$DEPLOY_ROOT/backend/artisan" db:seed --class=Database\\Seeders\\VarmanSeeder --force || true
   php "$DEPLOY_ROOT/backend/artisan" optimize:clear || true
   php "$DEPLOY_ROOT/backend/artisan" config:cache || true
   php "$DEPLOY_ROOT/backend/artisan" route:cache || true
