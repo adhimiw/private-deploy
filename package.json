@@ -8,8 +8,10 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "babel components -d dist/components --presets @babel/preset-react && babel app.js -d dist/ --presets @babel/preset-react && npm run minify",
-    "minify": "npx terser dist/app.js -o dist/app.js -c -m && npx terser dist/components/Header.js -o dist/components/Header.js -c -m && npx terser dist/components/Hero.js -o dist/components/Hero.js -c -m && npx terser dist/components/Services.js -o dist/components/Services.js -c -m && npx terser dist/components/About.js -o dist/components/About.js -c -m && npx terser dist/components/FAQ.js -o dist/components/FAQ.js -c -m && npx terser dist/components/Contact.js -o dist/components/Contact.js -c -m && npx terser dist/components/Footer.js -o dist/components/Footer.js -c -m && npx terser dist/components/Admin.js -o dist/components/Admin.js -c -m"
+    "build": "npx tailwindcss -i styles/tailwind.input.css -o dist/tailwind.css --minify && babel components -d dist/components --presets @babel/preset-react && babel app.js -d dist/ --presets @babel/preset-react && npm run minify",
+    "minify": "npx terser dist/app.js -o dist/app.js -c -m && npx terser dist/components/Header.js -o dist/components/Header.js -c -m && npx terser dist/components/Hero.js -o dist/components/Hero.js -c -m && npx terser dist/components/Services.js -o dist/components/Services.js -c -m && npx terser dist/components/About.js -o dist/components/About.js -c -m && npx terser dist/components/FAQ.js -o dist/components/FAQ.js -c -m && npx terser dist/components/Contact.js -o dist/components/Contact.js -c -m && npx terser dist/components/Footer.js -o dist/components/Footer.js -c -m && npx terser dist/components/Admin.js -o dist/components/Admin.js -c -m",
+    "smoke:prod": "bash scripts/smoke_check.sh",
+    "smoke:prod:win": "powershell -ExecutionPolicy Bypass -File scripts/smoke_check.ps1"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +21,7 @@
     "@babel/cli": "^7.28.6",
     "@babel/core": "^7.29.0",
     "@babel/preset-react": "^7.28.5",
+    "tailwindcss": "^3.4.17",
     "terser": "^5.46.0"
   }
 }

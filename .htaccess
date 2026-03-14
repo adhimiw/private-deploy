@@ -50,8 +50,8 @@ RewriteRule ^favicon\.ico$ /assets/logo.png [L]
     # Remove server info
     Header always unset X-Powered-By
     
-    # Content Security Policy (allow tailwind CDN + resource.trickle.so)
-    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://unpkg.com https://cdn.tailwindcss.com https://resource.trickle.so; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://resource.trickle.so https://unpkg.com; font-src 'self' https://fonts.gstatic.com https://resource.trickle.so; img-src 'self' data: https:; connect-src 'self' https://wa.me https://varmanconstructions.in https://resource.trickle.so;"
+    # Content Security Policy
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://unpkg.com https://resource.trickle.so; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://resource.trickle.so https://unpkg.com; font-src 'self' https://fonts.gstatic.com https://resource.trickle.so; img-src 'self' data: https:; connect-src 'self' https://wa.me https://varmanconstructions.in https://resource.trickle.so;"
 </IfModule>
 
 # Prevent access to sensitive files
@@ -92,6 +92,7 @@ RewriteRule ^legacy/ - [F,L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI} !^/api/
+RewriteCond %{REQUEST_URI} !\.(?:js|mjs|css|map|json|png|jpe?g|gif|webp|svg|ico|woff2?|ttf|eot)$ [NC]
 RewriteRule ^(.*)$ /index.html [L]
 
 # Protect admin dashboard with HTTP Basic Auth outside local/dev access

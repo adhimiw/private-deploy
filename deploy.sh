@@ -28,6 +28,12 @@ mkdir -p "$RELEASE_DIR"
 echo "[deploy] Extracting release archive"
 tar -xzf "$ARCHIVE_PATH" -C "$RELEASE_DIR"
 
+if [ ! -f "$RELEASE_DIR/dist/app.js" ] || [ ! -f "$RELEASE_DIR/dist/components/Header.js" ] || [ ! -f "$RELEASE_DIR/dist/tailwind.css" ]; then
+  echo "[deploy] Missing required frontend build output in release archive (dist/*)."
+  echo "[deploy] Aborting deployment to prevent MIME/script failures in production."
+  exit 1
+fi
+
 mkdir -p "$RELEASE_DIR/storage" "$RELEASE_DIR/assets/uploads"
 
 if [ -f "$SHARED_STORAGE_DIR/config.php" ]; then
