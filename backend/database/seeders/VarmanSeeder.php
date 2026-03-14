@@ -181,14 +181,10 @@ class VarmanSeeder extends Seeder
 
     private function seedFaqs(): void
     {
-        if (DB::table('faqs')->count() > 0) {
-            return;
-        }
-
         $faqs = [
             [
                 'question' => 'What areas do you deliver to?',
-                'answer' => 'We deliver across Tamil Nadu with a primary focus on Southern regions including Tirunelveli, Thoothukudi, Kanyakumari, Madurai, and surrounding districts. We also serve parts of Kerala and Karnataka for bulk orders.',
+                'answer' => 'We deliver across Tamil Nadu with a primary focus on Coimbatore, Dindigul, Tiruppur, Madurai, Tirunelveli, Thoothukudi, Kanyakumari, and surrounding districts.',
                 'category' => 'delivery',
             ],
             [
@@ -218,11 +214,17 @@ class VarmanSeeder extends Seeder
             ],
         ];
 
-        DB::table('faqs')->insert(array_map(fn (array $faq) => [
+        $rows = array_map(fn (array $faq) => [
             'question' => $faq['question'],
             'answer' => $faq['answer'],
             'category' => $faq['category'],
             'active' => 1,
-        ], $faqs));
+        ], $faqs);
+
+        DB::table('faqs')->upsert(
+            $rows,
+            ['question'],
+            ['answer', 'category', 'active']
+        );
     }
 }
