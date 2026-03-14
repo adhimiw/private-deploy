@@ -52,6 +52,18 @@ RewriteRule ^favicon\.ico$ /assets/logo.png [L]
     
     # Content Security Policy
     Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://unpkg.com https://resource.trickle.so; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://resource.trickle.so https://unpkg.com; font-src 'self' https://fonts.gstatic.com https://resource.trickle.so; img-src 'self' data: https:; connect-src 'self' https://wa.me https://varmanconstructions.in https://resource.trickle.so;"
+
+    # Ensure HTML updates are never stale
+    <FilesMatch "\.(html|htm)$">
+        Header set Cache-Control "no-cache, no-store, must-revalidate"
+        Header set Pragma "no-cache"
+        Header set Expires "0"
+    </FilesMatch>
+
+    # Cache built assets aggressively; cache bust via query string
+    <FilesMatch "\.(js|mjs|css|map)$">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </FilesMatch>
 </IfModule>
 
 # Prevent access to sensitive files
