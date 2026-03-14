@@ -26,7 +26,24 @@ class PublicApiController extends Controller
 
     public function products(): JsonResponse
     {
-        $rows = DB::table('products')->where('active', 1)->get()->map(
+        $preferredOrder = [
+            'm_sand',
+            'p_sand',
+            'blue_metal',
+            'red_bricks',
+            'fly_ash_bricks',
+            'concrete_blocks',
+            'cement',
+            'aac_blocks',
+            'size_stone',
+        ];
+
+        $orderSql = "FIELD(id, '" . implode("','", $preferredOrder) . "')";
+        $rows = DB::table('products')
+            ->where('active', 1)
+            ->orderByRaw($orderSql)
+            ->get()
+            ->map(
             fn ($row) => $this->support->productFromRow((array) $row)
         )->values();
 
