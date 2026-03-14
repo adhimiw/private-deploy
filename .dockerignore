@@ -1,0 +1,9 @@
+.git
+.gitignore
+*.log
+storage/varman.sqlite
+pagespeed.json
+node_modules
+backend/vendor
+backend/storage/framework
+backend/storage/logs

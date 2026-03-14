@@ -1,0 +1,14 @@
+return [
+  'jwt_secret' => 'your-long-random-secret',
+  'admin_email' => 'info@varmanconstructions.in',
+  'admin_whatsapp' => '917708484811',
+  'default_country_code' => '91',
+  'smtp' => [
+    'host' => 'smtp.hostinger.com',   // or smtp.titan.email
+    'port' => 465,
+    'user' => 'info@varmanconstructions.in',
+    'pass' => 'change-me',
+    'from' => 'info@varmanconstructions.in',
+    'secure' => 'ssl'
+  ]
+];

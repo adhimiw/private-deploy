@@ -1,0 +1,13 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: private-deploy-php
+    ports:
+      - "8080:80"
+    volumes:
+      - ./storage:/var/www/html/storage
+      - ./assets/uploads:/var/www/html/assets/uploads
+    command: ["/var/www/html/docker/start.sh"]
+    restart: unless-stopped
