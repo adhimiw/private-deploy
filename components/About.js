@@ -61,7 +61,7 @@ function About() {
                 VARMAN CONSTRUCTIONS, established in 2020, has rapidly grown to become a trusted supplier of premium building materials across Tamil Nadu. Despite being a relatively new player in the market, our commitment to quality and customer satisfaction has helped us serve over 200+ construction projects successfully.
               </p>
 
-              <p className="text-base md:text-lg leading-relaxed text-[var(--text-secondary)]">
+              <p className="text-lg md:text-xl leading-relaxed text-[var(--text-secondary)]">
                 We specialize in supplying high-quality construction materials including M-Sand, Blue Metal (Jalli), various types of bricks, cement, AAC blocks, and natural stones. Our extensive network now covers 3+ states with a primary focus on Tamil Nadu markets, ensuring that quality construction materials reach every corner of our service area.
               </p>
 
