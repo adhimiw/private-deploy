@@ -92,7 +92,7 @@ function About() {
             {/* Image */}
             <div className="relative">
               <img
-                src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                src="assets/herobg.webp"
                 alt="VARMAN CONSTRUCTIONS - Building materials supplier"
                 className="rounded-lg shadow-xl w-full h-96 object-cover"
                 loading="lazy"
