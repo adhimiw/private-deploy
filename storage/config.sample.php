@@ -1,3 +1,5 @@
+<?php
+
 return [
   'jwt_secret' => 'your-long-random-secret',
   'admin_email' => 'info@varmanconstructions.in',
