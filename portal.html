@@ -61,8 +61,17 @@
   <script defer src="dist/components/Admin.js"></script>
   
   <script>
-    const root = ReactDOM.createRoot(document.getElementById('admin-root'));
-    root.render(React.createElement(Admin));
+    window.addEventListener('DOMContentLoaded', () => {
+      const mount = document.getElementById('admin-root');
+      if (!mount) return;
+      if (!window.Admin) {
+        console.error('Admin component failed to load.');
+        mount.textContent = 'Admin dashboard failed to load. Please refresh.';
+        return;
+      }
+      const root = ReactDOM.createRoot(mount);
+      root.render(React.createElement(window.Admin));
+    });
   </script>
 </body>
 </html>
