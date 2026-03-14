@@ -22,7 +22,6 @@ backend/.env
 storage/config.php
 
 # Build outputs
-dist/
 build/
 
 # Logs
