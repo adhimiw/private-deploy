@@ -190,6 +190,7 @@ class VarmanApiSupport
             'id' => $row['id'],
             'icon' => $row['icon'],
             'name' => $row['name'],
+            'short_description' => $row['short_description'] ?? null,
             'description' => $row['description'],
             'specifications' => $this->decodeJsonArray($row['specifications'] ?? null),
             'uses' => $this->decodeJsonArray($row['uses'] ?? null),

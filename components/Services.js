@@ -164,7 +164,7 @@ function Services() {
               id: product.id,
               icon: product.icon || ICON_MAP[product.id] || 'box',
               title: product.name,
-              shortDescription: product.description,
+              shortDescription: product.short_description || product.description,
               description: product.description,
               specifications: specsArray,
               uses: product.uses || [],

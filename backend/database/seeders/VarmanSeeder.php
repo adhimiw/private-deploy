@@ -35,6 +35,7 @@ class VarmanSeeder extends Seeder
                 'id' => 'm_sand',
                 'icon' => 'layers',
                 'name' => 'M-Sand (Manufactured Sand)',
+                'short_description' => 'High-quality manufactured sand for all construction needs',
                 'description' => 'High-quality manufactured sand for all construction needs. Premium manufactured sand produced under controlled conditions for consistent quality and performance.',
                 'specifications' => ['Fineness Modulus: 2.6-3.0', 'Silt Content: <3%', 'Water Absorption: <2%', 'Bulk Density: 1.75-1.85 kg/m3'],
                 'uses' => ['Concrete mixing', 'Plastering work', 'Block work', 'Foundation construction'],
@@ -47,6 +48,7 @@ class VarmanSeeder extends Seeder
                 'id' => 'p_sand',
                 'icon' => 'droplets',
                 'name' => 'P-Sand (Plastering Sand)',
+                'short_description' => 'Fine plastering sand for smooth wall finishes',
                 'description' => 'Fine plastering sand for smooth wall finishes. Specially processed plastering sand for achieving smooth and durable wall finishes.',
                 'specifications' => ['Fineness Modulus: 1.8-2.2', 'Silt Content: <2%', 'Grain Size: 0.15-2.36mm'],
                 'uses' => ['Wall plastering', 'Ceiling work', 'Fine finishing', 'Decorative plastering'],
@@ -59,6 +61,7 @@ class VarmanSeeder extends Seeder
                 'id' => 'blue_metal',
                 'icon' => 'zap',
                 'name' => 'Blue Metal (Jalli)',
+                'short_description' => 'Crushed stone aggregate for concrete and road construction',
                 'description' => 'Crushed stone aggregate for concrete and road construction. High-quality crushed blue granite stone available in various sizes.',
                 'specifications' => ['20mm - Standard concrete', '40mm - Road construction', '12mm - Fine concrete work'],
                 'uses' => ['Concrete mixing', 'Road base', 'Drainage systems', 'Foundation work'],
@@ -71,6 +74,7 @@ class VarmanSeeder extends Seeder
                 'id' => 'red_bricks',
                 'icon' => 'home',
                 'name' => 'Red Bricks',
+                'short_description' => 'Traditional clay bricks for wall construction',
                 'description' => 'Traditional clay bricks for wall construction. Traditional kiln-fired clay bricks known for durability and thermal insulation.',
                 'specifications' => ['Size: 9x4.5x3 inches', 'Compressive Strength: >3.5 N/mm2', 'Water Absorption: <20%'],
                 'uses' => ['Wall construction', 'Boundary walls', 'Pillars', 'Load-bearing structures'],
@@ -83,6 +87,7 @@ class VarmanSeeder extends Seeder
                 'id' => 'fly_ash_bricks',
                 'icon' => 'leaf',
                 'name' => 'Fly Ash Bricks',
+                'short_description' => 'Modern eco-friendly bricks made from fly ash, offering better strength.',
                 'description' => 'Eco-friendly bricks made from fly ash. Modern eco-friendly bricks offering better strength and uniform size.',
                 'specifications' => ['Size: 9x4x3 inches', 'Compressive Strength: >7.5 N/mm2', 'Water Absorption: <12%'],
                 'uses' => ['Wall construction', 'High-rise buildings', 'Commercial structures', 'Residential projects'],
@@ -95,6 +100,7 @@ class VarmanSeeder extends Seeder
                 'id' => 'concrete_blocks',
                 'icon' => 'square',
                 'name' => 'Concrete Blocks',
+                'short_description' => 'Solid and hollow concrete blocks for construction',
                 'description' => 'Solid and hollow concrete blocks for construction. Machine-made concrete blocks available in solid and hollow variants.',
                 'specifications' => ['Solid: 16x8x8 inches', 'Hollow: 16x8x8 inches', 'Compressive Strength: >4 N/mm2'],
                 'uses' => ['Wall construction', 'Partition walls', 'Compound walls', 'Industrial buildings'],
@@ -107,6 +113,7 @@ class VarmanSeeder extends Seeder
                 'id' => 'cement',
                 'icon' => 'package',
                 'name' => 'Cement',
+                'short_description' => 'Premium quality cement from top brands UltraTech, ACC, Ramco',
                 'description' => 'Premium quality cement from top brands including UltraTech, ACC, Ramco, Dalmia, and Chettinad.',
                 'specifications' => ['OPC 53 Grade', 'PPC Grade', 'PSC Grade available'],
                 'uses' => ['Concrete mixing', 'Plastering', 'Masonry work', 'Foundation'],
@@ -120,6 +127,7 @@ class VarmanSeeder extends Seeder
                 'id' => 'aac_blocks',
                 'icon' => 'box',
                 'name' => 'AAC Blocks',
+                'short_description' => 'Lightweight autoclaved aerated concrete blocks',
                 'description' => 'Lightweight autoclaved aerated concrete blocks. Modern AAC blocks offering excellent thermal insulation and faster construction.',
                 'specifications' => ['Sizes: 600x200x100mm to 600x200x300mm', 'Density: 550-650 kg/m3', 'Compressive Strength: 3-4.5 N/mm2'],
                 'uses' => ['High-rise construction', 'Green buildings', 'Commercial complexes', 'Residential projects'],
@@ -132,6 +140,7 @@ class VarmanSeeder extends Seeder
                 'id' => 'size_stone',
                 'icon' => 'mountain',
                 'name' => 'Size Stone / Rough Stone',
+                'short_description' => 'Natural stones for foundation and compound walls',
                 'description' => 'Natural stones for foundation and compound walls. Natural rough stones and cut size stones for foundation work.',
                 'specifications' => ['Rough Stone: Various sizes', 'Size Stone: 9x6 inches standard'],
                 'uses' => ['Foundation work', 'Compound walls', 'Retaining walls', 'Landscaping'],
@@ -148,6 +157,7 @@ class VarmanSeeder extends Seeder
                 'id' => $product['id'],
                 'icon' => $product['icon'],
                 'name' => $product['name'],
+                'short_description' => $product['short_description'],
                 'description' => $product['description'],
                 'specifications' => json_encode($product['specifications'] ?? []),
                 'uses' => json_encode($product['uses'] ?? []),
@@ -165,7 +175,7 @@ class VarmanSeeder extends Seeder
         DB::table('products')->upsert(
             $rows,
             ['id'],
-            ['icon', 'name', 'description', 'specifications', 'uses', 'advantages', 'unit', 'image', 'brands', 'sizes', 'types', 'grades', 'active']
+            ['icon', 'name', 'short_description', 'description', 'specifications', 'uses', 'advantages', 'unit', 'image', 'brands', 'sizes', 'types', 'grades', 'active']
         );
     }
 
