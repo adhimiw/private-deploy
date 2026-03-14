@@ -196,7 +196,7 @@ function Hero() {
             {/* Right Hero Image */}
             <div className="flex justify-center items-center mt-8 lg:mt-0 animate-fade-in">
               <img
-                src="assets/hero.png"
+                src="assets/herobg.webp"
                 alt="Construction materials - VARMAN CONSTRUCTIONS"
                 className="relative z-10"
                 loading="eager"
