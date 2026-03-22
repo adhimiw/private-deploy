@@ -19,7 +19,7 @@ function Hero() {
           alignItems: 'center'
         }}
       >
-        {/* Dark brown gradient background from older theme */}
+        {/* Clean white background for light theme */}
         <div
           style={{
             position: 'absolute',
@@ -27,12 +27,12 @@ function Hero() {
             left: 0,
             right: 0,
             bottom: 0,
-            background: 'linear-gradient(135deg, #1a0a00 0%, #2d1810 25%, #3d2015 50%, #4a2818 75%, #2d1810 100%)',
+            background: '#FFFFFF',
             zIndex: 0
           }}
         />
 
-        {/* Warm orange glow */}
+        {/* Warm orange glow tailored for white background */}
         <div
           style={{
             position: 'absolute',
@@ -40,7 +40,7 @@ function Hero() {
             right: '-10%',
             width: '70%',
             height: '80%',
-            background: 'radial-gradient(ellipse at center, rgba(255, 140, 66, 0.3) 0%, rgba(229, 90, 43, 0.15) 40%, transparent 70%)',
+            background: 'radial-gradient(ellipse at center, rgba(255, 140, 66, 0.15) 0%, rgba(229, 90, 43, 0.05) 40%, transparent 70%)',
             zIndex: 1,
             pointerEvents: 'none'
           }}
@@ -53,21 +53,21 @@ function Hero() {
             <div className="space-y-6 animate-slide-up">
               {/* Trust Badge */}
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mt-8" style={{
-                background: 'rgba(0, 0, 0, 0.5)',
-                border: '1px solid rgba(255, 140, 66, 0.5)',
+                background: 'rgba(255, 140, 66, 0.1)',
+                border: '1px solid rgba(255, 140, 66, 0.3)',
                 backdropFilter: 'blur(4px)'
               }}>
-                <svg className="w-4 h-4" style={{ color: '#FF8C42' }} fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
-                <span className="text-white text-sm font-medium">Trusted by 500+ Contractors Since 2020</span>
+                <svg className="w-4 h-4" style={{ color: '#E55A2B' }} fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
+                <span className="text-sm font-semibold" style={{ color: '#E55A2B' }}>Trusted by 500+ Contractors Since 2020</span>
               </div>
 
               {/* Main Headline - Clear Value Proposition */}
-              <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight">
-                <span style={{ color: '#FFFFFF' }}>Premium Building Materials</span>
+              <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold leading-tight">
+                <span style={{ color: '#E55A2B' }}>Premium Building Materials</span>
                 <br />
-                <span style={{ color: '#FFFFFF' }}>Supplier Across </span>
+                <span style={{ color: '#FF8C42' }}>Supplier Across </span>
                 <span style={{
-                  background: 'linear-gradient(135deg, #FF8C42, #FFB366)',
+                  background: 'linear-gradient(135deg, #FF8C42, #E55A2B)',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent'
                 }}>Tamil Nadu</span>
@@ -75,30 +75,30 @@ function Hero() {
 
               {/* Clear Benefit Statement */}
               <p className="text-lg md:text-xl leading-relaxed max-w-lg" style={{
-                color: 'rgba(255, 255, 255, 0.85)'
+                color: '#475569'
               }}>
-                Your trusted partner since 2020 for high-quality building materials. We supply <span style={{ color: '#FF8C42', fontWeight: '600' }}>M-Sand, Blue Metal, Cement, Bricks</span>, and specialized construction supplies across Tamil Nadu with guaranteed quality and timely delivery.
+                Your trusted partner since 2020 for high-quality building materials. We supply <span style={{ color: '#E55A2B', fontWeight: '700' }}>M-Sand, Blue Metal, Cement, Bricks</span>, and specialized construction supplies across Tamil Nadu with guaranteed quality and timely delivery.
               </p>
 
               {/* Key Benefits - Quick Scan */}
               <div className="grid grid-cols-2 gap-3 max-w-md">
                 <div className="flex items-center gap-2">
-                  <svg className="w-5 h-5" style={{ color: '#4ADE80' }} fill="currentColor" viewBox="0 0 20 20">
+                  <svg className="w-5 h-5" style={{ color: '#FF8C42' }} fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
-                  <span style={{ color: 'rgba(255,255,255,0.9)', fontSize: '14px' }}>Quality Certified</span>
+                  <span style={{ color: '#0F172A', fontSize: '14px', fontWeight: '500' }}>Quality Certified</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <svg className="w-5 h-5" style={{ color: '#4ADE80' }} fill="currentColor" viewBox="0 0 20 20">
+                  <svg className="w-5 h-5" style={{ color: '#FF8C42' }} fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
-                  <span style={{ color: 'rgba(255,255,255,0.9)', fontSize: '14px' }}>24-48hr Delivery</span>
+                  <span style={{ color: '#0F172A', fontSize: '14px', fontWeight: '500' }}>24-48hr Delivery</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <svg className="w-5 h-5" style={{ color: '#4ADE80' }} fill="currentColor" viewBox="0 0 20 20">
+                  <svg className="w-5 h-5" style={{ color: '#FF8C42' }} fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
-                  <span style={{ color: 'rgba(255,255,255,0.9)', fontSize: '14px' }}>Best Prices</span>
+                  <span style={{ color: '#0F172A', fontSize: '14px', fontWeight: '500' }}>Best Prices</span>
                 </div>
               </div>
 
@@ -175,10 +175,10 @@ function Hero() {
               {/* Social Proof */}
               <div className="flex items-center gap-6 pt-4">
                 <div className="flex -space-x-2">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center text-white font-bold text-sm border-2 border-white/20">A</div>
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-white font-bold text-sm border-2 border-white/20">R</div>
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center text-white font-bold text-sm border-2 border-white/20">K</div>
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center text-white font-bold text-sm border-2 border-white/20">M</div>
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center text-white font-bold text-sm border-2 border-white">A</div>
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-white font-bold text-sm border-2 border-white">R</div>
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center text-white font-bold text-sm border-2 border-white">K</div>
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center text-white font-bold text-sm border-2 border-white">M</div>
                 </div>
                 <div>
                   <div className="flex items-center gap-1">
@@ -188,7 +188,7 @@ function Hero() {
                       </svg>
                     ))}
                   </div>
-                  <span style={{ color: 'rgba(255,255,255,0.7)', fontSize: '13px' }}>Rated 4.9/5 by 200+ customers</span>
+                  <span style={{ color: '#475569', fontSize: '13px', fontWeight: '500' }}>Rated 4.9/5 by 200+ customers</span>
                 </div>
               </div>
             </div>
